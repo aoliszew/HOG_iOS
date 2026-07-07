@@ -11,15 +11,6 @@ change on your branch first). Keep one task per PR. See ROADMAP.md for phase det
 | Real-device drive test behind Apple Maps (ducking, background) | — | open (needs human) |
 | App icon + launch screen | — | open |
 
-## Phase 2 — Interaction
-
-| Task | Claimed by | Status |
-|---|---|---|
-| Push-to-talk voice commands (SFSpeechRecognizer): "power down", "status report" | claude/voice-commands | in progress |
-| Message queue: hail beep, message waits for "play message" | claude/message-queue | in progress |
-| Acceleration/deceleration SFX from speed deltas | claude/acceleration-sfx | in progress |
-| Power/Eco mode sound personalities | claude/engine-personality | in progress |
-
 ## Phase 2.5 — Event system & design (see docs/EVENT_SYSTEM.md)
 
 | Task | Claimed by | Status |
@@ -61,3 +52,4 @@ change on your branch first). Keep one task per PR. See ROADMAP.md for phase det
 | Feasibility research + roadmap | claude (2026-07-07) |
 | POC scaffold: audio, TTS, GPS, events, bridge UI, SFX | claude (2026-07-07) |
 | Repo + multi-agent infrastructure | claude (2026-07-07) |
+| Phase 2: message queue, push-to-talk voice commands, thruster SFX, Power/Eco personalities | claude (2026-07-07, PRs #1, #6) |
