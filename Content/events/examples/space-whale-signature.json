@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "space-whale-signature",
+  "title": "Space whale energy signature",
+  "author": "claude",
+  "type": "sequence",
+  "tags": ["science", "roadtrip"],
+  "trigger": {
+    "contexts": {
+      "tripModes": ["roadtrip"],
+      "speedMPH": { "min": 45 },
+      "tripDistanceMiles": { "min": 5 }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      { "source": "SCIENCE", "text": "Captain, sensors are detecting an unusual energy signature ahead. Large. Slow. Possibly biological." },
+      { "wait": { "miles": 2 } },
+      { "source": "SCIENCE", "text": "The signature is getting stronger. It appears to be... singing?" },
+      { "wait": { "seconds": 90 } },
+      { "source": "SHIP", "text": "Mystery resolved. It was a space whale. It seems happy for us to pass. Logging peaceful first contact. A good day, Captain." }
+    ]
+  },
+  "effects": { "setFlags": ["met-space-whale"] }
+}

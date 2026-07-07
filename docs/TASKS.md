@@ -20,6 +20,20 @@ change on your branch first). Keep one task per PR. See ROADMAP.md for phase det
 | Acceleration/deceleration SFX from speed deltas | claude/acceleration-sfx | in progress |
 | Power/Eco mode sound personalities | claude/engine-personality | in progress |
 
+## Phase 2.5 — Event system & design (see docs/EVENT_SYSTEM.md)
+
+| Task | Claimed by | Status |
+|---|---|---|
+| Event schema, validator, examples, design doc | claude/event-system-plan | in review |
+| Runtime: ContentLibrary + TriggerEvaluator (drive-state contexts) | — | open |
+| Runtime: EventPlayer for sequence type (time/distance waits) | — | open |
+| Runtime: EventPlayer for branching type (voice/tap choices, timeouts, flags) | — | open |
+| Migrate CannedEvents to Content/events/*.json | — | open |
+| Event Editor web app (trigger form + branching node editor) | — | open |
+| Wireframes: rough exploration board (bridge, author mode, navigator) | — | open |
+| Wireframes: clickable HTML mockups of winning direction | — | open |
+| Replace synthesized SFX with StoryBlocks assets (Alex has access) | — | open (needs human picks) |
+
 ## Phase 3 — Generated adventures
 
 | Task | Claimed by | Status |

@@ -6,6 +6,13 @@ on:
     branches: [main]
 
 jobs:
+  validate-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate event content
+        run: python3 tools/validate_events.py
+
   build:
     runs-on: macos-15
     steps:
