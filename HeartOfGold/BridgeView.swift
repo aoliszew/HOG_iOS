@@ -13,6 +13,7 @@ struct BridgeView: View {
                 header
                 velocityReadout
                 modePicker
+                personalityPicker
                 eventLog
                 if ship.poweredUp && !ship.pendingMessages.isEmpty {
                     playMessageButton
@@ -65,6 +66,15 @@ struct BridgeView: View {
         }
         .pickerStyle(.segmented)
         .disabled(ship.poweredUp)
+    }
+
+    private var personalityPicker: some View {
+        Picker("Engine", selection: $ship.personality) {
+            ForEach(EnginePersonality.allCases) { p in
+                Text(p.rawValue.uppercased()).tag(p)
+            }
+        }
+        .pickerStyle(.segmented)
     }
 
     private var eventLog: some View {

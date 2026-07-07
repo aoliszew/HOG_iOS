@@ -4,11 +4,14 @@ import AVFoundation
 protocol VoiceSynthesizing {
     func speak(_ text: String)
     func stopSpeaking()
+    func setDelivery(rate: Float, pitch: Float)
 }
 
 final class ShipVoice: NSObject, VoiceSynthesizing {
     private let synthesizer = AVSpeechSynthesizer()
     private let voice: AVSpeechSynthesisVoice?
+    private var rate: Float = 0.48
+    private var pitch: Float = 0.95
 
     override init() {
         // Prefer an enhanced/premium en voice if one is downloaded on the device.
@@ -23,13 +26,18 @@ final class ShipVoice: NSObject, VoiceSynthesizing {
     func speak(_ text: String) {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice
-        utterance.rate = 0.48
-        utterance.pitchMultiplier = 0.95
+        utterance.rate = rate
+        utterance.pitchMultiplier = pitch
         utterance.preUtteranceDelay = 0.15
         synthesizer.speak(utterance)
     }
 
     func stopSpeaking() {
         synthesizer.stopSpeaking(at: .word)
+    }
+
+    func setDelivery(rate: Float, pitch: Float) {
+        self.rate = rate
+        self.pitch = pitch
     }
 }

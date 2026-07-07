@@ -6,6 +6,15 @@ import Combine
 final class ShipController: ObservableObject {
     @Published var poweredUp = false
     @Published var mode: TravelMode = .roadtrip
+    @Published var personality: EnginePersonality = .power {
+        didSet {
+            guard personality != oldValue else { return }
+            voice.setDelivery(rate: personality.speechRate, pitch: personality.pitch)
+            if poweredUp {
+                say(source: "ENGINEERING", personality.confirmation)
+            }
+        }
+    }
     @Published var log: [LogEntry] = []
     @Published var pendingMessages: [ShipEvent] = []
 
@@ -78,6 +87,7 @@ final class ShipController: ObservableObject {
         trip.resetTrip()
         trip.start()
         commands.requestPermissions()
+        voice.setDelivery(rate: personality.speechRate, pitch: personality.pitch)
         audio.play(.powerUp)
 
         let shields = Int.random(in: 94...99)
@@ -101,13 +111,7 @@ final class ShipController: ObservableObject {
     }
 
     private func speedCallout(_ mph: Int) {
-        let line: String
-        switch mph {
-        case 30: line = "Entering cruise velocity."
-        case 55: line = "Sublight velocity fifty-five. Engines purring, Captain."
-        default: line = "Approaching maximum recommended sublight. Shields tightened."
-        }
-        say(source: "HELM", line)
+        say(source: "HELM", personality.speedCallout(threshold: mph))
     }
 
     /// Encounters don't interrupt: a hail beep sounds and the message waits in the
