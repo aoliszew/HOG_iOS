@@ -1,0 +1,402 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		215E1A034D5A5F7BE823F21B /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80327A0E3CC7D5BB2FE49893 /* AudioEngine.swift */; };
+		238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */; };
+		25F4A32EFD9EB0EB45C90C39 /* power_up.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FC72571DB2B9D3532E3BDE8 /* power_up.caf */; };
+		38BD90C95924C75259E9122D /* power_down.caf in Resources */ = {isa = PBXBuildFile; fileRef = 54AE6C3306CF804B3126BE53 /* power_down.caf */; };
+		3F3E3295D0E616CC6E88EA6A /* EventEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DCB1167A3C7DB871965408 /* EventEngine.swift */; };
+		41ABC0D46847CE8137D278D7 /* hail.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5132877E7A79E7DD1493C5C9 /* hail.caf */; };
+		53A886F626B7B3E84DC1E7DB /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C023DAD6F781FEAE481CF5 /* BridgeView.swift */; };
+		6264F53319BD3D413906054C /* ShipVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */; };
+		85BA74BDB49D9685A861AA83 /* TripTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3975AF298726332F369C53 /* TripTracker.swift */; };
+		8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960ECB60B39A5D929263167F /* ShipController.swift */; };
+		C38D0C941761995B850BD61E /* CannedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945B23079CC9962822FEF369 /* CannedEvents.swift */; };
+		D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1086615983ACD3CB3D05160 /* TravelMode.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0FC72571DB2B9D3532E3BDE8 /* power_up.caf */ = {isa = PBXFileReference; path = power_up.caf; sourceTree = "<group>"; };
+		36C023DAD6F781FEAE481CF5 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
+		5132877E7A79E7DD1493C5C9 /* hail.caf */ = {isa = PBXFileReference; path = hail.caf; sourceTree = "<group>"; };
+		54AE6C3306CF804B3126BE53 /* power_down.caf */ = {isa = PBXFileReference; path = power_down.caf; sourceTree = "<group>"; };
+		80327A0E3CC7D5BB2FE49893 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipVoice.swift; sourceTree = "<group>"; };
+		945B23079CC9962822FEF369 /* CannedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannedEvents.swift; sourceTree = "<group>"; };
+		960ECB60B39A5D929263167F /* ShipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipController.swift; sourceTree = "<group>"; };
+		A1086615983ACD3CB3D05160 /* TravelMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMode.swift; sourceTree = "<group>"; };
+		BD3975AF298726332F369C53 /* TripTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTracker.swift; sourceTree = "<group>"; };
+		C9DCB1167A3C7DB871965408 /* EventEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEngine.swift; sourceTree = "<group>"; };
+		D394B43303D809BCC9CB9186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartOfGoldApp.swift; sourceTree = "<group>"; };
+		FA68DE29A7AA2B5FB1734D90 /* HeartOfGold.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HeartOfGold.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		00DECBD5BC6C700840A42CC8 /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				5132877E7A79E7DD1493C5C9 /* hail.caf */,
+				54AE6C3306CF804B3126BE53 /* power_down.caf */,
+				0FC72571DB2B9D3532E3BDE8 /* power_up.caf */,
+			);
+			path = SFX;
+			sourceTree = "<group>";
+		};
+		0C6134469A76930C0379F133 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				80327A0E3CC7D5BB2FE49893 /* AudioEngine.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		19EA7DE561C1321DF4C60E4C /* HeartOfGold */ = {
+			isa = PBXGroup;
+			children = (
+				36C023DAD6F781FEAE481CF5 /* BridgeView.swift */,
+				EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */,
+				D394B43303D809BCC9CB9186 /* Info.plist */,
+				960ECB60B39A5D929263167F /* ShipController.swift */,
+				0C6134469A76930C0379F133 /* Audio */,
+				1B4BE6C0AC6F76D0792B2952 /* Events */,
+				901F8CE0154BCE5CBB43BD8E /* Modes */,
+				36890CB434B3F2B5230D64CF /* Resources */,
+				FB737DD02ED3A5971895A45A /* Trip */,
+				A99C14BC20A7CA8A6FFC18FB /* Voice */,
+			);
+			path = HeartOfGold;
+			sourceTree = "<group>";
+		};
+		1B4BE6C0AC6F76D0792B2952 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				945B23079CC9962822FEF369 /* CannedEvents.swift */,
+				C9DCB1167A3C7DB871965408 /* EventEngine.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		1C3F5CA7CC04EF63685C3E94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA68DE29A7AA2B5FB1734D90 /* HeartOfGold.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		36890CB434B3F2B5230D64CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				00DECBD5BC6C700840A42CC8 /* SFX */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7C43C702887CB28BA1EA8A49 = {
+			isa = PBXGroup;
+			children = (
+				19EA7DE561C1321DF4C60E4C /* HeartOfGold */,
+				1C3F5CA7CC04EF63685C3E94 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		901F8CE0154BCE5CBB43BD8E /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				A1086615983ACD3CB3D05160 /* TravelMode.swift */,
+			);
+			path = Modes;
+			sourceTree = "<group>";
+		};
+		A99C14BC20A7CA8A6FFC18FB /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */,
+			);
+			path = Voice;
+			sourceTree = "<group>";
+		};
+		FB737DD02ED3A5971895A45A /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				BD3975AF298726332F369C53 /* TripTracker.swift */,
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADF7924C1D2D4875F4F9A7B7 /* HeartOfGold */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E51B6154BC14E0BDB35078C4 /* Build configuration list for PBXNativeTarget "HeartOfGold" */;
+			buildPhases = (
+				F86E0331C27C4BFE9801C4A7 /* Sources */,
+				51BBBAB9C2C6F6D3C14229E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HeartOfGold;
+			packageProductDependencies = (
+			);
+			productName = HeartOfGold;
+			productReference = FA68DE29A7AA2B5FB1734D90 /* HeartOfGold.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F733B0035226F76D59F03DEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					ADF7924C1D2D4875F4F9A7B7 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CF5AA19746E33CF82F092CED /* Build configuration list for PBXProject "HeartOfGold" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7C43C702887CB28BA1EA8A49;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1C3F5CA7CC04EF63685C3E94 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADF7924C1D2D4875F4F9A7B7 /* HeartOfGold */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		51BBBAB9C2C6F6D3C14229E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41ABC0D46847CE8137D278D7 /* hail.caf in Resources */,
+				38BD90C95924C75259E9122D /* power_down.caf in Resources */,
+				25F4A32EFD9EB0EB45C90C39 /* power_up.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F86E0331C27C4BFE9801C4A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				215E1A034D5A5F7BE823F21B /* AudioEngine.swift in Sources */,
+				53A886F626B7B3E84DC1E7DB /* BridgeView.swift in Sources */,
+				C38D0C941761995B850BD61E /* CannedEvents.swift in Sources */,
+				3F3E3295D0E616CC6E88EA6A /* EventEngine.swift in Sources */,
+				238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */,
+				8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */,
+				6264F53319BD3D413906054C /* ShipVoice.swift in Sources */,
+				D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */,
+				85BA74BDB49D9685A861AA83 /* TripTracker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		532416F5D7AAB21580EEE11F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = HeartOfGold/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliszewski.heartofgold;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		71F6505A4C8E13512F9B3E18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		85002818B62F5681F0E88198 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		96456E64DCE2FA69B76B5359 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = HeartOfGold/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oliszewski.heartofgold;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF5AA19746E33CF82F092CED /* Build configuration list for PBXProject "HeartOfGold" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85002818B62F5681F0E88198 /* Debug */,
+				71F6505A4C8E13512F9B3E18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E51B6154BC14E0BDB35078C4 /* Build configuration list for PBXNativeTarget "HeartOfGold" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				532416F5D7AAB21580EEE11F /* Debug */,
+				96456E64DCE2FA69B76B5359 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F733B0035226F76D59F03DEC /* Project object */;
+}

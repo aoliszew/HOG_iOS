@@ -1,0 +1,19 @@
+name: HeartOfGold
+options:
+  bundleIdPrefix: com.oliszewski
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  HeartOfGold:
+    type: application
+    platform: iOS
+    sources:
+      - HeartOfGold
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.oliszewski.heartofgold
+        GENERATE_INFOPLIST_FILE: false
+        INFOPLIST_FILE: HeartOfGold/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.9"
+        CODE_SIGN_STYLE: Automatic
