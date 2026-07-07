@@ -16,6 +16,12 @@ Current status/task board: `docs/TASKS.md`.
 - Speed simulation for testing: Simulator → Features → Location → Freeway Drive.
 - No third-party dependencies yet. Do not add packages without noting it in docs/TASKS.md.
 
+## Event content
+
+Encounters/quests are data, not code: JSON in `Content/events/` following
+`docs/EVENT_SYSTEM.md`. Validate with `python3 tools/validate_events.py` before
+any content PR (CI enforces it). Content must work audio-only for the driver.
+
 ## Architecture (respect these seams)
 
 - `ShipController` is the single coordinator; views talk only to it.
