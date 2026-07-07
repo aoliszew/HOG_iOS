@@ -14,6 +14,9 @@ struct BridgeView: View {
                 velocityReadout
                 modePicker
                 eventLog
+                if ship.poweredUp && !ship.pendingMessages.isEmpty {
+                    playMessageButton
+                }
                 powerButton
             }
             .padding()
@@ -78,6 +81,20 @@ struct BridgeView: View {
         }
         .background(Color.white.opacity(0.03))
         .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private var playMessageButton: some View {
+        Button {
+            ship.playNextMessage()
+        } label: {
+            Text("▶ PLAY MESSAGE (\(ship.pendingMessages.count))")
+                .font(.system(.headline, design: .monospaced).bold())
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(Color.green.opacity(0.85))
+                .foregroundStyle(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
     }
 
     private var powerButton: some View {
