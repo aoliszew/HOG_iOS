@@ -4,6 +4,7 @@ enum SoundEffect: String {
     case powerUp = "power_up"
     case powerDown = "power_down"
     case hail = "hail"
+    case thruster = "thruster"
 }
 
 /// Owns the audio session and sound-effect playback. Configured to keep running
@@ -19,9 +20,11 @@ final class AudioEngine {
     private func configureSession() {
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playback,
-                                    mode: .voicePrompt,
-                                    options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers])
+            // .playAndRecord so push-to-talk can use the mic; still ducks Maps guidance.
+            try session.setCategory(.playAndRecord,
+                                    mode: .default,
+                                    options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers,
+                                              .defaultToSpeaker, .allowBluetooth])
             try session.setActive(true)
         } catch {
             print("Audio session error: \(error)")
@@ -29,7 +32,7 @@ final class AudioEngine {
     }
 
     private func preload() {
-        for effect in [SoundEffect.powerUp, .powerDown, .hail] {
+        for effect in [SoundEffect.powerUp, .powerDown, .hail, .thruster] {
             guard let url = Bundle.main.url(forResource: effect.rawValue, withExtension: "caf") else {
                 print("Missing SFX: \(effect.rawValue).caf")
                 continue

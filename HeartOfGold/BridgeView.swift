@@ -13,11 +13,17 @@ struct BridgeView: View {
                 header
                 velocityReadout
                 modePicker
+                personalityPicker
                 eventLog
                 if ship.poweredUp && !ship.pendingMessages.isEmpty {
                     playMessageButton
                 }
-                powerButton
+                HStack(spacing: 12) {
+                    powerButton
+                    if ship.poweredUp {
+                        talkButton
+                    }
+                }
             }
             .padding()
         }
@@ -62,6 +68,15 @@ struct BridgeView: View {
         .disabled(ship.poweredUp)
     }
 
+    private var personalityPicker: some View {
+        Picker("Engine", selection: $ship.personality) {
+            ForEach(EnginePersonality.allCases) { p in
+                Text(p.rawValue.uppercased()).tag(p)
+            }
+        }
+        .pickerStyle(.segmented)
+    }
+
     private var eventLog: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
@@ -93,6 +108,20 @@ struct BridgeView: View {
                 .padding(.vertical, 14)
                 .background(Color.green.opacity(0.85))
                 .foregroundStyle(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+    }
+
+    private var talkButton: some View {
+        Button {
+            ship.listenForCommand()
+        } label: {
+            Image(systemName: ship.commands.isListening ? "waveform.circle.fill" : "mic.circle.fill")
+                .font(.system(size: 34))
+                .frame(width: 72)
+                .padding(.vertical, 12)
+                .background(ship.commands.isListening ? Color.green : Color.white.opacity(0.12))
+                .foregroundStyle(ship.commands.isListening ? .black : amber)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
