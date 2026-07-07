@@ -11,10 +11,15 @@ enum SoundEffect: String {
 /// in the background and duck other audio (e.g. Maps guidance) while speaking.
 final class AudioEngine {
     private var players: [SoundEffect: AVAudioPlayer] = [:]
+    // Session setup and player priming block on CoreAudio XPC and must never run
+    // on the main thread (deadlocks app launch); all state is confined to this queue.
+    private let queue = DispatchQueue(label: "com.oliszewski.heartofgold.audio")
 
     init() {
-        configureSession()
-        preload()
+        queue.async { [self] in
+            configureSession()
+            preload()
+        }
     }
 
     private func configureSession() {
@@ -24,7 +29,7 @@ final class AudioEngine {
             try session.setCategory(.playAndRecord,
                                     mode: .default,
                                     options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers,
-                                              .defaultToSpeaker, .allowBluetooth])
+                                              .defaultToSpeaker, .allowBluetoothHFP])
             try session.setActive(true)
         } catch {
             print("Audio session error: \(error)")
@@ -43,11 +48,15 @@ final class AudioEngine {
     }
 
     func play(_ effect: SoundEffect) {
-        players[effect]?.currentTime = 0
-        players[effect]?.play()
+        queue.async { [self] in
+            players[effect]?.currentTime = 0
+            players[effect]?.play()
+        }
     }
 
     func deactivate() {
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        queue.async {
+            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        }
     }
 }
