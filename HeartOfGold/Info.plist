@@ -26,6 +26,10 @@
 	<string>The Heart of Gold tracks your sublight velocity and mission distance.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Allows the ship computer to keep reporting while you use Maps.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Push-to-talk lets you give the ship computer voice commands.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Recognizes ship commands like "play message" and "status report".</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

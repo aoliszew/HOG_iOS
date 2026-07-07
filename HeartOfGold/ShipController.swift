@@ -17,6 +17,7 @@ final class ShipController: ObservableObject {
     }
 
     let trip = TripTracker()
+    let commands = CommandListener()
 
     private let audio = AudioEngine()
     private let voice: VoiceSynthesizing = ShipVoice()
@@ -24,13 +25,48 @@ final class ShipController: ObservableObject {
         self?.trip.speedMPH ?? 0
     }
 
+    private var cancellables: Set<AnyCancellable> = []
+
     init() {
+        // Nested ObservableObjects don't propagate to SwiftUI; forward their changes.
+        commands.objectWillChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.objectWillChange.send() }
+            .store(in: &cancellables)
         trip.onThresholdCrossed = { [weak self] mph in
             Task { @MainActor in self?.speedCallout(mph) }
         }
         events.onEvent = { [weak self] event in
             Task { @MainActor in self?.deliver(event) }
         }
+        commands.onCommand = { [weak self] command in
+            Task { @MainActor in self?.handle(command) }
+        }
+        commands.onNoMatch = { [weak self] in
+            Task { @MainActor in self?.say(source: "COMMS", "Command not recognized, Captain.") }
+        }
+    }
+
+    func listenForCommand() {
+        voice.stopSpeaking()
+        commands.startListening()
+    }
+
+    private func handle(_ command: ShipCommand) {
+        switch command {
+        case .playMessage: playNextMessage()
+        case .statusReport: statusReport()
+        case .powerDown: powerDown()
+        }
+    }
+
+    func statusReport() {
+        let speed = Int(trip.speedMPH.rounded())
+        let distance = String(format: "%.1f", trip.distanceMiles)
+        let waiting = pendingMessages.isEmpty
+            ? "No transmissions waiting."
+            : "\(pendingMessages.count) transmission\(pendingMessages.count == 1 ? "" : "s") waiting."
+        say(source: "SHIP", "Status report. Sublight velocity \(speed) miles per hour. Mission distance \(distance) miles. All systems nominal. \(waiting)")
     }
 
     func powerUp() {
@@ -38,6 +74,7 @@ final class ShipController: ObservableObject {
         poweredUp = true
         trip.resetTrip()
         trip.start()
+        commands.requestPermissions()
         audio.play(.powerUp)
 
         let shields = Int.random(in: 94...99)

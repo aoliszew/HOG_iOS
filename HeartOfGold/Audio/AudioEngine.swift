@@ -19,9 +19,11 @@ final class AudioEngine {
     private func configureSession() {
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playback,
-                                    mode: .voicePrompt,
-                                    options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers])
+            // .playAndRecord so push-to-talk can use the mic; still ducks Maps guidance.
+            try session.setCategory(.playAndRecord,
+                                    mode: .default,
+                                    options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers,
+                                              .defaultToSpeaker, .allowBluetooth])
             try session.setActive(true)
         } catch {
             print("Audio session error: \(error)")
