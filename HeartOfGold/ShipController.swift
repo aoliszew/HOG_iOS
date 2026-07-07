@@ -36,6 +36,9 @@ final class ShipController: ObservableObject {
         trip.onThresholdCrossed = { [weak self] mph in
             Task { @MainActor in self?.speedCallout(mph) }
         }
+        trip.onHardAcceleration = { [weak self] in
+            Task { @MainActor in self?.audio.play(.thruster) }
+        }
         events.onEvent = { [weak self] event in
             Task { @MainActor in self?.deliver(event) }
         }
