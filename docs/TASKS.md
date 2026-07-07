@@ -17,8 +17,8 @@ change on your branch first). Keep one task per PR. See ROADMAP.md for phase det
 |---|---|---|
 | Push-to-talk voice commands (SFSpeechRecognizer): "power down", "status report" | claude/voice-commands | in progress |
 | Message queue: hail beep, message waits for "play message" | claude/message-queue | in progress |
-| Acceleration/deceleration SFX from speed deltas | — | open |
-| Power/Eco mode sound personalities | — | open |
+| Acceleration/deceleration SFX from speed deltas | claude/acceleration-sfx | in progress |
+| Power/Eco mode sound personalities | claude/engine-personality | in progress |
 
 ## Phase 3 — Generated adventures
 
