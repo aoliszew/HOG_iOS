@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate project
+        run: |
+          brew install xcodegen
+          xcodegen generate
+      - name: Build for Simulator
+        run: |
+          xcodebuild -project HeartOfGold.xcodeproj \
+            -scheme HeartOfGold \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
