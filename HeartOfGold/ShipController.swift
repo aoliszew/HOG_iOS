@@ -7,6 +7,7 @@ final class ShipController: ObservableObject {
     @Published var poweredUp = false
     @Published var mode: TravelMode = .roadtrip
     @Published var log: [LogEntry] = []
+    @Published var pendingMessages: [ShipEvent] = []
 
     struct LogEntry: Identifiable {
         let id = UUID()
@@ -51,6 +52,7 @@ final class ShipController: ObservableObject {
         events.stop()
         trip.stop()
         voice.stopSpeaking()
+        pendingMessages.removeAll()
         say(source: "SHIP", "Powering down. Mission distance: \(String(format: "%.1f", trip.distanceMiles)) miles. It has been a pleasure, Captain. So long, and thanks for all the fish.")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [audio] in
             audio.play(.powerDown)
@@ -68,9 +70,24 @@ final class ShipController: ObservableObject {
         say(source: "HELM", line)
     }
 
+    /// Encounters don't interrupt: a hail beep sounds and the message waits in the
+    /// queue until the captain asks for it ("play message" / the PLAY MESSAGE button).
     private func deliver(_ event: ShipEvent) {
         audio.play(.hail)
-        say(source: event.source, event.text, delay: 0.8)
+        pendingMessages.append(event)
+        log.insert(LogEntry(source: "COMMS", text: "Incoming transmission from \(event.source). Say or tap PLAY MESSAGE."), at: 0)
+    }
+
+    func playNextMessage() {
+        guard !pendingMessages.isEmpty else {
+            say(source: "COMMS", "No messages waiting, Captain.")
+            return
+        }
+        let event = pendingMessages.removeFirst()
+        say(source: event.source, event.text)
+        if !pendingMessages.isEmpty {
+            say(source: "COMMS", "\(pendingMessages.count) more message\(pendingMessages.count == 1 ? "" : "s") waiting.", delay: 0.5)
+        }
     }
 
     private func say(source: String, _ text: String, delay: TimeInterval = 0) {
