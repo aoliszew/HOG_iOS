@@ -15,17 +15,22 @@
 		41ABC0D46847CE8137D278D7 /* hail.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5132877E7A79E7DD1493C5C9 /* hail.caf */; };
 		53A886F626B7B3E84DC1E7DB /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C023DAD6F781FEAE481CF5 /* BridgeView.swift */; };
 		6264F53319BD3D413906054C /* ShipVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */; };
+		783C96DF23C05700570534F9 /* CommandListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FA5244E5B461E83523522B /* CommandListener.swift */; };
 		85BA74BDB49D9685A861AA83 /* TripTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3975AF298726332F369C53 /* TripTracker.swift */; };
 		8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960ECB60B39A5D929263167F /* ShipController.swift */; };
+		9CC6958A295669FECC7A0AAD /* EnginePersonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */; };
 		C38D0C941761995B850BD61E /* CannedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945B23079CC9962822FEF369 /* CannedEvents.swift */; };
 		D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1086615983ACD3CB3D05160 /* TravelMode.swift */; };
+		E563FBB14B0D20E14B4EA92A /* thruster.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC388C99557D54D24C5E61D /* thruster.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0FC72571DB2B9D3532E3BDE8 /* power_up.caf */ = {isa = PBXFileReference; path = power_up.caf; sourceTree = "<group>"; };
+		2FC388C99557D54D24C5E61D /* thruster.caf */ = {isa = PBXFileReference; path = thruster.caf; sourceTree = "<group>"; };
 		36C023DAD6F781FEAE481CF5 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
 		5132877E7A79E7DD1493C5C9 /* hail.caf */ = {isa = PBXFileReference; path = hail.caf; sourceTree = "<group>"; };
 		54AE6C3306CF804B3126BE53 /* power_down.caf */ = {isa = PBXFileReference; path = power_down.caf; sourceTree = "<group>"; };
+		62FA5244E5B461E83523522B /* CommandListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandListener.swift; sourceTree = "<group>"; };
 		80327A0E3CC7D5BB2FE49893 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipVoice.swift; sourceTree = "<group>"; };
 		945B23079CC9962822FEF369 /* CannedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannedEvents.swift; sourceTree = "<group>"; };
@@ -36,6 +41,7 @@
 		D394B43303D809BCC9CB9186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartOfGoldApp.swift; sourceTree = "<group>"; };
 		FA68DE29A7AA2B5FB1734D90 /* HeartOfGold.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HeartOfGold.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnginePersonality.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -45,6 +51,7 @@
 				5132877E7A79E7DD1493C5C9 /* hail.caf */,
 				54AE6C3306CF804B3126BE53 /* power_down.caf */,
 				0FC72571DB2B9D3532E3BDE8 /* power_up.caf */,
+				2FC388C99557D54D24C5E61D /* thruster.caf */,
 			);
 			path = SFX;
 			sourceTree = "<group>";
@@ -110,6 +117,7 @@
 		901F8CE0154BCE5CBB43BD8E /* Modes */ = {
 			isa = PBXGroup;
 			children = (
+				FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */,
 				A1086615983ACD3CB3D05160 /* TravelMode.swift */,
 			);
 			path = Modes;
@@ -118,6 +126,7 @@
 		A99C14BC20A7CA8A6FFC18FB /* Voice */ = {
 			isa = PBXGroup;
 			children = (
+				62FA5244E5B461E83523522B /* CommandListener.swift */,
 				8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */,
 			);
 			path = Voice;
@@ -193,6 +202,7 @@
 				41ABC0D46847CE8137D278D7 /* hail.caf in Resources */,
 				38BD90C95924C75259E9122D /* power_down.caf in Resources */,
 				25F4A32EFD9EB0EB45C90C39 /* power_up.caf in Resources */,
+				E563FBB14B0D20E14B4EA92A /* thruster.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +216,8 @@
 				215E1A034D5A5F7BE823F21B /* AudioEngine.swift in Sources */,
 				53A886F626B7B3E84DC1E7DB /* BridgeView.swift in Sources */,
 				C38D0C941761995B850BD61E /* CannedEvents.swift in Sources */,
+				783C96DF23C05700570534F9 /* CommandListener.swift in Sources */,
+				9CC6958A295669FECC7A0AAD /* EnginePersonality.swift in Sources */,
 				3F3E3295D0E616CC6E88EA6A /* EventEngine.swift in Sources */,
 				238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */,
 				8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */,
