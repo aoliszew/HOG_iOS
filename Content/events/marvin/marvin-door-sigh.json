@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-door-sigh",
+  "title": "Marvin door sigh",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "The doors are happy to see you. I find that unbearable."
+  }
+}

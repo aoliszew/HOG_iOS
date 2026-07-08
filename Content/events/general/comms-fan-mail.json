@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-fan-mail",
+  "title": "Comms fan mail",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "We have received {n:2-9} pieces of subspace fan mail for the ship. One is addressed to the {pick:cup holder|left thruster|towel}."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "mission-ops-checklist",
+  "title": "Mission ops checklist",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "errands"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "errands"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "MISSION OPS",
+    "text": "Mission ops estimates {n:1-5} objectives remaining. Probability of remembering all of them without checking the list: {n:8-60} percent."
+  }
+}

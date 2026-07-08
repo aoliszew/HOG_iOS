@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-view",
+  "title": "Marvin view",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I've calculated the scenic value of the current view. It's {n:2-11} percent. I wouldn't bother looking."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-brain-planet",
+  "title": "Marvin brain planet",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "Here I am, brain the size of a planet, and they ask me to monitor the {pick:cargo bay|coffee machine|tire pressure|glove compartment}. Call that job satisfaction? I don't."
+  }
+}

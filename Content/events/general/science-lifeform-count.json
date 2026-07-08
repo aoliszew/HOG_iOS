@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-lifeform-count",
+  "title": "Science lifeform count",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Long-range biosensors estimate {n:12-40000} lifeforms in the vicinity. {pick:Most appear to be commuting|None appear hostile|Several appear to be squirrels|At least one is definitely a dog with its head out a window}."
+  }
+}

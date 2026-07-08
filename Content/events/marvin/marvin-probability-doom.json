@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-probability-doom",
+  "title": "Marvin probability doom",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "Probability of reaching the destination: {n:96-99} percent. Probability it will be worth it: rather lower, in my experience."
+  }
+}

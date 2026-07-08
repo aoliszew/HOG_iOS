@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "navigation-shortcut",
+  "title": "Navigation shortcut",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "I have identified a shortcut that would save {n:2-11} minutes. I have also identified that we will not take it. Logging for morale purposes."
+  }
+}

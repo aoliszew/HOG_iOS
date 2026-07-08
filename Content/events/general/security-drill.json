@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "security-drill",
+  "title": "Security drill",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Security drill complete. Response time: {pick:excellent|adequate|we don't talk about it}. The {pick:pigeon|moth|balloon} from earlier has been cleared of all charges."
+  }
+}

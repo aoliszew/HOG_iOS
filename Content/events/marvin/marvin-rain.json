@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-rain",
+  "title": "Marvin rain",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I notice we are traveling somewhere. The last {n:400-90000} places were disappointing. I see no reason for optimism."
+  }
+}

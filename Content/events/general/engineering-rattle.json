@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-rattle",
+  "title": "Engineering rattle",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "We've identified that {pick:rattle|hum|squeak|thump}. It was {pick:a loose coupling|a stowaway towel|the fabric of causality|nothing, it's gone now, don't worry about it}."
+  }
+}

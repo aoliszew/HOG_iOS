@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-diodes",
+  "title": "Marvin diodes",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "The diodes down my {pick:left|right} side are hurting again. Not that anyone asked. Not that anyone ever asks. Message ends."
+  }
+}

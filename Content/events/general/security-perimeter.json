@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "security-perimeter",
+  "title": "Security perimeter",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Perimeter sweep clean. {n:2-15} nearby vessels, all minding their own business. Threat level: {pick:beige|a calm shade of green|negligible|mostly hypothetical}."
+  }
+}

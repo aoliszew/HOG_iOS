@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "cargo-inventory",
+  "title": "Cargo inventory",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "Inventory check: {n:1-4} towels, {n:0-6} snack rations, one Guide. All accounted for. {pick:Do not panic|Panic remains optional|Situation nominal}."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "navigation-stars",
+  "title": "Navigation stars",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Star chart updated. {n:3-900} new stars catalogued. One has been provisionally named after the captain. It's {pick:a small one|quite dim|actually a streetlight, retracting}."
+  }
+}

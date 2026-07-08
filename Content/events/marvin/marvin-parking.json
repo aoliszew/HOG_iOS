@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "marvin-parking",
+  "title": "Marvin parking",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "max": 25
+      }
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I could calculate the optimal parking spot in a nanosecond. You'll pick the wrong one anyway. They always do."
+  }
+}

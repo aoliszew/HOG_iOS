@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-intercepted",
+  "title": "Comms intercepted",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Intercepted transmission: {pick:a weather report from a planet with no weather|someone's grocery list, heavily encrypted|a radio jingle from a very distant star|two satellites arguing about right of way}. Logged and ignored."
+  }
+}
