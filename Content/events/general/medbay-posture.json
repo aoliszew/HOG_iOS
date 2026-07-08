@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-posture",
+  "title": "Medbay posture",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Posture scan complete. Recommend the captain {pick:un-hunch|relax the shoulders|loosen the death grip on the wheel|breathe, generally}. Doctor's orders."
+  }
+}

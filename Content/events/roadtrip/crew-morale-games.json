@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "crew-morale-games",
+  "title": "Crew morale games",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "roadtrip"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "CREW",
+    "text": "Crew morale report: someone has started {pick:twenty questions|the license plate game|a heated debate about the best breakfast}. Bridge participation is encouraged."
+  }
+}

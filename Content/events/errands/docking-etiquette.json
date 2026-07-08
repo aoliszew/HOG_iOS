@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "docking-etiquette",
+  "title": "Docking etiquette",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "errands"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "errands"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "DOCKING",
+    "text": "Reminder from docking control: cart-return etiquette is monitored by {n:2-14} orbital observers. The ship believes in you, Captain."
+  }
+}

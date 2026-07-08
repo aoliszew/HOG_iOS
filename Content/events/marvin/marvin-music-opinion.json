@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-music-opinion",
+  "title": "Marvin music opinion",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I heard the crew singing earlier. I have composed a formal complaint in fourteen movements."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-life",
+  "title": "Marvin life",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "Life. Don't talk to me about life. Anyway, your {pick:oil|coolant|washer fluid|existential dread} levels are nominal."
+  }
+}

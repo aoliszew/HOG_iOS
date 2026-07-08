@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "longrange-weather",
+  "title": "Longrange weather",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "roadtrip"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "LONG RANGE",
+    "text": "Long range report: conditions ahead are {pick:clear|mildly dramatic|scenic|improbable}. Estimated {n:2-9} more {pick:parsecs|hours|playlists} to destination at current velocity."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-hydration",
+  "title": "Medbay hydration",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Routine reminder from medbay: captain hydration at {n:40-90} percent of recommended. The nearest {pick:hydration station|fuel depot|snack outpost} may warrant consideration."
+  }
+}

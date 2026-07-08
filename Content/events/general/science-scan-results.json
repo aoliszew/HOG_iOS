@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-scan-results",
+  "title": "Science scan results",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Scan complete. The {pick:asteroid|comet|satellite|billboard|passing vehicle} contains {pick:trace iridium|absolutely nothing of interest|what appears to be cheese|an improbability residue} . Filing under {pick:anomalies|snacks|paperwork}."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "ai-core-thought",
+  "title": "Ai core thought",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "Ship's log, supplemental: today I learned {n:1200-90000} new facts about {pick:this star system|hyperspace bypasses|local traffic ordinances|tea}. {pick:None were useful|Two were useful|All were fascinating}. Growth continues."
+  }
+}
