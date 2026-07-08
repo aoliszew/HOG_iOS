@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate all event JSON files in Content/events/. Run by CI on every PR."""
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -35,11 +36,32 @@ def check_range(path, value, field):
         err(path, f"{field} must be an object with min and/or max")
 
 
+TEMPLATE_RE = re.compile(r"\{([^{}]*)\}")
+
+
+def check_templates(path, text, where):
+    for body in TEMPLATE_RE.findall(text):
+        if body.startswith("n:"):
+            m = re.fullmatch(r"n:(-?\d+)-(-?\d+)", body)
+            if not m or int(m.group(1)) > int(m.group(2)):
+                err(path, f"{where}: bad number placeholder {{{body}}} (want {{n:LO-HI}})")
+        elif body.startswith("pick:"):
+            options = body[5:].split("|")
+            if len(options) < 2 or any(not o.strip() for o in options):
+                err(path, f"{where}: bad pick placeholder {{{body}}} (want 2+ non-empty '|' options)")
+        else:
+            err(path, f"{where}: unknown placeholder {{{body}}} (supported: n:, pick:)")
+    if text.count("{") != len(TEMPLATE_RE.findall(text)):
+        err(path, f"{where}: unbalanced braces in text")
+
+
 def check_line(path, node, where):
     if not isinstance(node.get("source"), str) or not node["source"]:
         err(path, f"{where}: missing 'source'")
     if not isinstance(node.get("text"), str) or not node["text"]:
         err(path, f"{where}: missing 'text'")
+    else:
+        check_templates(path, node["text"], where)
 
 
 def check_trigger(path, trigger):

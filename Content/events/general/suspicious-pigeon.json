@@ -14,6 +14,6 @@
   },
   "content": {
     "source": "SECURITY",
-    "text": "Security report: no hostile vessels detected. One suspicious pigeon on the forward viewport."
+    "text": "Security report: no hostile vessels detected. One suspicious {pick:pigeon|sparrow|crow|seagull|weather balloon|moth of unusual confidence} on the {pick:forward|port|starboard|dorsal} viewport."
   }
 }

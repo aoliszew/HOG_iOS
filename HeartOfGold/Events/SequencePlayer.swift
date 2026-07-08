@@ -57,7 +57,7 @@ final class SequencePlayer {
                 }
             }
         } else if let source = step.source, let text = step.text {
-            deliver(ShipEvent(source: source, text: text))
+            deliver(ShipEvent(source: source, text: MessageTemplate.render(text)))
             advance()
         } else {
             advance()
