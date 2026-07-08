@@ -23,6 +23,7 @@
 		7F623D4017426B50E2DFB844 /* EventModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A20B61DEA314ECC8BF8F73 /* EventModels.swift */; };
 		85BA74BDB49D9685A861AA83 /* TripTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3975AF298726332F369C53 /* TripTracker.swift */; };
 		85BF12E6A50327940785D8BD /* TriggerEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5630FEF15FE073B79669AEB /* TriggerEvaluator.swift */; };
+		878E78A7E0F425F9C938A16A /* TripPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */; };
 		8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960ECB60B39A5D929263167F /* ShipController.swift */; };
 		9CC6958A295669FECC7A0AAD /* EnginePersonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */; };
 		D0C49E948FF73FD013B03D23 /* CharacterVoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A05356927EFA9FF3A553FB /* CharacterVoices.swift */; };
@@ -54,6 +55,7 @@
 		BD3975AF298726332F369C53 /* TripTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTracker.swift; sourceTree = "<group>"; };
 		C405401DE777C5535E9C50B3 /* SequencePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencePlayer.swift; sourceTree = "<group>"; };
 		C9DCB1167A3C7DB871965408 /* EventEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEngine.swift; sourceTree = "<group>"; };
+		CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPlan.swift; sourceTree = "<group>"; };
 		D394B43303D809BCC9CB9186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DEA40CDEA63EDB544B6A7837 /* MessageTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTemplate.swift; sourceTree = "<group>"; };
 		EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartOfGoldApp.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		FB737DD02ED3A5971895A45A /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */,
 				5F31B6668D60B5AF7179516A /* TripStore.swift */,
 				BD3975AF298726332F369C53 /* TripTracker.swift */,
 			);
@@ -259,6 +262,7 @@
 				6264F53319BD3D413906054C /* ShipVoice.swift in Sources */,
 				D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */,
 				85BF12E6A50327940785D8BD /* TriggerEvaluator.swift in Sources */,
+				878E78A7E0F425F9C938A16A /* TripPlan.swift in Sources */,
 				EC49D665A9D369F4D9D1AD30 /* TripStore.swift in Sources */,
 				85BA74BDB49D9685A861AA83 /* TripTracker.swift in Sources */,
 			);

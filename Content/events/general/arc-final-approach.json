@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "arc-final-approach",
+  "title": "Arc final approach",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general",
+    "arc"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "final"
+      ]
+    },
+    "weight": 2
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Final approach phase, Captain. Recommend queueing a triumphant arrival soundtrack. The crew has voted {pick:twice|unanimously|by interpretive dance}."
+  }
+}

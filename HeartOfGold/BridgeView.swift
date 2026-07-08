@@ -15,6 +15,7 @@ struct BridgeView: View {
                 if !ship.poweredUp {
                     modePicker
                     personalityPicker
+                    briefingPickers
                     eventLog
                     if ship.resumableTrip != nil {
                         resumeButton
@@ -168,6 +169,39 @@ struct BridgeView: View {
             .foregroundStyle(ship.commands.isListening ? .black : amber)
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber.opacity(0.5), lineWidth: 1.5))
             .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+    }
+
+    /// Optional pre-flight mission briefing; skip it and the ship asks by voice.
+    private var briefingPickers: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text("STOPS")
+                    .font(.system(.caption2, design: .monospaced))
+                    .foregroundStyle(.gray)
+                    .frame(width: 54, alignment: .leading)
+                Picker("Stops", selection: $ship.plan.plannedStops) {
+                    Text("ASK").tag(Int?.none)
+                    Text("0").tag(Int?.some(0))
+                    Text("1").tag(Int?.some(1))
+                    Text("2").tag(Int?.some(2))
+                    Text("3+").tag(Int?.some(3))
+                }
+                .pickerStyle(.segmented)
+            }
+            HStack {
+                Text("LENGTH")
+                    .font(.system(.caption2, design: .monospaced))
+                    .foregroundStyle(.gray)
+                    .frame(width: 54, alignment: .leading)
+                Picker("Length", selection: $ship.plan.length) {
+                    Text("ASK").tag(TripPlan.Length?.none)
+                    Text("QUICK").tag(TripPlan.Length?.some(.quickHop))
+                    Text("<1 HR").tag(TripPlan.Length?.some(.underAnHour))
+                    Text("LONG").tag(TripPlan.Length?.some(.longHaul))
+                }
+                .pickerStyle(.segmented)
+            }
         }
     }
 

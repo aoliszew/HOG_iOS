@@ -13,10 +13,11 @@ PERSONALITIES = {"power", "eco"}
 TIMES = {"morning", "afternoon", "evening", "night"}
 DAYS = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"}
 WEATHER = {"clear", "cloudy", "rain", "storm", "snow", "fog", "wind"}
+PHASES = {"beginning", "middle", "final"}
 CONTEXT_KEYS = {
     "tripModes", "personalities", "speedMPH", "tripDistanceMiles", "stopped",
     "hardAccelRecently", "timeOfDay", "daysOfWeek", "weather",
-    "requiresFlags", "forbidsFlags",
+    "requiresFlags", "forbidsFlags", "tripPhase", "stopsRemaining",
 }
 
 errors = []
@@ -79,6 +80,10 @@ def check_trigger(path, trigger):
         check_enum(path, contexts["daysOfWeek"], DAYS, "daysOfWeek")
     if "weather" in contexts:
         check_enum(path, contexts["weather"], WEATHER, "weather")
+    if "tripPhase" in contexts:
+        check_enum(path, contexts["tripPhase"], PHASES, "tripPhase")
+    if "stopsRemaining" in contexts:
+        check_range(path, contexts["stopsRemaining"], "stopsRemaining")
     for field in ("speedMPH", "tripDistanceMiles"):
         if field in contexts:
             check_range(path, contexts[field], field)

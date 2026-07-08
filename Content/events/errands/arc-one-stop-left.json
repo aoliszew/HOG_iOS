@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "id": "arc-one-stop-left",
+  "title": "Arc one stop left",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "errands",
+    "arc"
+  ],
+  "trigger": {
+    "contexts": {
+      "stopsRemaining": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "weight": 2
+  },
+  "content": {
+    "source": "MISSION OPS",
+    "text": "One objective remains, Captain. History will remember {pick:this errand|today's logistics|your cart-return form}."
+  }
+}

@@ -5,7 +5,8 @@ import Combine
 @MainActor
 final class ShipController: ObservableObject {
     @Published var poweredUp = false
-    @Published var mode: TravelMode = .roadtrip
+    @Published var mode: TravelMode = .errands
+    @Published var plan = TripPlan()
     @Published var personality: EnginePersonality = .power {
         didSet {
             guard personality != oldValue else { return }
@@ -52,7 +53,9 @@ final class ShipController: ObservableObject {
                            hardAccelRecently: self.trip.hardAccelRecently,
                            flags: [],
                            longFormActive: self.activeSequence != nil || self.activeBranching != nil,
-                           queuedMessages: self.pendingMessages.count)
+                           queuedMessages: self.pendingMessages.count,
+                           tripPhase: self.plan.phase(distanceMiles: self.trip.distanceMiles),
+                           stopsRemaining: self.plan.stopsRemaining)
     }
 
     private var cancellables: Set<AnyCancellable> = []
@@ -74,6 +77,7 @@ final class ShipController: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.objectWillChange.send()
+                self?.updateStopDetection()
                 self?.persistIfFlying()
             }
             .store(in: &cancellables)
@@ -103,14 +107,23 @@ final class ShipController: ObservableObject {
         }
         commands.onFailure = { [weak self] failure in
             Task { @MainActor in
-                self?.audio.exitListeningMode()
-                self?.reportListenFailure(failure)
+                guard let self else { return }
+                self.audio.exitListeningMode()
+                if self.briefingQuery != nil {
+                    self.abandonBriefing()   // no interrogation — one shot, then wing it
+                } else {
+                    self.reportListenFailure(failure)
+                }
             }
         }
         commands.onChoice = { [weak self] index in
             Task { @MainActor in
                 guard let self else { return }
                 self.audio.exitListeningMode()
+                if let query = self.briefingQuery {
+                    self.handleBriefingAnswer(query, index: index)
+                    return
+                }
                 guard let player = self.activeBranching,
                       self.activeChoices.indices.contains(index) else { return }
                 let choice = self.activeChoices[index]
@@ -118,6 +131,66 @@ final class ShipController: ObservableObject {
                 player.choose(choice)
             }
         }
+    }
+
+    // MARK: - Mission briefing (voice fallback when the tap flow was skipped)
+
+    private enum BriefingQuery { case stops, length }
+    private var briefingQuery: BriefingQuery?
+
+    private func askBriefing() {
+        guard poweredUp else { return }
+        if plan.plannedStops == nil {
+            briefingQuery = .stops
+            commands.setChoicePhrases([
+                ["zero", "none", "no stops", "straight"],
+                ["one", "1"],
+                ["two", "2"],
+                ["three", "3", "many", "more"],
+            ])
+            say(source: "SHIP", "Mission briefing, Captain. How many stops before we return to base? Zero, one, two, or three or more?") { [weak self] in
+                Task { @MainActor in self?.listenForBriefing() }
+            }
+        } else if plan.length == nil {
+            briefingQuery = .length
+            commands.setChoicePhrases([
+                ["quick", "hop", "short"],
+                ["hour", "under an hour", "medium"],
+                ["long", "haul", "road trip"],
+            ])
+            say(source: "SHIP", "And the flight plan: a quick hop, under an hour, or a long haul?") { [weak self] in
+                Task { @MainActor in self?.listenForBriefing() }
+            }
+        } else {
+            briefingQuery = nil
+            commands.setChoicePhrases([])
+            let stops = plan.plannedStops ?? 0
+            let stopsText = stops == 0 ? "a direct flight" : "\(stops)\(stops == 3 ? " or more" : "") stop\(stops == 1 ? "" : "s")"
+            say(source: "SHIP", "Briefing logged: \(stopsText), \(plan.length?.spoken ?? "duration unknown"). Plotting narrative course.")
+        }
+    }
+
+    private func listenForBriefing() {
+        guard briefingQuery != nil, poweredUp, !isPaused else { return }
+        audio.enterListeningMode { [weak self] in
+            self?.commands.startListening()
+        }
+    }
+
+    private func handleBriefingAnswer(_ query: BriefingQuery, index: Int) {
+        switch query {
+        case .stops:
+            plan.plannedStops = index      // choice order matches 0,1,2,3+
+        case .length:
+            plan.length = TripPlan.Length.allCases[safe: index] ?? .underAnHour
+        }
+        askBriefing()   // ask the next missing piece, or confirm
+    }
+
+    private func abandonBriefing() {
+        briefingQuery = nil
+        commands.setChoicePhrases([])
+        say(source: "SHIP", "Very well, we'll improvise. The best missions usually are.")
     }
 
     private func reportListenFailure(_ failure: ListenFailure) {
@@ -172,9 +245,15 @@ final class ShipController: ObservableObject {
         voice.setDelivery(rate: personality.speechRate, pitch: personality.pitch)
         audio.play(.powerUp)
 
+        plan.stopsCompleted = 0
         let shields = Int.random(in: 94...99)
         let startup = "Systems online. Shields at \(shields) percent. Infinite Improbability Drive on standby. \(mode.startupGreeting)"
-        say(source: "SHIP", startup, delay: 1.2)
+        say(source: "SHIP", startup, delay: 1.2) { [weak self] in
+            Task { @MainActor in
+                guard let self, self.poweredUp else { return }
+                if !self.plan.isComplete { self.askBriefing() }
+            }
+        }
 
         events.start(mode: mode)
         resumableTrip = nil
@@ -187,6 +266,9 @@ final class ShipController: ObservableObject {
         guard !poweredUp, let saved = resumableTrip else { return }
         mode = TravelMode(rawValue: saved.mode) ?? mode
         personality = EnginePersonality(rawValue: saved.personality) ?? personality
+        plan = TripPlan(length: saved.planLength.flatMap(TripPlan.Length.init(rawValue:)),
+                        plannedStops: saved.plannedStops,
+                        stopsCompleted: saved.stopsCompleted ?? 0)
         poweredUp = true
         trip.resetTrip()
         trip.restoreDistance(saved.distanceMiles)
@@ -228,6 +310,39 @@ final class ShipController: ObservableObject {
         say(source: "SHIP", "Resuming, Captain.")
     }
 
+    // MARK: - Stop (docking) detection
+
+    private var stoppedSince: Date?
+    private var docked = false
+
+    /// Stationary 4+ minutes = a docking (traffic lights don't count);
+    /// pulling away afterwards ticks off an errand objective.
+    private func updateStopDetection() {
+        guard poweredUp, !isPaused else { return }
+        let speed = trip.speedMPH
+        if speed < 2 {
+            if let since = stoppedSince {
+                if !docked, Date().timeIntervalSince(since) > 240 { docked = true }
+            } else {
+                stoppedSince = Date()
+            }
+        } else if speed > 8 {
+            if docked {
+                docked = false
+                plan.stopsCompleted += 1
+                if let remaining = plan.stopsRemaining {
+                    let line = remaining > 0
+                        ? "Docking complete. \(remaining) objective\(remaining == 1 ? "" : "s") remaining before home."
+                        : "Final objective complete. Setting course for home base, Captain."
+                    say(source: "SHIP", line)
+                } else {
+                    say(source: "SHIP", "Docking complete. Resuming course.")
+                }
+            }
+            stoppedSince = nil
+        }
+    }
+
     private func persistIfFlying() {
         guard poweredUp else { return }
         let state = eventSource.snapshot
@@ -239,7 +354,10 @@ final class ShipController: ObservableObject {
                                     distanceMiles: trip.distanceMiles,
                                     flags: Array(state.flags),
                                     firedCounts: state.firedCounts,
-                                    lastFired: state.lastFired))
+                                    lastFired: state.lastFired,
+                                    planLength: plan.length?.rawValue,
+                                    plannedStops: plan.plannedStops,
+                                    stopsCompleted: plan.stopsCompleted))
     }
 
     func powerDown() {
@@ -262,6 +380,10 @@ final class ShipController: ObservableObject {
         }
         poweredUp = false
         isPaused = false
+        briefingQuery = nil
+        stoppedSince = nil
+        docked = false
+        plan = TripPlan()   // fresh briefing next drive
         TripStore.clear()
     }
 
@@ -381,5 +503,11 @@ final class ShipController: ObservableObject {
         } else {
             speak()
         }
+    }
+}
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        indices.contains(index) ? self[index] : nil
     }
 }

@@ -44,7 +44,9 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
       "daysOfWeek": ["sat", "sun"],    //                                (Phase: time)
       "weather": ["rain", "storm"],    // WeatherKit conditions          (Phase: weather)
       "requiresFlags": ["met-aliens"], // story state                    (Phase: flags)
-      "forbidsFlags": ["ship-damaged"]
+      "forbidsFlags": ["ship-damaged"],
+      "tripPhase": ["final"],          // arc: beginning | middle | final (needs briefing)
+      "stopsRemaining": { "max": 1 }   // errand objectives left (needs briefing)
     },
     "weight": 3,                       // selection weight vs other qualified events
     "cooldownMinutes": 45,             // min gap before this event can repeat

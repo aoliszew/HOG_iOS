@@ -67,6 +67,13 @@ final class TriggerEvaluator {
         if let required = c.requiresFlags, !Set(required).isSubset(of: context.flags) { return false }
         if let forbidden = c.forbidsFlags, !Set(forbidden).isDisjoint(with: context.flags) { return false }
 
+        if let phases = c.tripPhase {
+            guard let phase = context.tripPhase, phases.contains(phase) else { return false }
+        }
+        if let stops = c.stopsRemaining {
+            guard let remaining = context.stopsRemaining, stops.contains(Double(remaining)) else { return false }
+        }
+
         // Contexts the ship can't sense yet: any event requiring them stays dormant.
         if c.timeOfDay != nil || c.daysOfWeek != nil || c.weather != nil { return false }
 
