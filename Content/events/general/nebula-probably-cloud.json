@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "nebula-probably-cloud",
+  "title": "Nebula probably cloud",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Science officer reporting. Sensors detect a nebula ahead. It is almost certainly just a cloud, but I am logging it as a nebula."
+  }
+}

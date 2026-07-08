@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "vogon-freighter-poetry",
+  "title": "Vogon freighter poetry",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Incoming transmission from a passing Vogon freighter. It appears to be poetry. Recommend we do not answer."
+  }
+}

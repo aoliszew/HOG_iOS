@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "improbability-idle",
+  "title": "Improbability idle",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Engineering here. The Infinite Improbability Drive is idling at two to the power of nothing much. All systems green."
+  }
+}

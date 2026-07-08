@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-snack-deficiency",
+  "title": "Medbay snack deficiency",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Medbay to bridge. All crew vitals nominal. One crew member reports mild snack deficiency."
+  }
+}

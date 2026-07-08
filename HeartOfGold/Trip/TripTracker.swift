@@ -13,6 +13,9 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
     /// Fired on hard acceleration (rate-limited).
     var onHardAcceleration: (() -> Void)?
 
+    /// True within 60s of the last hard-acceleration event (trigger context).
+    var hardAccelRecently: Bool { Date().timeIntervalSince(lastThrusterFire) < 60 }
+
     private var lastSpeedSample: (mph: Double, time: Date)?
     private var lastThrusterFire = Date.distantPast
     private let hardAccelMPHPerSec = 4.5

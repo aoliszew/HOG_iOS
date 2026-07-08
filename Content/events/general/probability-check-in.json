@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "probability-check-in",
+  "title": "Probability check in",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "Just checking in, Captain. Probability of a pleasant journey currently holding at ninety-seven point three percent."
+  }
+}

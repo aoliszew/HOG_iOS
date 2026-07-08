@@ -5,10 +5,13 @@ struct ShipEvent {
     let text: String
 }
 
-/// Supplies encounter events. The POC uses CannedEvents; Phase 3 swaps in a
-/// Claude-backed story source without touching the rest of the app.
+/// Supplies encounter events. The POC used hard-coded lines; ContentEventSource
+/// reads JSON content, and Phase 3's Claude generator is another implementation.
 protocol EventSource {
-    func nextEvent(mode: TravelMode, speedMPH: Double) -> ShipEvent
+    /// Called when a trip starts (reset cooldowns/counters).
+    func tripStarted()
+    /// Return the next event qualified for this context, or nil to skip this slot.
+    func nextEvent(context: ShipContext) -> ShipEvent?
 }
 
 /// Schedules random encounters while the ship is powered up.
@@ -18,15 +21,16 @@ final class EventEngine {
     private let source: EventSource
     private var timer: Timer?
     private var mode: TravelMode = .roadtrip
-    private var currentSpeed: () -> Double
+    private let currentContext: () -> ShipContext
 
-    init(source: EventSource, currentSpeed: @escaping () -> Double) {
+    init(source: EventSource, currentContext: @escaping () -> ShipContext) {
         self.source = source
-        self.currentSpeed = currentSpeed
+        self.currentContext = currentContext
     }
 
     func start(mode: TravelMode) {
         self.mode = mode
+        source.tripStarted()
         scheduleNext()
     }
 
@@ -39,7 +43,9 @@ final class EventEngine {
         let interval = TimeInterval.random(in: mode.encounterInterval)
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
             guard let self else { return }
-            self.onEvent?(self.source.nextEvent(mode: self.mode, speedMPH: self.currentSpeed()))
+            if let event = self.source.nextEvent(context: self.currentContext()) {
+                self.onEvent?(event)
+            }
             self.scheduleNext()
         }
     }

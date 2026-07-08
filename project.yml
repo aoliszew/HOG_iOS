@@ -9,6 +9,9 @@ targets:
     platform: iOS
     sources:
       - HeartOfGold
+      - path: Content
+        type: folder
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.oliszewski.heartofgold
@@ -17,3 +20,4 @@ targets:
         TARGETED_DEVICE_FAMILY: "1"
         SWIFT_VERSION: "5.9"
         CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: HX3M98Z75G

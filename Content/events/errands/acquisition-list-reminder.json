@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "acquisition-list-reminder",
+  "title": "Acquisition list reminder",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "errands"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "errands"
+      ]
+    },
+    "weight": 1,
+    "cooldownMinutes": 25,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "MISSION OPS",
+    "text": "Mission ops reminder: this is a multi-objective sortie. Recommend reviewing the acquisition list before docking."
+  }
+}

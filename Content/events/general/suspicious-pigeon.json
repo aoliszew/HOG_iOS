@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "suspicious-pigeon",
+  "title": "Suspicious pigeon",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Security report: no hostile vessels detected. One suspicious pigeon on the forward viewport."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "trade-station-traffic",
+  "title": "Trade station traffic",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "errands"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "errands"
+      ]
+    },
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "DOCKING",
+    "text": "Docking control reports heavy traffic at the trade station. Patience shields to maximum."
+  }
+}

@@ -30,8 +30,18 @@ final class ShipController: ObservableObject {
 
     private let audio = AudioEngine()
     private let voice: VoiceSynthesizing = ShipVoice()
-    private lazy var events: EventEngine = EventEngine(source: CannedEvents()) { [weak self] in
-        self?.trip.speedMPH ?? 0
+    private lazy var events: EventEngine = EventEngine(source: ContentEventSource()) { [weak self] in
+        guard let self else {
+            return ShipContext(mode: .roadtrip, personality: .power, speedMPH: 0,
+                               tripDistanceMiles: 0, stopped: true, hardAccelRecently: false, flags: [])
+        }
+        return ShipContext(mode: self.mode,
+                           personality: self.personality,
+                           speedMPH: self.trip.speedMPH,
+                           tripDistanceMiles: self.trip.distanceMiles,
+                           stopped: self.trip.speedMPH < 1,
+                           hardAccelRecently: self.trip.hardAccelRecently,
+                           flags: [])
     }
 
     private var cancellables: Set<AnyCancellable> = []
