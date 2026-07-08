@@ -1,0 +1,107 @@
+import Foundation
+
+/// Codable model of an event JSON file — schema v1, see docs/EVENT_SYSTEM.md.
+struct EventDefinition: Decodable, Identifiable {
+    enum EventType: String, Decodable {
+        case single, sequence, branching
+    }
+
+    let schema: Int
+    let id: String
+    let title: String
+    let author: String
+    let type: EventType
+    let tags: [String]?
+    let trigger: Trigger?
+    let content: Content
+    let effects: Effects?
+
+    struct Trigger: Decodable {
+        let contexts: Contexts?
+        let weight: Double?
+        let cooldownMinutes: Double?
+        let maxPerTrip: Int?
+    }
+
+    struct Contexts: Decodable {
+        let tripModes: [String]?
+        let personalities: [String]?
+        let speedMPH: RangeCondition?
+        let tripDistanceMiles: RangeCondition?
+        let stopped: Bool?
+        let hardAccelRecently: Bool?
+        let timeOfDay: [String]?
+        let daysOfWeek: [String]?
+        let weather: [String]?
+        let requiresFlags: [String]?
+        let forbidsFlags: [String]?
+    }
+
+    struct RangeCondition: Decodable {
+        let min: Double?
+        let max: Double?
+
+        func contains(_ value: Double) -> Bool {
+            if let min, value < min { return false }
+            if let max, value > max { return false }
+            return true
+        }
+    }
+
+    /// Union of the three content shapes; which fields are set depends on `type`.
+    struct Content: Decodable {
+        // single
+        let source: String?
+        let text: String?
+        // sequence
+        let steps: [Step]?
+        // branching
+        let entry: String?
+        let nodes: [String: Node]?
+    }
+
+    struct Step: Decodable {
+        let source: String?
+        let text: String?
+        let wait: Wait?
+    }
+
+    struct Wait: Decodable {
+        let seconds: Double?
+        let miles: Double?
+    }
+
+    struct Node: Decodable {
+        let source: String
+        let text: String
+        let choices: [Choice]?
+        let next: String?
+        let timeoutSeconds: Double?
+        let timeoutNext: String?
+        let setFlags: [String]?
+    }
+
+    struct Choice: Decodable {
+        let label: String
+        let phrases: [String]
+        let next: String
+        let setFlags: [String]?
+    }
+
+    struct Effects: Decodable {
+        let setFlags: [String]?
+    }
+}
+
+/// Snapshot of everything the trigger system can currently observe.
+/// Fields the app can't sense yet (weather, …) simply disqualify events that require them.
+struct ShipContext {
+    var mode: TravelMode
+    var personality: EnginePersonality
+    var speedMPH: Double
+    var tripDistanceMiles: Double
+    var stopped: Bool
+    var hardAccelRecently: Bool
+    var flags: Set<String>
+    var date: Date = .now
+}

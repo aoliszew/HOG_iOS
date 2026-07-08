@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "open-space-ahead",
+  "title": "Open space ahead",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "roadtrip"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "LONG RANGE",
+    "text": "Long range sensors report open space for several parsecs. Ideal conditions for cruise velocity."
+  }
+}

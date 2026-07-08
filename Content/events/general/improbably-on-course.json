@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "improbably-on-course",
+  "title": "Improbably on course",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Navigation update: we remain improbably on course. The Guide suggests this is cause for mild celebration."
+  }
+}

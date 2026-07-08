@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "resupply-station-request",
+  "title": "Resupply station request",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "roadtrip"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 1,
+    "cooldownMinutes": 25,
+    "maxPerTrip": 2
+  },
+  "content": {
+    "source": "CREW",
+    "text": "A crew member requests a status update on the next resupply station. Translation: they need a bathroom."
+  }
+}

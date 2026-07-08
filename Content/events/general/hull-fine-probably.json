@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "hull-fine-probably",
+  "title": "Hull fine probably",
+  "author": "claude",
+  "type": "single",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "min": 65
+      }
+    },
+    "weight": 2,
+    "cooldownMinutes": 25
+  },
+  "content": {
+    "source": "HELM",
+    "text": "Helm reports we are approaching maximum sublight. The hull is fine. Probably."
+  }
+}
