@@ -95,6 +95,8 @@ def check_content(path, event):
         for name, node in nodes.items():
             check_line(path, node, f"node '{name}'")
             nexts = [c.get("next") for c in node.get("choices", [])]
+            if len(node.get("choices", [])) > 3:
+                err(path, f"node '{name}': max 3 choices (driver-safe glanceable UI)")
             for c in node.get("choices", []):
                 if not c.get("phrases") or not c.get("label"):
                     err(path, f"node '{name}': every choice needs 'label' and 'phrases'")
@@ -130,6 +132,8 @@ def main():
         for field in ("schema", "id", "title", "author", "type"):
             if field not in event:
                 err(path, f"missing required field '{field}'")
+        if event.get("class") is not None and event["class"] not in {"ambient", "plot"}:
+            err(path, "class must be 'ambient' or 'plot'")
         if event.get("type") not in TYPES:
             err(path, f"type must be one of {sorted(TYPES)}")
             continue

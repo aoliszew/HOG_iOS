@@ -46,7 +46,8 @@ final class ShipController: ObservableObject {
                            stopped: self.trip.speedMPH < 1,
                            hardAccelRecently: self.trip.hardAccelRecently,
                            flags: [],
-                           longFormActive: self.activeSequence != nil || self.activeBranching != nil)
+                           longFormActive: self.activeSequence != nil || self.activeBranching != nil,
+                           queuedMessages: self.pendingMessages.count)
     }
 
     private var cancellables: Set<AnyCancellable> = []
@@ -215,12 +216,19 @@ final class ShipController: ObservableObject {
     }
 
     private func deliver(_ event: ShipEvent) {
+        pruneStaleAmbient()
         audio.play(.hail)
         pendingMessages.append(event)
         log.insert(LogEntry(source: "COMMS", text: "Incoming transmission from \(event.source). Say or tap PLAY MESSAGE."), at: 0)
     }
 
+    /// Ambient chatter that sat unheard for 10+ minutes is no longer news.
+    private func pruneStaleAmbient() {
+        pendingMessages.removeAll { $0.ambient && Date().timeIntervalSince($0.queuedAt) > 600 }
+    }
+
     func playNextMessage() {
+        pruneStaleAmbient()
         guard !pendingMessages.isEmpty else {
             say(source: "COMMS", "No messages waiting, Captain.")
             return

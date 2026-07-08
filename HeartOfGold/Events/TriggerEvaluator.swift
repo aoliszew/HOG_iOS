@@ -5,15 +5,18 @@ import Foundation
 final class TriggerEvaluator {
     private var firedCounts: [String: Int] = [:]
     private var lastFired: [String: Date] = [:]
+    private var lastFiredID: String?
 
     func resetTrip() {
         firedCounts = [:]
         lastFired = [:]
+        lastFiredID = nil
     }
 
     func recordFired(_ event: EventDefinition) {
         firedCounts[event.id, default: 0] += 1
         lastFired[event.id] = .now
+        lastFiredID = event.id
     }
 
     func pick(from events: [EventDefinition], context: ShipContext) -> EventDefinition? {
@@ -34,8 +37,11 @@ final class TriggerEvaluator {
     }
 
     func qualifies(_ event: EventDefinition, context: ShipContext) -> Bool {
-        if let maxPerTrip = event.trigger?.maxPerTrip,
-           firedCounts[event.id, default: 0] >= maxPerTrip { return false }
+        // Never the same event twice in a row, regardless of authoring.
+        if event.id == lastFiredID { return false }
+        // Unique-per-trip by default; repetition is opt-in via explicit maxPerTrip.
+        let maxPerTrip = event.trigger?.maxPerTrip ?? 1
+        if firedCounts[event.id, default: 0] >= maxPerTrip { return false }
         if let cooldown = event.trigger?.cooldownMinutes,
            let last = lastFired[event.id],
            Date.now.timeIntervalSince(last) < cooldown * 60 { return false }
