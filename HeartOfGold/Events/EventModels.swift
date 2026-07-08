@@ -6,15 +6,26 @@ struct EventDefinition: Decodable, Identifiable {
         case single, sequence, branching
     }
 
+    enum MessageClass: String, Decodable {
+        case ambient   // observational color; skipped when the queue backs up
+        case plot      // story content; always delivered
+    }
+
     let schema: Int
     let id: String
     let title: String
     let author: String
     let type: EventType
     let tags: [String]?
+    /// Defaults by type: single → ambient, sequence/branching → plot.
+    let `class`: MessageClass?
     let trigger: Trigger?
     let content: Content
     let effects: Effects?
+
+    var messageClass: MessageClass {
+        `class` ?? (type == .single ? .ambient : .plot)
+    }
 
     struct Trigger: Decodable {
         let contexts: Contexts?
@@ -106,5 +117,8 @@ struct ShipContext {
     /// True while a sequence/branching event is mid-playback — sources shouldn't
     /// start another long-form event on top of it.
     var longFormActive: Bool = false
+    /// How many messages are waiting unplayed — ambient events stop firing
+    /// when this backs up (~5+).
+    var queuedMessages: Int = 0
     var date: Date = .now
 }

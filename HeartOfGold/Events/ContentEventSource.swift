@@ -28,6 +28,10 @@ final class ContentEventSource: EventSource {
         if context.longFormActive {
             playable = playable.filter { $0.type == .single }
         }
+        // Queue backed up: stop generating ambient chatter; plot still flows.
+        if context.queuedMessages >= 5 {
+            playable = playable.filter { $0.messageClass == .plot }
+        }
         guard let event = evaluator.pick(from: playable, context: context) else { return nil }
         evaluator.recordFired(event)
 
@@ -35,7 +39,7 @@ final class ContentEventSource: EventSource {
         case .single:
             guard let source = event.content.source, let text = event.content.text else { return nil }
             applyEffects(of: event)
-            return .message(ShipEvent(source: source, text: text))
+            return .message(ShipEvent(source: source, text: text, ambient: event.messageClass == .ambient))
         case .sequence:
             // Effects apply on completion, via completed(eventID:extraFlags:).
             return .sequence(event)

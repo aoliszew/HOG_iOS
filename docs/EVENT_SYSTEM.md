@@ -29,6 +29,7 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
   "title": "Vogon poetry hail",
   "author": "alex",                    // who wrote it
   "type": "single",                    // single | sequence | branching
+  "class": "ambient",                  // ambient | plot; defaults: single→ambient, others→plot
   "tags": ["comms", "humor"],
 
   "trigger": {
@@ -47,7 +48,7 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
     },
     "weight": 3,                       // selection weight vs other qualified events
     "cooldownMinutes": 45,             // min gap before this event can repeat
-    "maxPerTrip": 1
+    "maxPerTrip": 1                    // DEFAULT is 1 — repetition is opt-in
   },
 
   "content": { /* shape depends on type — see below */ },
@@ -99,6 +100,15 @@ the captain ignoring the ship (consequences for not responding).
   }
 }
 ```
+
+### Engine guarantees (no authoring required)
+
+- The same event never fires twice in a row, ever.
+- Events fire at most once per trip unless they declare a higher `maxPerTrip`.
+- `ambient` events stop firing while 5+ messages sit unplayed, and expire from
+  the queue after 10 minutes unheard. `plot` events always fire and never expire.
+- Branching nodes may offer at most 3 choices (validator-enforced) so the
+  driving UI stays glanceable.
 
 ## Runtime architecture (implementation tasks on the board)
 

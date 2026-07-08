@@ -3,6 +3,9 @@ import Foundation
 struct ShipEvent {
     let source: String   // e.g. "MEDBAY", "SCIENCE"
     let text: String
+    /// Ambient chatter may be dropped if it sits unheard too long; plot never is.
+    var ambient: Bool = false
+    var queuedAt: Date = .now
 }
 
 /// What an encounter slot produced: a one-shot message, or a multi-step
