@@ -105,7 +105,12 @@ final class ShipController: ObservableObject {
             say(source: "COMMS", "I didn't catch anything, Captain.")
         case .heard(let transcript):
             log.insert(LogEntry(source: "COMMS", text: "Heard: \"\(transcript)\""), at: 0)
-            say(source: "COMMS", "Command not recognized, Captain. Try play message, status report, or power down.")
+            if !activeChoices.isEmpty {
+                let options = activeChoices.map(\.label).joined(separator: ", or ")
+                say(source: "COMMS", "I didn't catch that, Captain. Your options are: \(options).")
+            } else {
+                say(source: "COMMS", "Command not recognized, Captain. Try play message, status report, or power down.")
+            }
         }
     }
 
@@ -195,7 +200,16 @@ final class ShipController: ObservableObject {
                 // Branching moments are interactive: hail + speak immediately
                 // rather than queueing, since a timed question is waiting.
                 self?.audio.play(.hail)
-                self?.say(source: event.source, event.text, delay: 0.8)
+                self?.say(source: event.source, event.text, delay: 0.8) {
+                    // Auto-listen: a question was just asked — open the mic so
+                    // the captain can answer hands-free. One shot; the on-screen
+                    // buttons and the node timeout remain the fallbacks.
+                    Task { @MainActor in
+                        guard let self, self.activeBranching != nil,
+                              !self.activeChoices.isEmpty else { return }
+                        self.commands.startListening()
+                    }
+                }
             },
             setChoices: { [weak self] choices in self?.activeChoices = choices },
             onComplete: { [weak self] flags in
@@ -240,14 +254,15 @@ final class ShipController: ObservableObject {
         }
     }
 
-    private func say(source: String, _ text: String, delay: TimeInterval = 0) {
+    private func say(source: String, _ text: String, delay: TimeInterval = 0,
+                     completion: (() -> Void)? = nil) {
         log.insert(LogEntry(source: source, text: text), at: 0)
         if delay > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [voice] in
-                voice.speak(text)
+                voice.speak(text, completion: completion)
             }
         } else {
-            voice.speak(text)
+            voice.speak(text, completion: completion)
         }
     }
 }

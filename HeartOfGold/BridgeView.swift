@@ -9,23 +9,28 @@ struct BridgeView: View {
         ZStack {
             Color.black.ignoresSafeArea()
 
-            VStack(spacing: 24) {
+            VStack(spacing: 16) {
                 header
                 velocityReadout
-                modePicker
-                personalityPicker
-                eventLog
-                if ship.poweredUp && !ship.activeChoices.isEmpty {
-                    choiceButtons
-                }
-                if ship.poweredUp && !ship.pendingMessages.isEmpty {
-                    playMessageButton
-                }
-                HStack(spacing: 12) {
+                if !ship.poweredUp {
+                    modePicker
+                    personalityPicker
+                    eventLog
                     powerButton
-                    if ship.poweredUp {
-                        talkButton
+                } else if !ship.activeChoices.isEmpty {
+                    // A question is on the table: choices own the screen.
+                    Spacer(minLength: 0)
+                    choiceButtons
+                    talkButton
+                } else {
+                    personalityPicker
+                    eventLog
+                    if !ship.pendingMessages.isEmpty {
+                        playMessageButton
                     }
+                    // In flight, talking to the ship is the primary control.
+                    talkButton
+                    powerButton
                 }
             }
             .padding()
@@ -101,20 +106,25 @@ struct BridgeView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
+    // Driving-safe: huge stacked bars, glanceable at arm's length.
     private var choiceButtons: some View {
-        HStack(spacing: 10) {
+        VStack(spacing: 14) {
+            Text("AWAITING ORDERS")
+                .font(.system(.caption, design: .monospaced).bold())
+                .foregroundStyle(.green)
             ForEach(ship.activeChoices, id: \.label) { choice in
                 Button {
                     ship.choose(choice)
                 } label: {
                     Text(choice.label.uppercased())
-                        .font(.system(.subheadline, design: .monospaced).bold())
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .background(Color.white.opacity(0.08))
+                        .font(.system(.title2, design: .monospaced).bold())
+                        .minimumScaleFactor(0.6)
+                        .lineLimit(2)
+                        .frame(maxWidth: .infinity, minHeight: 84)
+                        .background(Color.white.opacity(0.1))
                         .foregroundStyle(amber)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(amber.opacity(0.6)))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber, lineWidth: 2))
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
             }
         }
@@ -134,17 +144,22 @@ struct BridgeView: View {
         }
     }
 
+    // Primary in-flight control: full-width, thumb-sized from a car mount.
     private var talkButton: some View {
         Button {
             ship.listenForCommand()
         } label: {
-            Image(systemName: ship.commands.isListening ? "waveform.circle.fill" : "mic.circle.fill")
-                .font(.system(size: 34))
-                .frame(width: 72)
-                .padding(.vertical, 12)
-                .background(ship.commands.isListening ? Color.green : Color.white.opacity(0.12))
-                .foregroundStyle(ship.commands.isListening ? .black : amber)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+            HStack(spacing: 12) {
+                Image(systemName: ship.commands.isListening ? "waveform" : "mic.fill")
+                    .font(.system(size: 30, weight: .bold))
+                Text(ship.commands.isListening ? "LISTENING…" : "TALK TO SHIP")
+                    .font(.system(.title3, design: .monospaced).bold())
+            }
+            .frame(maxWidth: .infinity, minHeight: 76)
+            .background(ship.commands.isListening ? Color.green : Color.white.opacity(0.12))
+            .foregroundStyle(ship.commands.isListening ? .black : amber)
+            .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber.opacity(0.5), lineWidth: 1.5))
+            .clipShape(RoundedRectangle(cornerRadius: 14))
         }
     }
 
