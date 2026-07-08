@@ -46,6 +46,10 @@ struct EventDefinition: Decodable, Identifiable {
         let weather: [String]?
         let requiresFlags: [String]?
         let forbidsFlags: [String]?
+        /// Arc position within the drive: beginning | middle | final.
+        let tripPhase: [String]?
+        /// Errand objectives left before home (from the mission briefing).
+        let stopsRemaining: RangeCondition?
     }
 
     struct RangeCondition: Decodable {
@@ -120,5 +124,9 @@ struct ShipContext {
     /// How many messages are waiting unplayed — ambient events stop firing
     /// when this backs up (~5+).
     var queuedMessages: Int = 0
+    /// Arc position from the mission briefing (nil when length unknown).
+    var tripPhase: String?
+    /// Errand objectives remaining (nil when no briefing given).
+    var stopsRemaining: Int?
     var date: Date = .now
 }

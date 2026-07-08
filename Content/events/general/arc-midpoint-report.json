@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "arc-midpoint-report",
+  "title": "Arc midpoint report",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general",
+    "arc"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "middle"
+      ]
+    },
+    "weight": 2
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Midpoint report: we are {pick:roughly|approximately|improbably} halfway. Morale holding at {n:78-97} percent."
+  }
+}

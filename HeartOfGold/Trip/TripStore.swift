@@ -14,6 +14,10 @@ struct TripSnapshot: Codable {
     var flags: [String]
     var firedCounts: [String: Int]
     var lastFired: [String: Date]
+    // Mission briefing (optional for backward compatibility)
+    var planLength: String?
+    var plannedStops: Int?
+    var stopsCompleted: Int?
 }
 
 enum TripStore {

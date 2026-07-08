@@ -1,8 +1,9 @@
 import Foundation
 
 enum TravelMode: String, CaseIterable, Identifiable {
-    case roadtrip = "Roadtrip"
+    // Errands first: it's the default and most common mission profile.
     case errands = "Errands"
+    case roadtrip = "Roadtrip"
 
     var id: String { rawValue }
 
