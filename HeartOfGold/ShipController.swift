@@ -54,7 +54,13 @@ final class ShipController: ObservableObject {
 
     init() {
         // Nested ObservableObjects don't propagate to SwiftUI; forward their changes.
+        // (trip drives the live speed/distance readout — without this the
+        // speedometer only refreshes when something else redraws the view.)
         commands.objectWillChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.objectWillChange.send() }
+            .store(in: &cancellables)
+        trip.objectWillChange
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in self?.objectWillChange.send() }
             .store(in: &cancellables)
