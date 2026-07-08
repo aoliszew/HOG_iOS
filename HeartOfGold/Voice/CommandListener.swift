@@ -39,9 +39,27 @@ final class CommandListener: NSObject, ObservableObject {
 
     var onCommand: ((ShipCommand) -> Void)?
     var onFailure: ((ListenFailure) -> Void)?
-    /// When set, transcripts are also checked against this (branching-event
-    /// choices). Returning true consumes the transcript and ends listening.
-    var matchDynamic: ((String) -> Bool)?
+    /// Fired (on main) when the transcript matches an active choice phrase set.
+    var onChoice: ((Int) -> Void)?
+
+    // Choice phrases are written from the main actor and read from the speech
+    // callback thread — guarded by a lock, never a synchronous thread hop
+    // (a main.sync here crashed in the field when the callback arrived on main).
+    private let choiceLock = NSLock()
+    private var choicePhrases: [[String]] = []
+
+    func setChoicePhrases(_ phrases: [[String]]) {
+        choiceLock.lock()
+        choicePhrases = phrases
+        choiceLock.unlock()
+    }
+
+    private func matchChoice(_ transcript: String) -> Int? {
+        let lower = transcript.lowercased()
+        choiceLock.lock()
+        defer { choiceLock.unlock() }
+        return choicePhrases.firstIndex { $0.contains { lower.contains($0.lowercased()) } }
+    }
 
     private let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private let audioEngine = AVAudioEngine()
@@ -106,8 +124,8 @@ final class CommandListener: NSObject, ObservableObject {
                     self.finish(.command(command))
                     return
                 }
-                if self.matchDynamic?(transcript) == true {
-                    self.finish(nil)  // consumer already acted on it
+                if let index = self.matchChoice(transcript) {
+                    self.finish(.choice(index))
                     return
                 }
                 if !transcript.isEmpty {
@@ -136,6 +154,7 @@ final class CommandListener: NSObject, ObservableObject {
 
     private enum Outcome {
         case command(ShipCommand)
+        case choice(Int)
         case failure(ListenFailure)
     }
 
@@ -171,6 +190,7 @@ final class CommandListener: NSObject, ObservableObject {
         DispatchQueue.main.async { [weak self] in
             switch outcome {
             case .command(let command): self?.onCommand?(command)
+            case .choice(let index): self?.onChoice?(index)
             case .failure(let failure): self?.onFailure?(failure)
             }
         }

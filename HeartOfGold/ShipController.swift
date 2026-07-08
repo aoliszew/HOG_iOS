@@ -86,17 +86,13 @@ final class ShipController: ObservableObject {
         commands.onFailure = { [weak self] failure in
             Task { @MainActor in self?.reportListenFailure(failure) }
         }
-        // Speech callbacks arrive off-main; hop synchronously to check/act on
-        // branching choices so the listener knows whether the transcript matched.
-        commands.matchDynamic = { [weak self] transcript in
-            DispatchQueue.main.sync {
-                MainActor.assumeIsolated {
-                    guard let self, let player = self.activeBranching,
-                          let choice = player.choice(matching: transcript) else { return false }
-                    self.log.insert(LogEntry(source: "CAPTAIN", text: choice.label), at: 0)
-                    player.choose(choice)
-                    return true
-                }
+        commands.onChoice = { [weak self] index in
+            Task { @MainActor in
+                guard let self, let player = self.activeBranching,
+                      self.activeChoices.indices.contains(index) else { return }
+                let choice = self.activeChoices[index]
+                self.log.insert(LogEntry(source: "CAPTAIN", text: choice.label), at: 0)
+                player.choose(choice)
             }
         }
     }
@@ -166,6 +162,7 @@ final class ShipController: ObservableObject {
         activeBranching?.stop()
         activeBranching = nil
         activeChoices = []
+        commands.setChoicePhrases([])
         trip.stop()
         voice.stopSpeaking()
         pendingMessages.removeAll()
@@ -217,7 +214,10 @@ final class ShipController: ObservableObject {
                     }
                 }
             },
-            setChoices: { [weak self] choices in self?.activeChoices = choices },
+            setChoices: { [weak self] choices in
+                self?.activeChoices = choices
+                self?.commands.setChoicePhrases(choices.map(\.phrases))
+            },
             onComplete: { [weak self] flags in
                 guard let self else { return }
                 self.eventSource.completed(eventID: definition.id, extraFlags: flags)
