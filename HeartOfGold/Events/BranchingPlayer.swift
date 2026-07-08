@@ -45,12 +45,6 @@ final class BranchingPlayer {
         goto(choice.next)
     }
 
-    /// Try to match a spoken transcript against the current choices.
-    func choice(matching transcript: String) -> EventDefinition.Choice? {
-        let lower = transcript.lowercased()
-        return currentChoices.first { $0.phrases.contains { lower.contains($0.lowercased()) } }
-    }
-
     private(set) var currentChoices: [EventDefinition.Choice] = []
 
     private func goto(_ nodeID: String) {
