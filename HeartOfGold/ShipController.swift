@@ -54,8 +54,22 @@ final class ShipController: ObservableObject {
         commands.onCommand = { [weak self] command in
             Task { @MainActor in self?.handle(command) }
         }
-        commands.onNoMatch = { [weak self] in
-            Task { @MainActor in self?.say(source: "COMMS", "Command not recognized, Captain.") }
+        commands.onFailure = { [weak self] failure in
+            Task { @MainActor in self?.reportListenFailure(failure) }
+        }
+    }
+
+    private func reportListenFailure(_ failure: ListenFailure) {
+        switch failure {
+        case .unauthorized:
+            say(source: "COMMS", "I need microphone and speech recognition permissions to hear you, Captain. Check the ship's Settings.")
+        case .unavailable:
+            say(source: "COMMS", "Speech recognition is unavailable right now, Captain.")
+        case .heardNothing:
+            say(source: "COMMS", "I didn't catch anything, Captain.")
+        case .heard(let transcript):
+            log.insert(LogEntry(source: "COMMS", text: "Heard: \"\(transcript)\""), at: 0)
+            say(source: "COMMS", "Command not recognized, Captain. Try play message, status report, or power down.")
         }
     }
 
