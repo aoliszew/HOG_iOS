@@ -14,6 +14,6 @@
   },
   "content": {
     "source": "SCIENCE",
-    "text": "Science officer reporting. Sensors detect a nebula ahead. It is almost certainly just a cloud, but I am logging it as a nebula."
+    "text": "Science officer reporting. Sensors detect {pick:a nebula|an anomaly|a spatial disturbance|an ion storm} ahead. It is almost certainly just {pick:a cloud|weather|a truck|nothing}, but I am logging it as {pick:a nebula|an anomaly|a discovery} anyway."
   }
 }

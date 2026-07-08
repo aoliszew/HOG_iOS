@@ -14,6 +14,6 @@
   },
   "content": {
     "source": "AI CORE",
-    "text": "Just checking in, Captain. Probability of a pleasant journey currently holding at ninety-seven point three percent."
+    "text": "Just checking in, Captain. Probability of a pleasant journey currently holding at {n:89-99} point {n:1-9} percent."
   }
 }

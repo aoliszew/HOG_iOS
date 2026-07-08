@@ -39,7 +39,8 @@ final class ContentEventSource: EventSource {
         case .single:
             guard let source = event.content.source, let text = event.content.text else { return nil }
             applyEffects(of: event)
-            return .message(ShipEvent(source: source, text: text, ambient: event.messageClass == .ambient))
+            return .message(ShipEvent(source: source, text: MessageTemplate.render(text),
+                                      ambient: event.messageClass == .ambient))
         case .sequence:
             // Effects apply on completion, via completed(eventID:extraFlags:).
             return .sequence(event)

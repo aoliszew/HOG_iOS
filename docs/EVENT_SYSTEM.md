@@ -110,6 +110,17 @@ the captain ignoring the ship (consequences for not responding).
 - Branching nodes may offer at most 3 choices (validator-enforced) so the
   driving UI stays glanceable.
 
+## Text templating
+
+Any `text` field may embed placeholders, resolved fresh each time the line plays:
+
+- `{n:88-99}` → a random integer in the range ("Shields at 94 percent")
+- `{pick:a hawk|two pigeons|a weather balloon}` → one option at random
+
+The validator checks placeholder syntax on every PR. Use these liberally —
+they are the cheapest way to keep repeated stations sounding novel, and the
+Event Editor will offer them as first-class inserts.
+
 ## Runtime architecture (implementation tasks on the board)
 
 ```
