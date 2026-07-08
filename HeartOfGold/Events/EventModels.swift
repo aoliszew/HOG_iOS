@@ -103,5 +103,8 @@ struct ShipContext {
     var stopped: Bool
     var hardAccelRecently: Bool
     var flags: Set<String>
+    /// True while a sequence/branching event is mid-playback — sources shouldn't
+    /// start another long-form event on top of it.
+    var longFormActive: Bool = false
     var date: Date = .now
 }

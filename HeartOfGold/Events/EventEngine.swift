@@ -5,18 +5,27 @@ struct ShipEvent {
     let text: String
 }
 
+/// What an encounter slot produced: a one-shot message, or a multi-step
+/// sequence the controller should hand to a SequencePlayer.
+enum PlayableEvent {
+    case message(ShipEvent)
+    case sequence(EventDefinition)
+}
+
 /// Supplies encounter events. The POC used hard-coded lines; ContentEventSource
 /// reads JSON content, and Phase 3's Claude generator is another implementation.
 protocol EventSource {
     /// Called when a trip starts (reset cooldowns/counters).
     func tripStarted()
     /// Return the next event qualified for this context, or nil to skip this slot.
-    func nextEvent(context: ShipContext) -> ShipEvent?
+    func nextEvent(context: ShipContext) -> PlayableEvent?
+    /// Called when a multi-step event finishes playback (applies its effects).
+    func completed(eventID: String)
 }
 
 /// Schedules random encounters while the ship is powered up.
 final class EventEngine {
-    var onEvent: ((ShipEvent) -> Void)?
+    var onEvent: ((PlayableEvent) -> Void)?
 
     private let source: EventSource
     private var timer: Timer?

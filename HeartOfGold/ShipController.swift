@@ -30,7 +30,9 @@ final class ShipController: ObservableObject {
 
     private let audio = AudioEngine()
     private let voice: VoiceSynthesizing = ShipVoice()
-    private lazy var events: EventEngine = EventEngine(source: ContentEventSource()) { [weak self] in
+    private let eventSource = ContentEventSource()
+    private var activeSequence: SequencePlayer?
+    private lazy var events: EventEngine = EventEngine(source: eventSource) { [weak self] in
         guard let self else {
             return ShipContext(mode: .roadtrip, personality: .power, speedMPH: 0,
                                tripDistanceMiles: 0, stopped: true, hardAccelRecently: false, flags: [])
@@ -41,7 +43,8 @@ final class ShipController: ObservableObject {
                            tripDistanceMiles: self.trip.distanceMiles,
                            stopped: self.trip.speedMPH < 1,
                            hardAccelRecently: self.trip.hardAccelRecently,
-                           flags: [])
+                           flags: [],
+                           longFormActive: self.activeSequence != nil)
     }
 
     private var cancellables: Set<AnyCancellable> = []
@@ -58,8 +61,14 @@ final class ShipController: ObservableObject {
         trip.onHardAcceleration = { [weak self] in
             Task { @MainActor in self?.audio.play(.thruster) }
         }
-        events.onEvent = { [weak self] event in
-            Task { @MainActor in self?.deliver(event) }
+        events.onEvent = { [weak self] playable in
+            Task { @MainActor in
+                guard let self else { return }
+                switch playable {
+                case .message(let event): self.deliver(event)
+                case .sequence(let definition): self.startSequence(definition)
+                }
+            }
         }
         commands.onCommand = { [weak self] command in
             Task { @MainActor in self?.handle(command) }
@@ -124,6 +133,8 @@ final class ShipController: ObservableObject {
     func powerDown() {
         guard poweredUp else { return }
         events.stop()
+        activeSequence?.stop()
+        activeSequence = nil
         trip.stop()
         voice.stopSpeaking()
         pendingMessages.removeAll()
@@ -140,6 +151,22 @@ final class ShipController: ObservableObject {
 
     /// Encounters don't interrupt: a hail beep sounds and the message waits in the
     /// queue until the captain asks for it ("play message" / the PLAY MESSAGE button).
+    private func startSequence(_ definition: EventDefinition) {
+        guard activeSequence == nil else { return }
+        let player = SequencePlayer(
+            event: definition,
+            currentDistance: { [weak self] in self?.trip.distanceMiles ?? 0 },
+            deliver: { [weak self] event in self?.deliver(event) },
+            onComplete: { [weak self] in
+                guard let self else { return }
+                self.eventSource.completed(eventID: definition.id)
+                self.activeSequence = nil
+            }
+        )
+        activeSequence = player
+        player.start()
+    }
+
     private func deliver(_ event: ShipEvent) {
         audio.play(.hail)
         pendingMessages.append(event)
