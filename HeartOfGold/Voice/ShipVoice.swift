@@ -12,6 +12,10 @@ extension VoiceSynthesizing {
 }
 
 final class ShipVoice: NSObject, VoiceSynthesizing, AVSpeechSynthesizerDelegate, @unchecked Sendable {
+    /// Fired when the synthesizer finishes its whole queue (for session release).
+    var onIdle: (() -> Void)?
+    var isSpeaking: Bool { synthesizer.isSpeaking }
+
     private let synthesizer = AVSpeechSynthesizer()
     private let voice: AVSpeechSynthesisVoice?
     private var rate: Float = 0.48
@@ -53,6 +57,7 @@ final class ShipVoice: NSObject, VoiceSynthesizing, AVSpeechSynthesizerDelegate,
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         completions.removeValue(forKey: ObjectIdentifier(utterance))?()
+        if !synthesizer.isSpeaking { onIdle?() }
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {

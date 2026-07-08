@@ -30,7 +30,8 @@ final class ShipController: ObservableObject {
     let commands = CommandListener()
 
     private let audio = AudioEngine()
-    private let voice: VoiceSynthesizing = ShipVoice()
+    private let shipVoice = ShipVoice()
+    private var voice: VoiceSynthesizing { shipVoice }
     private let eventSource = ContentEventSource()
     private var activeSequence: SequencePlayer?
     private var activeBranching: BranchingPlayer?
@@ -53,6 +54,11 @@ final class ShipController: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
 
     init() {
+        // Session lifecycle: release audio focus when the ship stops talking so
+        // the captain's music comes back to full volume between messages.
+        audio.isVoiceSpeaking = { [weak self] in self?.shipVoice.isSpeaking ?? false }
+        shipVoice.onIdle = { [weak self] in self?.audio.relinquishIfIdle() }
+
         // Nested ObservableObjects don't propagate to SwiftUI; forward their changes.
         // (trip drives the live speed/distance readout — without this the
         // speedometer only refreshes when something else redraws the view.)
@@ -81,14 +87,22 @@ final class ShipController: ObservableObject {
             }
         }
         commands.onCommand = { [weak self] command in
-            Task { @MainActor in self?.handle(command) }
+            Task { @MainActor in
+                self?.audio.exitListeningMode()
+                self?.handle(command)
+            }
         }
         commands.onFailure = { [weak self] failure in
-            Task { @MainActor in self?.reportListenFailure(failure) }
+            Task { @MainActor in
+                self?.audio.exitListeningMode()
+                self?.reportListenFailure(failure)
+            }
         }
         commands.onChoice = { [weak self] index in
             Task { @MainActor in
-                guard let self, let player = self.activeBranching,
+                guard let self else { return }
+                self.audio.exitListeningMode()
+                guard let player = self.activeBranching,
                       self.activeChoices.indices.contains(index) else { return }
                 let choice = self.activeChoices[index]
                 self.log.insert(LogEntry(source: "CAPTAIN", text: choice.label), at: 0)
@@ -118,7 +132,9 @@ final class ShipController: ObservableObject {
 
     func listenForCommand() {
         voice.stopSpeaking()
-        commands.startListening()
+        audio.enterListeningMode { [weak self] in
+            self?.commands.startListening()
+        }
     }
 
     private func handle(_ command: ShipCommand) {
@@ -163,6 +179,8 @@ final class ShipController: ObservableObject {
         activeBranching = nil
         activeChoices = []
         commands.setChoicePhrases([])
+        commands.stopListening()
+        audio.exitListeningMode()
         trip.stop()
         voice.stopSpeaking()
         pendingMessages.removeAll()
@@ -210,7 +228,9 @@ final class ShipController: ObservableObject {
                     Task { @MainActor in
                         guard let self, self.activeBranching != nil,
                               !self.activeChoices.isEmpty else { return }
-                        self.commands.startListening()
+                        self.audio.enterListeningMode { [weak self] in
+                            self?.commands.startListening()
+                        }
                     }
                 }
             },
@@ -263,12 +283,15 @@ final class ShipController: ObservableObject {
     private func say(source: String, _ text: String, delay: TimeInterval = 0,
                      completion: (() -> Void)? = nil) {
         log.insert(LogEntry(source: source, text: text), at: 0)
+        let speak: @Sendable () -> Void = { [audio, shipVoice] in
+            // Take the session, but let a nav prompt finish first.
+            audio.ensurePlayback()
+            audio.performWhenClear { shipVoice.speak(text, completion: completion) }
+        }
         if delay > 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [voice] in
-                voice.speak(text, completion: completion)
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: speak)
         } else {
-            voice.speak(text, completion: completion)
+            speak()
         }
     }
 }
