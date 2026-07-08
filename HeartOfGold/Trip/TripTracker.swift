@@ -52,6 +52,11 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
         announcedThresholds = []
     }
 
+    /// Crash-recovery: continue an interrupted trip's odometer.
+    func restoreDistance(_ miles: Double) {
+        distanceMiles = miles
+    }
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorized = manager.authorizationStatus == .authorizedWhenInUse
             || manager.authorizationStatus == .authorizedAlways

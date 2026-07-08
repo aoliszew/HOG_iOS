@@ -13,6 +13,16 @@ final class TriggerEvaluator {
         lastFiredID = nil
     }
 
+    var snapshot: (firedCounts: [String: Int], lastFired: [String: Date]) {
+        (firedCounts, lastFired)
+    }
+
+    func restore(firedCounts: [String: Int], lastFired: [String: Date]) {
+        self.firedCounts = firedCounts
+        self.lastFired = lastFired
+        self.lastFiredID = nil
+    }
+
     func recordFired(_ event: EventDefinition) {
         firedCounts[event.id, default: 0] += 1
         lastFired[event.id] = .now
