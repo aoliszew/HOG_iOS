@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "medbay-vitamin-d",
+  "title": "Medbay vitamin d",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Medbay notes ambient starlight exposure is {pick:adequate|excellent|technically sunlight}. Vitamin D synthesis proceeding {pick:nominally|heroically}."
+  }
+}

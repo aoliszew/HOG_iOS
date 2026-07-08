@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "security-glovebox",
+  "title": "Security glovebox",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Random inspection of the {pick:glove compartment|center console|door pocket} scheduled. Expected findings: {pick:napkins|mystery receipts|a fossilized fry|nothing incriminating}."
+  }
+}

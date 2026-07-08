@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "stopped-red-light",
+  "title": "Stopped red light",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "stopped": true
+    }
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Sensors indicate a localized red glow ahead. Analysis: it will turn green. Confidence: {n:93-99} percent. Eventually."
+  }
+}

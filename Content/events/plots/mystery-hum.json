@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "id": "mystery-hum",
+  "title": "Mystery hum",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 8
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "ENGINEERING",
+        "text": "Captain, we're tracking an unidentified hum in the {pick:aft|forward|lower} section. Investigating."
+      },
+      {
+        "wait": {
+          "miles": 2
+        }
+      },
+      {
+        "source": "ENGINEERING",
+        "text": "Update on the hum: it's getting {pick:louder|harmonized|rhythmic}. Marvin claims it's the ship being sad. We doubt it."
+      },
+      {
+        "wait": {
+          "miles": 2,
+          "seconds": 60
+        }
+      },
+      {
+        "source": "ENGINEERING",
+        "text": "Mystery solved. The hum was {pick:a resonating snack wrapper|the improbability drive humming show tunes|a very small stowaway band}. Removed, applauded, and logged. Engineering out."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "solved-mystery-hum"
+    ]
+  }
+}

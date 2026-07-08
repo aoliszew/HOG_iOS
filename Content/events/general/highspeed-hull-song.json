@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "id": "highspeed-hull-song",
+  "title": "Highspeed hull song",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "min": 60
+      }
+    }
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "At this velocity the hull makes a faint musical note. Today it is {pick:B flat|a confident C|somewhere between notes|jazz}."
+  }
+}

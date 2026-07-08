@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "id": "highspeed-tailwind",
+  "title": "Highspeed tailwind",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "min": 60
+      }
+    }
+  },
+  "content": {
+    "source": "HELM",
+    "text": "Sublight velocity strong. Detecting a {pick:favorable tailwind|smooth hyperspace lane|suspicious lack of traffic}. Recommend enjoying it while it lasts."
+  }
+}
