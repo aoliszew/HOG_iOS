@@ -20,6 +20,8 @@ final class ShipController: ObservableObject {
     @Published var activeChoices: [EventDefinition.Choice] = []
     /// A crashed/interrupted mission that can be resumed (set at launch).
     @Published var resumableTrip: TripSnapshot?
+    /// Video-game pause: all story clocks frozen, GPS tracking suspended.
+    @Published var isPaused = false
 
     struct LogEntry: Identifiable {
         let id = UUID()
@@ -203,6 +205,29 @@ final class ShipController: ObservableObject {
         persistIfFlying()
     }
 
+    func pauseMission() {
+        guard poweredUp, !isPaused else { return }
+        isPaused = true
+        events.pause()
+        activeSequence?.pause()
+        activeBranching?.pause()
+        commands.stopListening()
+        audio.exitListeningMode()
+        voice.stopSpeaking()
+        trip.stop()
+        persistIfFlying()
+    }
+
+    func resumeFromPause() {
+        guard poweredUp, isPaused else { return }
+        isPaused = false
+        trip.start()
+        events.resume()
+        activeSequence?.resume()
+        activeBranching?.resume()
+        say(source: "SHIP", "Resuming, Captain.")
+    }
+
     private func persistIfFlying() {
         guard poweredUp else { return }
         let state = eventSource.snapshot
@@ -236,6 +261,7 @@ final class ShipController: ObservableObject {
             audio.play(.powerDown)
         }
         poweredUp = false
+        isPaused = false
         TripStore.clear()
     }
 

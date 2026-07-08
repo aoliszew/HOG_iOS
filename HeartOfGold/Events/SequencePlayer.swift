@@ -35,7 +35,28 @@ final class SequencePlayer {
         timer = nil
     }
 
+    /// Freeze the current wait gate (game pause), remembering time left.
+    func pause() {
+        if let gate = currentGate {
+            pausedRemaining = max(0, gate.resumeAt.timeIntervalSinceNow)
+        }
+        timer?.invalidate()
+        timer = nil
+    }
+
+    func resume() {
+        guard let gate = currentGate else { return }
+        let remaining = pausedRemaining ?? 0
+        pausedRemaining = nil
+        currentGate = (Date().addingTimeInterval(remaining), gate.targetMiles)
+        startPolling()
+    }
+
+    private var currentGate: (resumeAt: Date, targetMiles: Double)?
+    private var pausedRemaining: TimeInterval?
+
     private func advance() {
+        currentGate = nil
         guard index < steps.count else {
             onComplete()
             return
@@ -47,20 +68,27 @@ final class SequencePlayer {
             // Gate on time and/or distance; when both are given, both must pass.
             // Waiting naturally tolerates stops: parked miles don't accumulate
             // and the story simply resumes when the numbers are met.
-            let resumeAt = Date().addingTimeInterval(wait.seconds ?? 0)
-            let distance = currentDistance
-            let targetMiles = distance() + (wait.miles ?? 0)
-            timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] t in
-                if Date() >= resumeAt && distance() >= targetMiles {
-                    t.invalidate()
-                    Task { @MainActor in self?.advance() }
-                }
-            }
+            currentGate = (Date().addingTimeInterval(wait.seconds ?? 0),
+                           currentDistance() + (wait.miles ?? 0))
+            startPolling()
         } else if let source = step.source, let text = step.text {
             deliver(ShipEvent(source: source, text: MessageTemplate.render(text)))
             advance()
         } else {
             advance()
+        }
+    }
+
+    private func startPolling() {
+        let distance = currentDistance
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] t in
+            Task { @MainActor in
+                guard let self, let gate = self.currentGate else { t.invalidate(); return }
+                if Date() >= gate.resumeAt && distance() >= gate.targetMiles {
+                    t.invalidate()
+                    self.advance()
+                }
+            }
         }
     }
 }

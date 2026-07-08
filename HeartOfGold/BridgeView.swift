@@ -20,6 +20,8 @@ struct BridgeView: View {
                         resumeButton
                     }
                     powerButton
+                } else if ship.isPaused {
+                    pausedScreen
                 } else if !ship.activeChoices.isEmpty {
                     // A question is on the table: choices own the screen.
                     Spacer(minLength: 0)
@@ -33,7 +35,10 @@ struct BridgeView: View {
                     }
                     // In flight, talking to the ship is the primary control.
                     talkButton
-                    powerButton
+                    HStack(spacing: 12) {
+                        pauseButton
+                        powerButton
+                    }
                 }
             }
             .padding()
@@ -163,6 +168,46 @@ struct BridgeView: View {
             .foregroundStyle(ship.commands.isListening ? .black : amber)
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber.opacity(0.5), lineWidth: 1.5))
             .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+    }
+
+    private var pauseButton: some View {
+        Button {
+            ship.pauseMission()
+        } label: {
+            Image(systemName: "pause.fill")
+                .font(.system(size: 24, weight: .bold))
+                .frame(width: 76)
+                .frame(maxHeight: .infinity)
+                .background(Color.white.opacity(0.12))
+                .foregroundStyle(amber)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .fixedSize(horizontal: true, vertical: false)
+    }
+
+    private var pausedScreen: some View {
+        VStack(spacing: 24) {
+            Spacer()
+            Text("MISSION PAUSED")
+                .font(.system(.title, design: .monospaced).bold())
+                .foregroundStyle(amber)
+            Text("All story clocks frozen. The universe will wait.\nIt has nowhere better to be.")
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.gray)
+                .multilineTextAlignment(.center)
+            Spacer()
+            Button {
+                ship.resumeFromPause()
+            } label: {
+                Text("▶ RESUME")
+                    .font(.system(.title3, design: .monospaced).bold())
+                    .frame(maxWidth: .infinity, minHeight: 76)
+                    .background(Color.green.opacity(0.85))
+                    .foregroundStyle(.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+            }
+            powerButton
         }
     }
 
