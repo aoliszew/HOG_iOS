@@ -26,6 +26,7 @@
 		9CC6958A295669FECC7A0AAD /* EnginePersonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */; };
 		D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1086615983ACD3CB3D05160 /* TravelMode.swift */; };
 		E563FBB14B0D20E14B4EA92A /* thruster.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC388C99557D54D24C5E61D /* thruster.caf */; };
+		EAA276B60630FE8BDEDCA8B4 /* SequencePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C405401DE777C5535E9C50B3 /* SequencePlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		A1086615983ACD3CB3D05160 /* TravelMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMode.swift; sourceTree = "<group>"; };
 		B5630FEF15FE073B79669AEB /* TriggerEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerEvaluator.swift; sourceTree = "<group>"; };
 		BD3975AF298726332F369C53 /* TripTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTracker.swift; sourceTree = "<group>"; };
+		C405401DE777C5535E9C50B3 /* SequencePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencePlayer.swift; sourceTree = "<group>"; };
 		C9DCB1167A3C7DB871965408 /* EventEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEngine.swift; sourceTree = "<group>"; };
 		D394B43303D809BCC9CB9186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartOfGoldApp.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				5A186F0A480937F32C200BBE /* ContentLibrary.swift */,
 				C9DCB1167A3C7DB871965408 /* EventEngine.swift */,
 				A0A20B61DEA314ECC8BF8F73 /* EventModels.swift */,
+				C405401DE777C5535E9C50B3 /* SequencePlayer.swift */,
 				B5630FEF15FE073B79669AEB /* TriggerEvaluator.swift */,
 			);
 			path = Events;
@@ -236,6 +239,7 @@
 				3F3E3295D0E616CC6E88EA6A /* EventEngine.swift in Sources */,
 				7F623D4017426B50E2DFB844 /* EventModels.swift in Sources */,
 				238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */,
+				EAA276B60630FE8BDEDCA8B4 /* SequencePlayer.swift in Sources */,
 				8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */,
 				6264F53319BD3D413906054C /* ShipVoice.swift in Sources */,
 				D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */,
