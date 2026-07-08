@@ -2,13 +2,16 @@ import AVFoundation
 
 /// Abstraction over speech output so a network TTS (ElevenLabs etc.) can swap in later.
 protocol VoiceSynthesizing {
-    func speak(_ text: String, completion: (() -> Void)?)
+    func speak(_ text: String, rateMultiplier: Float, pitchMultiplier: Float, completion: (() -> Void)?)
     func stopSpeaking()
     func setDelivery(rate: Float, pitch: Float)
 }
 
 extension VoiceSynthesizing {
-    func speak(_ text: String) { speak(text, completion: nil) }
+    func speak(_ text: String) { speak(text, rateMultiplier: 1, pitchMultiplier: 1, completion: nil) }
+    func speak(_ text: String, completion: (() -> Void)?) {
+        speak(text, rateMultiplier: 1, pitchMultiplier: 1, completion: completion)
+    }
 }
 
 final class ShipVoice: NSObject, VoiceSynthesizing, AVSpeechSynthesizerDelegate, @unchecked Sendable {
@@ -33,11 +36,11 @@ final class ShipVoice: NSObject, VoiceSynthesizing, AVSpeechSynthesizerDelegate,
         synthesizer.delegate = self
     }
 
-    func speak(_ text: String, completion: (() -> Void)?) {
+    func speak(_ text: String, rateMultiplier: Float, pitchMultiplier: Float, completion: (() -> Void)?) {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice
-        utterance.rate = rate
-        utterance.pitchMultiplier = pitch
+        utterance.rate = min(max(rate * rateMultiplier, 0.1), 0.7)
+        utterance.pitchMultiplier = min(max(pitch * pitchMultiplier, 0.5), 2.0)
         utterance.preUtteranceDelay = 0.15
         if let completion {
             completions[ObjectIdentifier(utterance)] = completion

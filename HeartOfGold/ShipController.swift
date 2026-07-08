@@ -331,10 +331,24 @@ final class ShipController: ObservableObject {
     private func say(source: String, _ text: String, delay: TimeInterval = 0,
                      completion: (() -> Void)? = nil) {
         log.insert(LogEntry(source: source, text: text), at: 0)
+        // Audio self-sufficiency: spoken attribution + a per-character delivery
+        // so the captain knows who's talking without looking at the screen.
+        let style = CharacterVoices.style(for: source)
+        let spoken: String
+        if let lead = CharacterVoices.attribution(for: source, text: text) {
+            spoken = "\(lead) \(text)"
+        } else {
+            spoken = text
+        }
         let speak: @Sendable () -> Void = { [audio, shipVoice] in
             // Take the session, but let a nav prompt finish first.
             audio.ensurePlayback()
-            audio.performWhenClear { shipVoice.speak(text, completion: completion) }
+            audio.performWhenClear {
+                shipVoice.speak(spoken,
+                                rateMultiplier: style.rateMultiplier,
+                                pitchMultiplier: style.pitchMultiplier,
+                                completion: completion)
+            }
         }
         if delay > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: speak)
