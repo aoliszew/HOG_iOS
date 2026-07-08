@@ -27,6 +27,7 @@
 		D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1086615983ACD3CB3D05160 /* TravelMode.swift */; };
 		E563FBB14B0D20E14B4EA92A /* thruster.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC388C99557D54D24C5E61D /* thruster.caf */; };
 		EAA276B60630FE8BDEDCA8B4 /* SequencePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C405401DE777C5535E9C50B3 /* SequencePlayer.swift */; };
+		F2C7D3977E797C767E6908B1 /* BranchingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC15D0725F2D3C6548367F6 /* BranchingPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		62FA5244E5B461E83523522B /* CommandListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandListener.swift; sourceTree = "<group>"; };
 		70EE05CD4D8107CF2DAA75BF /* ContentEventSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEventSource.swift; sourceTree = "<group>"; };
 		76CEABEBF60304E62E7000F6 /* Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Content; sourceTree = SOURCE_ROOT; };
+		7FC15D0725F2D3C6548367F6 /* BranchingPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchingPlayer.swift; sourceTree = "<group>"; };
 		80327A0E3CC7D5BB2FE49893 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		8DEE253E1A273E41C5CE24CF /* ShipVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipVoice.swift; sourceTree = "<group>"; };
 		960ECB60B39A5D929263167F /* ShipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		1B4BE6C0AC6F76D0792B2952 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				7FC15D0725F2D3C6548367F6 /* BranchingPlayer.swift */,
 				70EE05CD4D8107CF2DAA75BF /* ContentEventSource.swift */,
 				5A186F0A480937F32C200BBE /* ContentLibrary.swift */,
 				C9DCB1167A3C7DB871965408 /* EventEngine.swift */,
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				215E1A034D5A5F7BE823F21B /* AudioEngine.swift in Sources */,
+				F2C7D3977E797C767E6908B1 /* BranchingPlayer.swift in Sources */,
 				53A886F626B7B3E84DC1E7DB /* BridgeView.swift in Sources */,
 				783C96DF23C05700570534F9 /* CommandListener.swift in Sources */,
 				5841CAB3CF1840316EC5BFF7 /* ContentEventSource.swift in Sources */,

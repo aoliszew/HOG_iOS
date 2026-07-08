@@ -17,6 +17,7 @@ final class ShipController: ObservableObject {
     }
     @Published var log: [LogEntry] = []
     @Published var pendingMessages: [ShipEvent] = []
+    @Published var activeChoices: [EventDefinition.Choice] = []
 
     struct LogEntry: Identifiable {
         let id = UUID()
@@ -32,6 +33,7 @@ final class ShipController: ObservableObject {
     private let voice: VoiceSynthesizing = ShipVoice()
     private let eventSource = ContentEventSource()
     private var activeSequence: SequencePlayer?
+    private var activeBranching: BranchingPlayer?
     private lazy var events: EventEngine = EventEngine(source: eventSource) { [weak self] in
         guard let self else {
             return ShipContext(mode: .roadtrip, personality: .power, speedMPH: 0,
@@ -44,7 +46,7 @@ final class ShipController: ObservableObject {
                            stopped: self.trip.speedMPH < 1,
                            hardAccelRecently: self.trip.hardAccelRecently,
                            flags: [],
-                           longFormActive: self.activeSequence != nil)
+                           longFormActive: self.activeSequence != nil || self.activeBranching != nil)
     }
 
     private var cancellables: Set<AnyCancellable> = []
@@ -67,6 +69,7 @@ final class ShipController: ObservableObject {
                 switch playable {
                 case .message(let event): self.deliver(event)
                 case .sequence(let definition): self.startSequence(definition)
+                case .branching(let definition): self.startBranching(definition)
                 }
             }
         }
@@ -75,6 +78,19 @@ final class ShipController: ObservableObject {
         }
         commands.onFailure = { [weak self] failure in
             Task { @MainActor in self?.reportListenFailure(failure) }
+        }
+        // Speech callbacks arrive off-main; hop synchronously to check/act on
+        // branching choices so the listener knows whether the transcript matched.
+        commands.matchDynamic = { [weak self] transcript in
+            DispatchQueue.main.sync {
+                MainActor.assumeIsolated {
+                    guard let self, let player = self.activeBranching,
+                          let choice = player.choice(matching: transcript) else { return false }
+                    self.log.insert(LogEntry(source: "CAPTAIN", text: choice.label), at: 0)
+                    player.choose(choice)
+                    return true
+                }
+            }
         }
     }
 
@@ -135,6 +151,9 @@ final class ShipController: ObservableObject {
         events.stop()
         activeSequence?.stop()
         activeSequence = nil
+        activeBranching?.stop()
+        activeBranching = nil
+        activeChoices = []
         trip.stop()
         voice.stopSpeaking()
         pendingMessages.removeAll()
@@ -159,12 +178,40 @@ final class ShipController: ObservableObject {
             deliver: { [weak self] event in self?.deliver(event) },
             onComplete: { [weak self] in
                 guard let self else { return }
-                self.eventSource.completed(eventID: definition.id)
+                self.eventSource.completed(eventID: definition.id, extraFlags: [])
                 self.activeSequence = nil
             }
         )
         activeSequence = player
         player.start()
+    }
+
+    private func startBranching(_ definition: EventDefinition) {
+        guard activeBranching == nil else { return }
+        let player = BranchingPlayer(
+            event: definition,
+            speak: { [weak self] event in
+                // Branching moments are interactive: hail + speak immediately
+                // rather than queueing, since a timed question is waiting.
+                self?.audio.play(.hail)
+                self?.say(source: event.source, event.text, delay: 0.8)
+            },
+            setChoices: { [weak self] choices in self?.activeChoices = choices },
+            onComplete: { [weak self] flags in
+                guard let self else { return }
+                self.eventSource.completed(eventID: definition.id, extraFlags: flags)
+                self.activeBranching = nil
+            }
+        )
+        activeBranching = player
+        player.start()
+    }
+
+    /// Captain answered a branching choice by tapping (passenger/parked use).
+    func choose(_ choice: EventDefinition.Choice) {
+        guard let player = activeBranching else { return }
+        log.insert(LogEntry(source: "CAPTAIN", text: choice.label), at: 0)
+        player.choose(choice)
     }
 
     private func deliver(_ event: ShipEvent) {

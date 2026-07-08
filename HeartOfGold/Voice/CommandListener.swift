@@ -39,6 +39,9 @@ final class CommandListener: NSObject, ObservableObject {
 
     var onCommand: ((ShipCommand) -> Void)?
     var onFailure: ((ListenFailure) -> Void)?
+    /// When set, transcripts are also checked against this (branching-event
+    /// choices). Returning true consumes the transcript and ends listening.
+    var matchDynamic: ((String) -> Bool)?
 
     private let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private let audioEngine = AVAudioEngine()
@@ -101,6 +104,10 @@ final class CommandListener: NSObject, ObservableObject {
                 let transcript = result.bestTranscription.formattedString
                 if let command = ShipCommand.match(transcript) {
                     self.finish(.command(command))
+                    return
+                }
+                if self.matchDynamic?(transcript) == true {
+                    self.finish(nil)  // consumer already acted on it
                     return
                 }
                 if !transcript.isEmpty {
