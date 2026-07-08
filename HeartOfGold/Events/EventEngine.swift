@@ -58,10 +58,37 @@ final class EventEngine {
     func stop() {
         timer?.invalidate()
         timer = nil
+        nextFireDate = nil
+        pausedRemaining = nil
     }
 
+    /// Freeze the encounter clock, remembering how much time was left.
+    func pause() {
+        if let fireDate = nextFireDate {
+            pausedRemaining = max(1, fireDate.timeIntervalSinceNow)
+        }
+        timer?.invalidate()
+        timer = nil
+    }
+
+    func resume() {
+        if let remaining = pausedRemaining {
+            pausedRemaining = nil
+            schedule(after: remaining)
+        } else {
+            scheduleNext()
+        }
+    }
+
+    private var nextFireDate: Date?
+    private var pausedRemaining: TimeInterval?
+
     private func scheduleNext() {
-        let interval = TimeInterval.random(in: mode.encounterInterval)
+        schedule(after: TimeInterval.random(in: mode.encounterInterval))
+    }
+
+    private func schedule(after interval: TimeInterval) {
+        nextFireDate = Date().addingTimeInterval(interval)
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
             guard let self else { return }
             if let event = self.source.nextEvent(context: self.currentContext()) {
