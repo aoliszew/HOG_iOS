@@ -20,6 +20,18 @@ final class ContentEventSource: EventSource {
         flags = []
     }
 
+    // MARK: - Persistence (crash-safe resume)
+
+    var snapshot: (flags: Set<String>, firedCounts: [String: Int], lastFired: [String: Date]) {
+        let s = evaluator.snapshot
+        return (flags, s.firedCounts, s.lastFired)
+    }
+
+    func restore(flags: Set<String>, firedCounts: [String: Int], lastFired: [String: Date]) {
+        self.flags = flags
+        evaluator.restore(firedCounts: firedCounts, lastFired: lastFired)
+    }
+
     func nextEvent(context: ShipContext) -> PlayableEvent? {
         var context = context
         context.flags.formUnion(flags)

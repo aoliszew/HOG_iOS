@@ -48,6 +48,13 @@ final class EventEngine {
         scheduleNext()
     }
 
+    /// Resume scheduling without wiping the source's per-trip state
+    /// (used for crash recovery — cooldowns and fired counts were restored).
+    func startWithoutReset(mode: TravelMode) {
+        self.mode = mode
+        scheduleNext()
+    }
+
     func stop() {
         timer?.invalidate()
         timer = nil

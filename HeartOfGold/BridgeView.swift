@@ -16,6 +16,9 @@ struct BridgeView: View {
                     modePicker
                     personalityPicker
                     eventLog
+                    if ship.resumableTrip != nil {
+                        resumeButton
+                    }
                     powerButton
                 } else if !ship.activeChoices.isEmpty {
                     // A question is on the table: choices own the screen.
@@ -160,6 +163,20 @@ struct BridgeView: View {
             .foregroundStyle(ship.commands.isListening ? .black : amber)
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber.opacity(0.5), lineWidth: 1.5))
             .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+    }
+
+    private var resumeButton: some View {
+        Button {
+            ship.resumeMission()
+        } label: {
+            Text(String(format: "⟳ RESUME MISSION (%.1f MI)", ship.resumableTrip?.distanceMiles ?? 0))
+                .font(.system(.title3, design: .monospaced).bold())
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 18)
+                .background(Color.green.opacity(0.85))
+                .foregroundStyle(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
 

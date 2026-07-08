@@ -18,6 +18,8 @@ final class ShipController: ObservableObject {
     @Published var log: [LogEntry] = []
     @Published var pendingMessages: [ShipEvent] = []
     @Published var activeChoices: [EventDefinition.Choice] = []
+    /// A crashed/interrupted mission that can be resumed (set at launch).
+    @Published var resumableTrip: TripSnapshot?
 
     struct LogEntry: Identifiable {
         let id = UUID()
@@ -68,8 +70,13 @@ final class ShipController: ObservableObject {
             .store(in: &cancellables)
         trip.objectWillChange
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in self?.objectWillChange.send() }
+            .sink { [weak self] in
+                self?.objectWillChange.send()
+                self?.persistIfFlying()
+            }
             .store(in: &cancellables)
+
+        resumableTrip = TripStore.loadResumable()
         trip.onThresholdCrossed = { [weak self] mph in
             Task { @MainActor in self?.speedCallout(mph) }
         }
@@ -168,6 +175,46 @@ final class ShipController: ObservableObject {
         say(source: "SHIP", startup, delay: 1.2)
 
         events.start(mode: mode)
+        resumableTrip = nil
+        persistIfFlying()
+    }
+
+    /// Continue an interrupted mission: mileage, story flags, and fired-event
+    /// history come back so nothing repeats and the odometer stays honest.
+    func resumeMission() {
+        guard !poweredUp, let saved = resumableTrip else { return }
+        mode = TravelMode(rawValue: saved.mode) ?? mode
+        personality = EnginePersonality(rawValue: saved.personality) ?? personality
+        poweredUp = true
+        trip.resetTrip()
+        trip.restoreDistance(saved.distanceMiles)
+        trip.start()
+        commands.requestPermissions()
+        voice.setDelivery(rate: personality.speechRate, pitch: personality.pitch)
+        eventSource.restore(flags: Set(saved.flags),
+                            firedCounts: saved.firedCounts,
+                            lastFired: saved.lastFired)
+        audio.play(.powerUp)
+        say(source: "SHIP",
+            "Resuming mission. Distance so far: \(String(format: "%.1f", saved.distanceMiles)) miles. All systems restored. As I was saying, Captain.",
+            delay: 1.2)
+        events.startWithoutReset(mode: mode)
+        resumableTrip = nil
+        persistIfFlying()
+    }
+
+    private func persistIfFlying() {
+        guard poweredUp else { return }
+        let state = eventSource.snapshot
+        TripStore.save(TripSnapshot(active: true,
+                                    startedAt: .now,
+                                    updatedAt: .now,
+                                    mode: mode.rawValue,
+                                    personality: personality.rawValue,
+                                    distanceMiles: trip.distanceMiles,
+                                    flags: Array(state.flags),
+                                    firedCounts: state.firedCounts,
+                                    lastFired: state.lastFired))
     }
 
     func powerDown() {
@@ -189,6 +236,7 @@ final class ShipController: ObservableObject {
             audio.play(.powerDown)
         }
         poweredUp = false
+        TripStore.clear()
     }
 
     private func speedCallout(_ mph: Int) {
