@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "marvin-compliment",
+  "title": "Marvin compliment",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "Your driving is statistically adequate. That is the nicest thing I have said all year."
+  }
+}

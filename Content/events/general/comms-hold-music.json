@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "comms-hold-music",
+  "title": "Comms hold music",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "We remain on hold with {pick:Galactic Traffic Control|the Restaurant at the End of the Universe|customer service}. Current hold time: {n:2-7000} years. The music is not good."
+  }
+}

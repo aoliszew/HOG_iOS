@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "cargo-souvenir",
+  "title": "Cargo souvenir",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "Cargo bay has pre-approved storage for {n:1-6} souvenirs, should the mission acquire any. The towel has been moved to make room."
+  }
+}

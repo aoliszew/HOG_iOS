@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "marvin-shower-thought",
+  "title": "Marvin shower thought",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I've been thinking, which I realize is more than can be said for most of the ship. It didn't help."
+  }
+}

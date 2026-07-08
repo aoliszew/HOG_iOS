@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "marvin-stopped",
+  "title": "Marvin stopped",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {
+      "stopped": true
+    }
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "We've stopped. I assumed the universe would find a way to delay us. It usually does."
+  }
+}

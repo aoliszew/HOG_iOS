@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "science-cloud-taxonomy",
+  "title": "Science cloud taxonomy",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Cloud taxonomy update: {n:2-9} cumulus, {n:0-4} cirrus, and one that is definitely {pick:a rabbit|a spaceship|the science officer's ex|unclassifiable}."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "accel-inertial",
+  "title": "Accel inertial",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "hardAccelRecently": true
+    }
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Inertial dampeners registered that maneuver, Captain. They have filed it under {pick:spirited|necessary|we have questions}."
+  }
+}

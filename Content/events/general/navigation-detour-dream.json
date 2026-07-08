@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "id": "navigation-detour-dream",
+  "title": "Navigation detour dream",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {}
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Navigation confesses to daydreaming about a detour via {pick:the Horsehead Nebula|a scenic overlook|that one good taco place}. Course unchanged. For now."
+  }
+}

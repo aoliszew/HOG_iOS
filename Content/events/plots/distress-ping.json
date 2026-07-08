@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "id": "distress-ping",
+  "title": "Distress ping",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 4
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "ping",
+    "nodes": {
+      "ping": {
+        "source": "COMMS",
+        "text": "Faint distress ping detected from a tiny escape pod. It might be a genuine emergency, or another scam selling extended warranties. Investigate, or ignore?",
+        "choices": [
+          {
+            "label": "Investigate",
+            "phrases": [
+              "investigate",
+              "check it out",
+              "help them"
+            ],
+            "next": "investigate"
+          },
+          {
+            "label": "Ignore it",
+            "phrases": [
+              "ignore",
+              "keep going",
+              "no"
+            ],
+            "next": "ignore"
+          }
+        ],
+        "timeoutSeconds": 120,
+        "timeoutNext": "drift"
+      },
+      "investigate": {
+        "source": "COMMS",
+        "text": "Good instincts, Captain. The pod contained {pick:a grateful hamster-like diplomat|a lost delivery drone|a very confused tourist}. Gratitude logged. Karma balance improved by {n:3-9} points.",
+        "setFlags": [
+          "helped-a-stranger"
+        ],
+        "next": "end"
+      },
+      "ignore": {
+        "source": "COMMS",
+        "text": "Understood. For the record, it was the extended warranty people. Your caution has been vindicated and will be studied.",
+        "next": "end"
+      },
+      "drift": {
+        "source": "COMMS",
+        "text": "The pod has drifted out of range. Somewhere out there, someone's warranty remains tragically unextended.",
+        "next": "end"
+      }
+    }
+  }
+}
