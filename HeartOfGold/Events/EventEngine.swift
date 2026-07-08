@@ -10,6 +10,7 @@ struct ShipEvent {
 enum PlayableEvent {
     case message(ShipEvent)
     case sequence(EventDefinition)
+    case branching(EventDefinition)
 }
 
 /// Supplies encounter events. The POC used hard-coded lines; ContentEventSource
@@ -19,8 +20,9 @@ protocol EventSource {
     func tripStarted()
     /// Return the next event qualified for this context, or nil to skip this slot.
     func nextEvent(context: ShipContext) -> PlayableEvent?
-    /// Called when a multi-step event finishes playback (applies its effects).
-    func completed(eventID: String)
+    /// Called when a multi-step event finishes playback (applies its effects
+    /// plus any flags collected along the way, e.g. from branching choices).
+    func completed(eventID: String, extraFlags: Set<String>)
 }
 
 /// Schedules random encounters while the ship is powered up.

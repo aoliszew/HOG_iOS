@@ -24,7 +24,7 @@ final class ContentEventSource: EventSource {
         var context = context
         context.flags.formUnion(flags)
 
-        var playable = library.events.filter { $0.type != .branching }
+        var playable = library.events
         if context.longFormActive {
             playable = playable.filter { $0.type == .single }
         }
@@ -37,14 +37,15 @@ final class ContentEventSource: EventSource {
             applyEffects(of: event)
             return .message(ShipEvent(source: source, text: text))
         case .sequence:
-            // Effects apply on completion, via completed(eventID:).
+            // Effects apply on completion, via completed(eventID:extraFlags:).
             return .sequence(event)
         case .branching:
-            return nil
+            return .branching(event)
         }
     }
 
-    func completed(eventID: String) {
+    func completed(eventID: String, extraFlags: Set<String>) {
+        flags.formUnion(extraFlags)
         guard let event = library.events.first(where: { $0.id == eventID }) else { return }
         applyEffects(of: event)
     }

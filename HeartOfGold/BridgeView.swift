@@ -15,6 +15,9 @@ struct BridgeView: View {
                 modePicker
                 personalityPicker
                 eventLog
+                if ship.poweredUp && !ship.activeChoices.isEmpty {
+                    choiceButtons
+                }
                 if ship.poweredUp && !ship.pendingMessages.isEmpty {
                     playMessageButton
                 }
@@ -96,6 +99,25 @@ struct BridgeView: View {
         }
         .background(Color.white.opacity(0.03))
         .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private var choiceButtons: some View {
+        HStack(spacing: 10) {
+            ForEach(ship.activeChoices, id: \.label) { choice in
+                Button {
+                    ship.choose(choice)
+                } label: {
+                    Text(choice.label.uppercased())
+                        .font(.system(.subheadline, design: .monospaced).bold())
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(Color.white.opacity(0.08))
+                        .foregroundStyle(amber)
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(amber.opacity(0.6)))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+            }
+        }
     }
 
     private var playMessageButton: some View {
