@@ -15,11 +15,6 @@ change on your branch first). Keep one task per PR. See ROADMAP.md for phase det
 
 | Task | Claimed by | Status |
 |---|---|---|
-| Event schema, validator, examples, design doc | claude/event-system-plan | in review |
-| Runtime: ContentLibrary + TriggerEvaluator (drive-state contexts) | claude/event-runtime-core | in review |
-| Runtime: EventPlayer for sequence type (time/distance waits) | claude/event-sequence-player | in progress |
-| Runtime: EventPlayer for branching type (voice/tap choices, timeouts, flags) | claude/event-branching-player | in progress |
-| Migrate CannedEvents to Content/events/*.json | claude/event-runtime-core | in review |
 | Event Editor web app (trigger form + branching node editor) | — | open |
 | Wireframes: rough exploration board (bridge, author mode, navigator) | — | open |
 | Wireframes: clickable HTML mockups of winning direction | — | open |
@@ -53,3 +48,4 @@ change on your branch first). Keep one task per PR. See ROADMAP.md for phase det
 | POC scaffold: audio, TTS, GPS, events, bridge UI, SFX | claude (2026-07-07) |
 | Repo + multi-agent infrastructure | claude (2026-07-07) |
 | Phase 2: message queue, push-to-talk voice commands, thruster SFX, Power/Eco personalities | claude (2026-07-07, PRs #1, #6) |
+| Event system: schema+validator+docs, runtime (library/triggers/sequence/branching players), JSON content migration | claude (2026-07-08, PRs #5, #9, #10, #11) |
