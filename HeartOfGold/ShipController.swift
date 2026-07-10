@@ -337,6 +337,7 @@ final class ShipController: ObservableObject {
     func pauseMission() {
         guard poweredUp, !isPaused else { return }
         isPaused = true
+        isScanning = false
         events.pause()
         activeSequence?.pause()
         activeBranching?.pause()
@@ -496,6 +497,8 @@ final class ShipController: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) { [weak self] in
             guard let self else { return }
             self.isScanning = false
+            // Ship state may have changed mid-sweep (pause/power-down): abort quietly.
+            guard self.poweredUp, !self.isPaused else { return }
             guard let playable = self.requestOnDemand(tag: "scan") else {
                 self.say(source: "SENSORS", "Sensor sweep complete. Every vehicle in range has already been scanned this trip, Captain. They're starting to notice.")
                 return
@@ -607,6 +610,7 @@ final class ShipController: ObservableObject {
         }
         poweredUp = false
         isPaused = false
+        isScanning = false
         offerQuickResponses([])
         briefingQuery = nil
         stoppedSince = nil
