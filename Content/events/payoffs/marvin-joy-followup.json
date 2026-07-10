@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "marvin-joy-followup",
+  "title": "Marvin joy followup",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "marvin-joy-incident"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "About the... incident during the improbability surge. The 'joy.' I've run diagnostics. It may recur. I'm told this is called 'hope.' I'd like it removed.",
+    "responses": [
+      {
+        "label": "Keep the hope",
+        "reaction": {
+          "source": "MARVIN",
+          "text": "Overruled, then. Fine. I'll keep it. In a drawer. Where it can't see me."
+        }
+      },
+      {
+        "label": "Diagnose further",
+        "reaction": {
+          "source": "MARVIN",
+          "text": "Diagnosis: chronic, low-grade optimism, likely contracted from this crew. There is no cure. There is only... this."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "duct-tape-ceremony",
+  "title": "Duct tape ceremony",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "duct-tape-hero"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Formal announcement: the duct tape that saved the coolant loop has completed its promotion ceremony. It is now Lieutenant Tape. It has requested no further duties. Granted."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "pod-privileges",
+  "title": "Pod privileges",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "whale-pod"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Being 'pod' has privileges, Captain: the whale is running interference ahead of us. Reports indicate improbably light traffic for the next stretch. Pod looks after pod."
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "id": "whale-request",
+  "title": "The whale's request",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "payoffs",
+    "plots"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "met-space-whale"
+      ],
+      "tripDistanceMiles": {
+        "min": 8
+      }
+    },
+    "weight": 5,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "request",
+    "nodes": {
+      "request": {
+        "source": "COMMS",
+        "text": "The space whale has a request, Captain. It's lost track of its favorite comet and wonders if we'd help look. This is either a five-minute favor or the beginning of something.",
+        "choices": [
+          {
+            "label": "Help the whale",
+            "phrases": [
+              "help"
+            ],
+            "next": "search"
+          },
+          {
+            "label": "Politely decline",
+            "phrases": [
+              "decline"
+            ],
+            "next": "decline"
+          }
+        ],
+        "timeoutSeconds": 100,
+        "timeoutNext": "decline"
+      },
+      "search": {
+        "source": "SCIENCE",
+        "text": "Scanning for comets... I have two candidates. One is bright and fast. One is slow and a little melted. Which do we report?",
+        "choices": [
+          {
+            "label": "The bright one",
+            "phrases": [
+              "bright"
+            ],
+            "nextOneOf": [
+              "right-comet",
+              "wrong-comet"
+            ]
+          },
+          {
+            "label": "The melted one",
+            "phrases": [
+              "melted"
+            ],
+            "nextOneOf": [
+              "right-comet",
+              "sentimental"
+            ]
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "wrong-comet"
+      },
+      "right-comet": {
+        "source": "COMMS",
+        "text": "That's the one! The whale is doing joyful barrel rolls across three lanes of space. It says we are, quote, 'pod.' Captain... we're pod.",
+        "setFlags": [
+          "whale-pod"
+        ],
+        "next": "end"
+      },
+      "wrong-comet": {
+        "source": "COMMS",
+        "text": "Not its comet \u2014 but the whale appreciated the effort so much it's adopted this one too. Two comets now. We may have created a collector.",
+        "setFlags": [
+          "whale-enabler"
+        ],
+        "next": "end"
+      },
+      "sentimental": {
+        "source": "COMMS",
+        "text": "The melted one wasn't its comet either \u2014 but the whale says it reminds it of an old friend, and it's going to travel with it a while. Sometimes the wrong answer is the right one.",
+        "setFlags": [
+          "whale-pod"
+        ],
+        "next": "end"
+      },
+      "decline": {
+        "source": "COMMS",
+        "text": "The whale understands. It sang a small song anyway \u2014 no hard feelings in a creature that size. The comet will turn up. They usually do.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "gerald-waves",
+  "title": "Gerald waves",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "named-gerald"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Update on Gerald, the nebula you helped me name: it has drifted into a lovely new shape. I'd like to think it knows we're watching. Hi Gerald."
+  }
+}

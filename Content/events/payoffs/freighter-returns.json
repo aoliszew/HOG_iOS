@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "freighter-returns",
+  "title": "Freighter returns",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "freighter-grudge"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "Heads up: the freighter that caught us scanning is two lanes over. It has not forgotten. It has, however, gotten a new bumper sticker. It says 'NO SCANS.' That's fair."
+  }
+}

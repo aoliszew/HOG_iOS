@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "cinnamon-lingers",
+  "title": "Cinnamon lingers",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "cinnamon-incident"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "The cinnamon smell from the nebula incident has settled into the ventilation permanently. The crew has stopped asking questions and started bringing pastries. Net positive."
+  }
+}

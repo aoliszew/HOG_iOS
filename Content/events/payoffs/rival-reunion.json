@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "rival-reunion",
+  "title": "Rival reunion",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "road-ally"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "The dog from the allied vessel earlier has been spotted at a rest stop, telling other dogs about us. Our reputation among dogs is now excellent. This matters more than most things."
+  }
+}

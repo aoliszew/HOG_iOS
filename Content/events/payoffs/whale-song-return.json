@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "whale-song-return",
+  "title": "Whale song return",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "met-space-whale"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Captain \u2014 the space whale is back on long-range. It's singing. Science says the song translates roughly to 'hello again, small fast friend.'"
+  }
+}

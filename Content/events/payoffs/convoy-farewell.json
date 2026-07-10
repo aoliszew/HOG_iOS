@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "convoy-farewell",
+  "title": "Convoy farewell",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "convoy-member"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "The convoy from earlier is exiting. The lead freighter flashed a farewell salute reserved for honorary members. You will always be convoy, Captain. Always."
+  }
+}
