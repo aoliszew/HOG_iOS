@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "id": "improbability-surge",
+  "title": "The improbability surge",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 12
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "surge",
+    "nodes": {
+      "surge": {
+        "source": "ENGINEERING",
+        "text": "Heads up: the Improbability Drive is surging. For the next few minutes, unlikely things are {n:2-40} times more likely. Ride it out, or vent the surplus?",
+        "choices": [
+          {
+            "label": "Ride it out",
+            "phrases": [
+              "ride"
+            ],
+            "nextOneOf": [
+              "surge-wonder",
+              "surge-weird"
+            ]
+          },
+          {
+            "label": "Vent it",
+            "phrases": [
+              "vent"
+            ],
+            "next": "vent"
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "surge-weird"
+      },
+      "surge-wonder": {
+        "source": "ENGINEERING",
+        "text": "Surge complete. Improbably, every light ahead turned green, the perfect song came on, and the crew all thought of the same joke simultaneously. Cherish this.",
+        "setFlags": [
+          "improbable-blessing"
+        ],
+        "next": "end"
+      },
+      "surge-weird": {
+        "source": "ENGINEERING",
+        "text": "Surge complete. Side effects: the cup holder now holds cups slightly better than physics allows, and Marvin briefly felt joy. He has asked us never to speak of it.",
+        "setFlags": [
+          "marvin-joy-incident"
+        ],
+        "next": "end"
+      },
+      "vent": {
+        "source": "ENGINEERING",
+        "text": "Surplus improbability vented safely into the atmosphere. Somewhere downwind, a fish is about to win a modest lottery. Godspeed, fish.",
+        "next": "end"
+      }
+    }
+  }
+}

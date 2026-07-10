@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "id": "anomaly-belt",
+  "title": "The anomaly belt",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "middle"
+      ]
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "SCIENCE",
+        "text": "Captain, we're entering what I'm calling an anomaly belt: {n:3-9} unexplained readings in the last few minutes. Nothing dangerous. All weird."
+      },
+      {
+        "wait": {
+          "miles": 3
+        }
+      },
+      {
+        "source": "SCIENCE",
+        "text": "Anomaly update: one reading was a flock of birds flying in a perfect question mark. Another was a mattress on the shoulder, which raises its own questions."
+      },
+      {
+        "wait": {
+          "miles": 3
+        }
+      },
+      {
+        "source": "SCIENCE",
+        "text": "We've cleared the belt. Final tally: {n:5-15} anomalies, zero explanations, one excellent story. Science thanks you for driving through it."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "anomaly-surveyor"
+    ]
+  }
+}

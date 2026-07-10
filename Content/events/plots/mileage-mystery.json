@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "id": "mileage-mystery",
+  "title": "The great mileage mystery",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ],
+      "tripDistanceMiles": {
+        "min": 10
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "SECURITY",
+        "text": "Captain, we have a situation. Someone has eaten the emergency chocolate. The wrapper was found near the medbay. An investigation is underway."
+      },
+      {
+        "wait": {
+          "miles": 4
+        }
+      },
+      {
+        "source": "SECURITY",
+        "text": "Update: everyone claims innocence. The cat has an alibi. Marvin says, quote, 'it was probably me, everything else is.' We doubt it. He has no mouth for chocolate."
+      },
+      {
+        "wait": {
+          "miles": 4
+        }
+      },
+      {
+        "source": "SECURITY",
+        "text": "Breakthrough: chocolate traces detected on the science console. Science claims it was 'calibration.' We are consulting the dictionary."
+      },
+      {
+        "wait": {
+          "miles": 4,
+          "seconds": 120
+        }
+      },
+      {
+        "source": "SECURITY",
+        "text": "Case closed. It was Science, who confessed beautifully and cited 'morale research.' Sentence: they must share the backup chocolate. Justice, Captain. Justice."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "solved-chocolate-case"
+    ]
+  }
+}

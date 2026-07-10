@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "rival-ship",
+  "title": "The rival ship",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 15
+      },
+      "speedMPH": {
+        "min": 45
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "appears",
+    "nodes": {
+      "appears": {
+        "source": "SENSORS",
+        "text": "That vessel has been pacing us for {n:5-20} miles. Same speed. Same lane changes. This is either coincidence or a rivalry. How do we respond?",
+        "choices": [
+          {
+            "label": "Friendly wave",
+            "phrases": [
+              "wave"
+            ],
+            "nextOneOf": [
+              "wave-friend",
+              "wave-confusion"
+            ]
+          },
+          {
+            "label": "Subtle speed test",
+            "phrases": [
+              "speed test"
+            ],
+            "nextOneOf": [
+              "race-win",
+              "race-humble"
+            ]
+          },
+          {
+            "label": "Ignore them",
+            "phrases": [
+              "ignore"
+            ],
+            "next": "ignore"
+          }
+        ],
+        "timeoutSeconds": 100,
+        "timeoutNext": "ignore"
+      },
+      "wave-friend": {
+        "source": "SENSORS",
+        "text": "Wave returned enthusiastically! They have a dog. The dog is also waving, in its way. Rivalry converted to alliance. Best outcome available in this sector.",
+        "setFlags": [
+          "road-ally"
+        ],
+        "next": "end"
+      },
+      "wave-confusion": {
+        "source": "SENSORS",
+        "text": "They did not see the wave. They saw the aftermath, and are now deeply unsettled. They've changed lanes. The rivalry is over. So is the friendship that never began.",
+        "next": "end"
+      },
+      "race-win": {
+        "source": "SENSORS",
+        "text": "Within legal limits, we have established gentle dominance. The rival has accepted second place with grace. The crew is quietly triumphant.",
+        "setFlags": [
+          "gentle-dominance"
+        ],
+        "next": "end"
+      },
+      "race-humble": {
+        "source": "SENSORS",
+        "text": "They were not racing. They were just driving. We have been humbled by a stranger's indifference. Character: built.",
+        "next": "end"
+      },
+      "ignore": {
+        "source": "SENSORS",
+        "text": "We ignored them. They exited {n:2-9} miles later, unaware they were ever our rival. All rivalries are like this, if you think about it. Please don't.",
+        "next": "end"
+      }
+    }
+  }
+}

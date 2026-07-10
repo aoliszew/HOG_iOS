@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "id": "signal-from-home",
+  "title": "Signal from home base",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "final"
+      ],
+      "tripDistanceMiles": {
+        "min": 10
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "COMMS",
+        "text": "Long-range comms are picking up home base, Captain. Docking bay lights are on. Someone left the porch beacon lit for us."
+      },
+      {
+        "wait": {
+          "miles": 3
+        }
+      },
+      {
+        "source": "SHIP",
+        "text": "Home base on final approach vector. Pre-landing checklist: stretch the legs at the next opportunity, hydrate, and prepare the triumphant sigh of arrival."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "homing-beacon"
+    ]
+  }
+}

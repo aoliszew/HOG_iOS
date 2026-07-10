@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "id": "restaurant-end-road",
+  "title": "The restaurant at the end of this road",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "final"
+      ]
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "SHIP",
+        "text": "Final leg, Captain. In honor of tradition, the crew is compiling reviews of establishments we did not visit along the way."
+      },
+      {
+        "wait": {
+          "seconds": 180
+        }
+      },
+      {
+        "source": "CREW",
+        "text": "Review one: the gas station at mile {n:20-200}. Ambience: fluorescent. Selection: heroic. Bathroom: we don't discuss it. {n:2-4} stars."
+      },
+      {
+        "wait": {
+          "seconds": 180
+        }
+      },
+      {
+        "source": "CREW",
+        "text": "Final review: this vehicle. Service: excellent. Company: the best in the galaxy. Would ride again. {n:4-5} stars, deducting only for snack scarcity."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "end-of-road-reviews"
+    ]
+  }
+}

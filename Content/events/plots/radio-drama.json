@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "radio-drama",
+  "title": "The cosmic radio drama",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "middle"
+      ],
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "COMMS",
+        "text": "We've tuned into an ancient radio drama mid-episode. A voice says: 'The airlock was empty... and yet, the sandwiches were GONE.' Recording for the captain."
+      },
+      {
+        "wait": {
+          "miles": 5
+        }
+      },
+      {
+        "source": "COMMS",
+        "text": "The drama continues: the detective suspects the robot. The robot suspects the detective. The sandwiches remain at large. This is riveting, Captain."
+      },
+      {
+        "wait": {
+          "miles": 5
+        }
+      },
+      {
+        "source": "COMMS",
+        "text": "Finale: it was the airlock itself. Sentient the whole time. Hungry the whole time. The crew is shaken. Five stars. We're finding the sequel."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "radio-drama-fan"
+    ]
+  }
+}

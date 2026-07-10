@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "id": "cargo-manifesto",
+  "title": "The cargo manifesto",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "errands"
+      ],
+      "stopsRemaining": {
+        "min": 1
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "union",
+    "nodes": {
+      "union": {
+        "source": "CARGO BAY",
+        "text": "The acquired cargo has unionized, Captain. Their demands: gentler cornering and shade at the next stop. Negotiate, or hold firm?",
+        "choices": [
+          {
+            "label": "Negotiate",
+            "phrases": [
+              "negotiate"
+            ],
+            "next": "deal"
+          },
+          {
+            "label": "Hold firm",
+            "phrases": [
+              "hold firm"
+            ],
+            "nextOneOf": [
+              "firm-ok",
+              "firm-mutiny"
+            ]
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "deal"
+      },
+      "deal": {
+        "source": "CARGO BAY",
+        "text": "Terms accepted. The cargo has ratified the agreement unanimously, except one jar that abstained. Labor peace achieved.",
+        "setFlags": [
+          "cargo-peace"
+        ],
+        "next": "end"
+      },
+      "firm-ok": {
+        "source": "CARGO BAY",
+        "text": "You held firm. The union folded. The groceries respect strength. An eerie calm settles over the trunk.",
+        "next": "end"
+      },
+      "firm-mutiny": {
+        "source": "CARGO BAY",
+        "text": "The cargo has responded with a work slowdown: the bag with the eggs has moved itself somewhere unfindable. You'll locate it in {n:2-9} days. By smell.",
+        "setFlags": [
+          "egg-incident"
+        ],
+        "next": "end"
+      }
+    }
+  }
+}

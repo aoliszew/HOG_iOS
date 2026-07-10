@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "hitchhiker-signal",
+  "title": "The hitchhiker signal",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ],
+      "tripDistanceMiles": {
+        "min": 5
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "thumb",
+    "nodes": {
+      "thumb": {
+        "source": "COMMS",
+        "text": "Sensors detect a hitchhiker signal \u2014 someone out there is broadcasting the universal symbol: a thumb, extended with hope. Do we acknowledge it?",
+        "choices": [
+          {
+            "label": "Acknowledge",
+            "phrases": [
+              "acknowledge"
+            ],
+            "nextOneOf": [
+              "hiker-guide",
+              "hiker-story"
+            ]
+          },
+          {
+            "label": "Too risky",
+            "phrases": [
+              "risky",
+              "no"
+            ],
+            "next": "pass"
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "pass"
+      },
+      "hiker-guide": {
+        "source": "COMMS",
+        "text": "The signal responds with gratitude and a data packet: a well-worn copy of the Guide's entry on this region. Summary: 'Mostly harmless. Good fries at exit {n:12-99}.'",
+        "setFlags": [
+          "guide-entry-received"
+        ],
+        "next": "end"
+      },
+      "hiker-story": {
+        "source": "COMMS",
+        "text": "The signal shares a story in return: they've been traveling for {n:4-400} years and the best advice they have is 'always know where your towel is.' We checked. Ours is secure.",
+        "setFlags": [
+          "hitchhiker-wisdom"
+        ],
+        "next": "end"
+      },
+      "pass": {
+        "source": "COMMS",
+        "text": "Signal unanswered. It fades with dignity. Somewhere out there, a thumb keeps hoping.",
+        "next": "end"
+      }
+    }
+  }
+}
