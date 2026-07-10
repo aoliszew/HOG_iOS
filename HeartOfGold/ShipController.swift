@@ -25,6 +25,11 @@ final class ShipController: ObservableObject {
     @Published var resumableTrip: TripSnapshot?
     /// Video-game pause: all story clocks frozen, GPS tracking suspended.
     @Published var isPaused = false
+    /// Message delivery: true = transmissions play as they arrive (hands-free);
+    /// false = hail beep + PLAY MESSAGE button (classic). Persisted.
+    @Published var autoPlayMessages = UserDefaults.standard.bool(forKey: "autoPlayMessages") {
+        didSet { UserDefaults.standard.set(autoPlayMessages, forKey: "autoPlayMessages") }
+    }
 
     /// Voice input is parked while speech reliability is debugged — tap-first.
     /// Flip this to re-enable the talk button, auto-listen, and voice briefing.
@@ -495,8 +500,13 @@ final class ShipController: ObservableObject {
     private func deliver(_ event: ShipEvent) {
         pruneStaleAmbient()
         audio.play(.hail)
-        pendingMessages.append(event)
-        log.insert(LogEntry(source: "COMMS", text: "Incoming transmission from \(event.source). Say or tap PLAY MESSAGE."), at: 0)
+        if autoPlayMessages {
+            offerQuickResponses(event.responses)
+            say(source: event.source, event.text, delay: 0.8)
+        } else {
+            pendingMessages.append(event)
+            log.insert(LogEntry(source: "COMMS", text: "Incoming transmission from \(event.source). Tap PLAY MESSAGE."), at: 0)
+        }
     }
 
     /// Ambient chatter that sat unheard for 10+ minutes is no longer news.
