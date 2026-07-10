@@ -52,6 +52,10 @@ struct EventDefinition: Decodable, Identifiable {
         let stopsRemaining: RangeCondition?
         /// US state/province codes the ship must be operating in (e.g. ["OH"]).
         let states: [String]?
+        /// Multi-day voyage chapter: outbound | returning.
+        let voyagePhase: [String]?
+        /// Straight-line miles to the active destination (needs a set destination).
+        let milesToDestination: RangeCondition?
     }
 
     struct RangeCondition: Decodable {
@@ -154,5 +158,9 @@ struct ShipContext {
     var stopsRemaining: Int?
     /// Current US state code, if region awareness has a fix (e.g. "OH").
     var state: String?
+    /// Multi-day voyage chapter (outbound/returning), if a voyage is active.
+    var voyagePhase: String?
+    /// Straight-line miles to the active destination, if one is set.
+    var milesToDestination: Double?
     var date: Date = .now
 }

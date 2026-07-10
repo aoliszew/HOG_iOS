@@ -47,7 +47,9 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
       "forbidsFlags": ["ship-damaged"],
       "tripPhase": ["final"],          // arc: beginning | middle | final (needs briefing)
       "stopsRemaining": { "max": 1 },  // errand objectives left (needs briefing)
-      "states": ["OH", "IN"]           // 2-letter codes; needs a geocode fix
+      "states": ["OH", "IN"],          // 2-letter codes; needs a geocode fix
+      "voyagePhase": ["outbound"],     // multi-day voyage leg: outbound | returning
+      "milesToDestination": { "max": 50 } // needs a plotted destination
     },
     "weight": 3,                       // selection weight vs other qualified events
     "cooldownMinutes": 45,             // min gap before this event can repeat

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "voyage-return-inventory",
+  "title": "Voyage return inventory",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "returning"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "Return-leg inventory: we are heavier by {pick:souvenirs|leftovers|one questionable pamphlet|memories with mass} and lighter by exactly the right amount of worry."
+  }
+}

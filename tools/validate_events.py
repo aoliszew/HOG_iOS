@@ -18,6 +18,7 @@ CONTEXT_KEYS = {
     "tripModes", "personalities", "speedMPH", "tripDistanceMiles", "stopped",
     "hardAccelRecently", "timeOfDay", "daysOfWeek", "weather",
     "requiresFlags", "forbidsFlags", "tripPhase", "stopsRemaining", "states",
+    "voyagePhase", "milesToDestination",
 }
 
 errors = []
@@ -84,6 +85,10 @@ def check_trigger(path, trigger):
         check_enum(path, contexts["tripPhase"], PHASES, "tripPhase")
     if "stopsRemaining" in contexts:
         check_range(path, contexts["stopsRemaining"], "stopsRemaining")
+    if "voyagePhase" in contexts:
+        check_enum(path, contexts["voyagePhase"], {"outbound", "returning"}, "voyagePhase")
+    if "milesToDestination" in contexts:
+        check_range(path, contexts["milesToDestination"], "milesToDestination")
     if "states" in contexts:
         v = contexts["states"]
         if not isinstance(v, list) or not v or not all(isinstance(x, str) and len(x) == 2 for x in v):

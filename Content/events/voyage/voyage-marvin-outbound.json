@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "voyage-marvin-outbound",
+  "title": "Voyage marvin outbound",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "outbound"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "We're going somewhere new. I've precalculated my disappointment to save time on arrival. You're welcome."
+  }
+}

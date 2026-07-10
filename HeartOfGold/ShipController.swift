@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import CoreLocation
 
 /// Central coordinator: wires audio, voice, trip tracking, and events together.
 @MainActor
@@ -30,6 +31,13 @@ final class ShipController: ObservableObject {
     @Published var autoPlayMessages = UserDefaults.standard.bool(forKey: "autoPlayMessages") {
         didSet { UserDefaults.standard.set(autoPlayMessages, forKey: "autoPlayMessages") }
     }
+
+    // MARK: Voyage (multi-day journeys)
+    @Published var voyage: Voyage? = VoyageStore.current {
+        didSet { VoyageStore.current = voyage }
+    }
+    @Published var homeIsSet = VoyageStore.home != nil
+    @Published var destinationStatus: String?   // UI feedback while resolving
 
     /// Voice input is parked while speech reliability is debugged — tap-first.
     /// Flip this to re-enable the talk button, auto-listen, and voice briefing.
@@ -66,9 +74,17 @@ final class ShipController: ObservableObject {
                            flags: [],
                            longFormActive: self.activeSequence != nil || self.activeBranching != nil,
                            queuedMessages: self.pendingMessages.count,
-                           tripPhase: self.plan.phase(distanceMiles: self.trip.distanceMiles),
+                           tripPhase: self.destinationTripPhase ?? self.plan.phase(distanceMiles: self.trip.distanceMiles),
                            stopsRemaining: self.plan.stopsRemaining,
-                           state: self.region.stateCode)
+                           state: self.region.stateCode,
+                           voyagePhase: {
+                               switch self.voyage?.phase {
+                               case .outbound: return "outbound"
+                               case .returning: return "returning"
+                               default: return nil
+                               }
+                           }(),
+                           milesToDestination: self.milesToDestination)
     }
 
     private var cancellables: Set<AnyCancellable> = []
@@ -92,6 +108,7 @@ final class ShipController: ObservableObject {
                 self?.objectWillChange.send()
                 self?.updateStopDetection()
                 self?.updateRegion()
+                self?.updateVoyageProgress()
                 self?.persistIfFlying()
             }
             .store(in: &cancellables)
@@ -266,6 +283,8 @@ final class ShipController: ObservableObject {
         audio.play(.powerUp)
 
         plan.stopsCompleted = 0
+        voyageLegInitialMiles = nil
+        announcedMilestones = []
         hasMovedThisTrip = false
         stoppedSince = nil
         docked = false
@@ -335,6 +354,124 @@ final class ShipController: ObservableObject {
         activeSequence?.resume()
         activeBranching?.resume()
         say(source: "SHIP", "Resuming, Captain.")
+    }
+
+    // MARK: - Voyage
+
+    private var voyageLegInitialMiles: Double?
+    private var announcedMilestones: Set<String> = []
+
+    /// Where this leg is headed: the destination (outbound) or home (returning).
+    private var activeDestination: CLLocation? {
+        switch voyage?.phase {
+        case .outbound: return voyage?.destination
+        case .returning: return VoyageStore.home
+        default: return nil
+        }
+    }
+
+    var milesToDestination: Double? {
+        guard let dest = activeDestination, let loc = trip.currentLocation else { return nil }
+        return loc.distance(from: dest) / 1609.34
+    }
+
+    /// Story arc computed from real remaining distance (beats the briefing estimate).
+    private var destinationTripPhase: String? {
+        guard let initial = voyageLegInitialMiles, initial > 5,
+              let remaining = milesToDestination else { return nil }
+        let fraction = 1 - remaining / initial
+        if fraction < 0.3 { return "beginning" }
+        if fraction < 0.75 { return "middle" }
+        return "final"
+    }
+
+    func setHomeHere() {
+        trip.requestFix { [weak self] location in
+            Task { @MainActor in
+                guard let self else { return }
+                guard let location else {
+                    self.destinationStatus = "No GPS fix — try again outside"
+                    return
+                }
+                VoyageStore.home = location
+                self.homeIsSet = true
+                self.log.insert(LogEntry(source: "SHIP", text: "Home base coordinates locked."), at: 0)
+            }
+        }
+    }
+
+    func setDestination(_ query: String) {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        destinationStatus = "Resolving…"
+        CLGeocoder().geocodeAddressString(trimmed) { [weak self] placemarks, _ in
+            Task { @MainActor in
+                guard let self else { return }
+                guard let pm = placemarks?.first, let loc = pm.location else {
+                    self.destinationStatus = "Couldn't find that address"
+                    return
+                }
+                let name = [pm.locality, pm.administrativeArea].compactMap { $0 }.joined(separator: ", ")
+                self.voyage = Voyage(destinationName: name.isEmpty ? trimmed : name,
+                                     destinationLat: loc.coordinate.latitude,
+                                     destinationLon: loc.coordinate.longitude,
+                                     phase: .outbound,
+                                     startedAt: .now)
+                self.destinationStatus = nil
+                self.log.insert(LogEntry(source: "NAVIGATION", text: "Course plotted: \(self.voyage!.destinationName)."), at: 0)
+            }
+        }
+    }
+
+    func beginReturnVoyage() {
+        guard var v = voyage, v.phase == .atDestination, VoyageStore.home != nil else { return }
+        v.phase = .returning
+        voyage = v
+        log.insert(LogEntry(source: "SHIP", text: "Return voyage plotted. Day \(v.dayNumber)."), at: 0)
+    }
+
+    func clearVoyage() {
+        voyage = nil
+        destinationStatus = nil
+    }
+
+    private func updateVoyageProgress() {
+        guard poweredUp, !isPaused, let remaining = milesToDestination, var v = voyage else { return }
+        if voyageLegInitialMiles == nil { voyageLegInitialMiles = max(remaining, 1) }
+        let initial = voyageLegInitialMiles ?? remaining
+
+        func announce(_ key: String, _ source: String, _ text: String) {
+            guard !announcedMilestones.contains(key) else { return }
+            announcedMilestones.insert(key)
+            say(source: source, text)
+        }
+
+        if remaining < 0.6, trip.speedMPH < 10 {
+            // Arrival.
+            switch v.phase {
+            case .outbound:
+                v.phase = .atDestination
+                voyage = v
+                announce("arrived", "SHIP", "Arrival confirmed: \(v.destinationName). Outbound leg complete — \(String(format: "%.0f", trip.distanceMiles)) miles logged. Enjoy the expedition, Captain. The ship will keep the log warm.")
+            case .returning:
+                voyage = nil
+                announce("home", "SHIP", "Home base, Captain. Voyage complete. The odyssey is logged, the crew is proud, and the towel made it. Welcome home.")
+            default: break
+            }
+            return
+        }
+
+        if initial > 20 {
+            if remaining <= initial / 2 {
+                announce("halfway", "NAVIGATION", "Milestone: halfway to \(v.phase == .returning ? "home base" : v.destinationName). \(String(format: "%.0f", remaining)) miles remain.")
+            }
+            if remaining <= 25 {
+                announce("approach", "NAVIGATION", "\(String(format: "%.0f", remaining)) miles out. Beginning approach phase. Recommend savoring the final stretch.")
+            }
+            if remaining <= 5 {
+                announce("final", "SHIP", "Final approach: \(v.phase == .returning ? "home base" : v.destinationName) in \(String(format: "%.0f", remaining)) miles. All stations, prepare for arrival.")
+            }
+        }
     }
 
     private func updateRegion() {

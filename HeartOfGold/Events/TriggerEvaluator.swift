@@ -97,6 +97,12 @@ final class TriggerEvaluator {
             guard let state = context.state,
                   states.map({ $0.uppercased() }).contains(state.uppercased()) else { return false }
         }
+        if let phases = c.voyagePhase {
+            guard let phase = context.voyagePhase, phases.contains(phase) else { return false }
+        }
+        if let miles = c.milesToDestination {
+            guard let remaining = context.milesToDestination, miles.contains(remaining) else { return false }
+        }
 
         // Contexts the ship can't sense yet: any event requiring them stays dormant.
         if c.timeOfDay != nil || c.daysOfWeek != nil || c.weather != nil { return false }
