@@ -44,7 +44,8 @@
           }
         ],
         "timeoutSeconds": 90,
-        "timeoutNext": "surge-weird"
+        "timeoutNext": "surge-weird",
+        "sfx": "alert"
       },
       "surge-wonder": {
         "source": "ENGINEERING",
@@ -52,7 +53,8 @@
         "setFlags": [
           "improbable-blessing"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "surge-weird": {
         "source": "ENGINEERING",
@@ -60,7 +62,8 @@
         "setFlags": [
           "marvin-joy-incident"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "static"
       },
       "vent": {
         "source": "ENGINEERING",

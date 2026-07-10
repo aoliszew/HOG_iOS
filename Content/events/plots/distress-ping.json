@@ -44,7 +44,8 @@
           }
         ],
         "timeoutSeconds": 120,
-        "timeoutNext": "drift"
+        "timeoutNext": "drift",
+        "sfx": "static"
       },
       "investigate": {
         "source": "COMMS",
@@ -52,12 +53,14 @@
         "setFlags": [
           "helped-a-stranger"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "ignore": {
         "source": "COMMS",
         "text": "Understood. For the record, it was the extended warranty people. Your caution has been vindicated and will be studied.",
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_bad"
       },
       "drift": {
         "source": "COMMS",

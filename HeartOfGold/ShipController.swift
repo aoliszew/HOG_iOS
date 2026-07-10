@@ -578,7 +578,11 @@ final class ShipController: ObservableObject {
             deliver: { [weak self] event in
                 // Plot beats flow hands-free (hail + speak), matching branching —
                 // a story shouldn't demand a PLAY MESSAGE tap for every chapter.
-                self?.audio.play(.hail)
+                if let sfx = event.sfx {
+                    self?.audio.play(named: sfx)
+                } else {
+                    self?.audio.play(.hail)
+                }
                 self?.say(source: event.source, event.text, delay: 0.8)
             },
             onComplete: { [weak self] in
@@ -598,7 +602,11 @@ final class ShipController: ObservableObject {
             speak: { [weak self] event in
                 // Branching moments are interactive: hail + speak immediately
                 // rather than queueing, since a timed question is waiting.
-                self?.audio.play(.hail)
+                if let sfx = event.sfx {
+                    self?.audio.play(named: sfx)
+                } else {
+                    self?.audio.play(.hail)
+                }
                 self?.say(source: event.source, event.text, delay: 0.8) {
                     // Auto-listen: a question was just asked — open the mic so
                     // the captain can answer hands-free. One shot; the on-screen
@@ -636,7 +644,12 @@ final class ShipController: ObservableObject {
 
     private func deliver(_ event: ShipEvent) {
         pruneStaleAmbient()
-        audio.play(.hail)
+        // Story-specific sound when the content declares one; hail otherwise.
+        if let sfx = event.sfx {
+            audio.play(named: sfx)
+        } else {
+            audio.play(.hail)
+        }
         if autoPlayMessages {
             offerQuickResponses(event.responses)
             say(source: event.source, event.text, delay: 0.8)

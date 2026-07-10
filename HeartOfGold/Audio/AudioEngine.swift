@@ -1,10 +1,18 @@
 import AVFoundation
 
-enum SoundEffect: String {
+enum SoundEffect: String, CaseIterable {
     case powerUp = "power_up"
     case powerDown = "power_down"
     case hail = "hail"
     case thruster = "thruster"
+    // Event/content-triggerable (referenced by name in event JSON "sfx" fields)
+    case shieldUp = "shield_up"
+    case alert = "alert"
+    case scan = "scan"
+    case chimeGood = "chime_good"
+    case chimeBad = "chime_bad"
+    case dockClunk = "dock_clunk"
+    case commsStatic = "static"
 }
 
 /// Owns the audio session (sole owner — see AGENTS.md) and sound-effect playback.
@@ -18,7 +26,7 @@ enum SoundEffect: String {
 /// - All session calls stay off the main thread (setActive blocks on XPC and
 ///   once deadlocked app launch).
 final class AudioEngine {
-    private var players: [SoundEffect: AVAudioPlayer] = [:]
+    private var players: [String: AVAudioPlayer] = [:]
     private let queue = DispatchQueue(label: "com.oliszewski.heartofgold.audio")
 
     /// Set by the controller so idle checks can see if TTS is still talking.
@@ -103,21 +111,26 @@ final class AudioEngine {
     // MARK: - SFX
 
     private func preload() {
-        for effect in [SoundEffect.powerUp, .powerDown, .hail, .thruster] {
+        for effect in SoundEffect.allCases {
             guard let url = Bundle.main.url(forResource: effect.rawValue, withExtension: "caf") else {
                 print("Missing SFX: \(effect.rawValue).caf")
                 continue
             }
-            players[effect] = try? AVAudioPlayer(contentsOf: url)
-            players[effect]?.prepareToPlay()
+            players[effect.rawValue] = try? AVAudioPlayer(contentsOf: url)
+            players[effect.rawValue]?.prepareToPlay()
         }
     }
 
     func play(_ effect: SoundEffect) {
+        play(named: effect.rawValue)
+    }
+
+    /// Content-driven playback: event JSON references SFX by file name.
+    func play(named name: String) {
         queue.async { [self] in
             setPlaybackCategory()
-            players[effect]?.currentTime = 0
-            players[effect]?.play()
+            players[name]?.currentTime = 0
+            players[name]?.play()
         }
         relinquishIfIdle()
     }

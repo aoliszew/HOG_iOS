@@ -18,6 +18,7 @@
   },
   "content": {
     "source": "COMMS",
-    "text": "Captain \u2014 the space whale is back on long-range. It's singing. Science says the song translates roughly to 'hello again, small fast friend.'"
+    "text": "Captain \u2014 the space whale is back on long-range. It's singing. Science says the song translates roughly to 'hello again, small fast friend.'",
+    "sfx": "static"
   }
 }

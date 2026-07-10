@@ -61,6 +61,12 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
 }
 ```
 
+Any content line (single, step, or node) may also declare `"sfx": "<name>"` —
+a sound played as it arrives instead of the generic hail. Available: hail,
+shield_up, alert, scan, chime_good, chime_bad, dock_clunk, static, thruster
+(validator-enforced; files live in HeartOfGold/Resources/SFX, StoryBlocks
+replacements swap file-for-file).
+
 ### `type: "single"` — one transmission
 ```jsonc
 "content": {

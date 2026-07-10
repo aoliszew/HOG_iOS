@@ -72,7 +72,7 @@ final class SequencePlayer {
                            currentDistance() + (wait.miles ?? 0))
             startPolling()
         } else if let source = step.source, let text = step.text {
-            deliver(ShipEvent(source: source, text: MessageTemplate.render(text)))
+            deliver(ShipEvent(source: source, text: MessageTemplate.render(text), sfx: step.sfx))
             advance()
         } else {
             advance()

@@ -57,7 +57,8 @@
           }
         ],
         "timeoutSeconds": 100,
-        "timeoutNext": "ignore"
+        "timeoutNext": "ignore",
+        "sfx": "scan"
       },
       "wave-friend": {
         "source": "SENSORS",
@@ -65,7 +66,8 @@
         "setFlags": [
           "road-ally"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "wave-confusion": {
         "source": "SENSORS",
@@ -83,7 +85,8 @@
       "race-humble": {
         "source": "SENSORS",
         "text": "They were not racing. They were just driving. We have been humbled by a stranger's indifference. Character: built.",
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_bad"
       },
       "ignore": {
         "source": "SENSORS",

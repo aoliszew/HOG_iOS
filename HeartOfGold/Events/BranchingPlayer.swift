@@ -72,7 +72,7 @@ final class BranchingPlayer {
             finish()
             return
         }
-        speak(ShipEvent(source: node.source, text: MessageTemplate.render(node.text)))
+        speak(ShipEvent(source: node.source, text: MessageTemplate.render(node.text), sfx: node.sfx))
         if let flags = node.setFlags { collectedFlags.formUnion(flags) }
 
         if let choices = node.choices, !choices.isEmpty {

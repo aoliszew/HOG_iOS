@@ -22,7 +22,8 @@
     "steps": [
       {
         "source": "SCIENCE",
-        "text": "Captain, we're entering what I'm calling an anomaly belt: {n:3-9} unexplained readings in the last few minutes. Nothing dangerous. All weird."
+        "text": "Captain, we're entering what I'm calling an anomaly belt: {n:3-9} unexplained readings in the last few minutes. Nothing dangerous. All weird.",
+        "sfx": "scan"
       },
       {
         "wait": {
@@ -40,7 +41,8 @@
       },
       {
         "source": "SCIENCE",
-        "text": "We've cleared the belt. Final tally: {n:5-15} anomalies, zero explanations, one excellent story. Science thanks you for driving through it."
+        "text": "We've cleared the belt. Final tally: {n:5-15} anomalies, zero explanations, one excellent story. Science thanks you for driving through it.",
+        "sfx": "chime_good"
       }
     ]
   },

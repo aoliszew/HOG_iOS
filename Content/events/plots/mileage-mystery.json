@@ -25,7 +25,8 @@
     "steps": [
       {
         "source": "SECURITY",
-        "text": "Captain, we have a situation. Someone has eaten the emergency chocolate. The wrapper was found near the medbay. An investigation is underway."
+        "text": "Captain, we have a situation. Someone has eaten the emergency chocolate. The wrapper was found near the medbay. An investigation is underway.",
+        "sfx": "alert"
       },
       {
         "wait": {
@@ -39,7 +40,8 @@
       {
         "wait": {
           "miles": 4
-        }
+        },
+        "sfx": "chime_good"
       },
       {
         "source": "SECURITY",

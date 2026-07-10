@@ -22,6 +22,7 @@
   },
   "content": {
     "source": "NAVIGATION",
-    "text": "Milestone: under 100 miles to destination. The ship has entered what deep-space crews call 'the almost-there'. Symptoms include seat adjusting and ETA arithmetic."
+    "text": "Milestone: under 100 miles to destination. The ship has entered what deep-space crews call 'the almost-there'. Symptoms include seat adjusting and ETA arithmetic.",
+    "sfx": "chime_good"
   }
 }

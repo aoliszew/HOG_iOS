@@ -24,7 +24,8 @@
     "steps": [
       {
         "source": "COMMS",
-        "text": "Picking up an automated beacon, very old. It repeats: 'Still here. Still lit. Come by if you're passing.' Signal source: unclear. Tone: friendly."
+        "text": "Picking up an automated beacon, very old. It repeats: 'Still here. Still lit. Come by if you're passing.' Signal source: unclear. Tone: friendly.",
+        "sfx": "static"
       },
       {
         "wait": {
@@ -43,7 +44,8 @@
       },
       {
         "source": "COMMS",
-        "text": "We've passed the beacon's point of closest approach. Final message: 'Safe travels. Tell someone about me.' ...Logging it in the ship's chart, Captain. Permanently. Someone will always know."
+        "text": "We've passed the beacon's point of closest approach. Final message: 'Safe travels. Tell someone about me.' ...Logging it in the ship's chart, Captain. Permanently. Someone will always know.",
+        "sfx": "chime_good"
       }
     ]
   },

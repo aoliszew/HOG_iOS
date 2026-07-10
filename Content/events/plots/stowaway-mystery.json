@@ -43,7 +43,8 @@
           }
         ],
         "timeoutSeconds": 100,
-        "timeoutNext": "escalates"
+        "timeoutNext": "escalates",
+        "sfx": "scan"
       },
       "cat-solves": {
         "source": "SECURITY",
@@ -51,7 +52,8 @@
         "setFlags": [
           "cat-hero"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "cat-defects": {
         "source": "SECURITY",
@@ -59,7 +61,8 @@
         "setFlags": [
           "aft-party"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "static"
       },
       "next-stop": {
         "source": "SECURITY",

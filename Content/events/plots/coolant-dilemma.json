@@ -46,7 +46,8 @@
           }
         ],
         "timeoutSeconds": 120,
-        "timeoutNext": "ignored"
+        "timeoutNext": "ignored",
+        "sfx": "alert"
       },
       "tea-good": {
         "source": "ENGINEERING",
@@ -54,7 +55,8 @@
         "setFlags": [
           "crisis-ace"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "tea-bad": {
         "source": "ENGINEERING",
@@ -62,7 +64,8 @@
         "setFlags": [
           "tea-incident"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_bad"
       },
       "throttle": {
         "source": "ENGINEERING",
@@ -78,7 +81,8 @@
         "setFlags": [
           "duct-tape-hero"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       }
     }
   }

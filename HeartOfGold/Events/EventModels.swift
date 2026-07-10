@@ -74,6 +74,8 @@ struct EventDefinition: Decodable, Identifiable {
         // single
         let source: String?
         let text: String?
+        /// Optional sound effect (by file name) played as the message arrives.
+        let sfx: String?
         /// Optional quick replies (max 2) on a single: tap → spoken reaction.
         /// No long-term effects — ambient banter, not plot.
         let responses: [QuickResponse]?
@@ -98,6 +100,7 @@ struct EventDefinition: Decodable, Identifiable {
     struct Step: Decodable {
         let source: String?
         let text: String?
+        let sfx: String?
         let wait: Wait?
     }
 
@@ -109,6 +112,7 @@ struct EventDefinition: Decodable, Identifiable {
     struct Node: Decodable {
         let source: String
         let text: String
+        let sfx: String?
         let choices: [Choice]?
         let next: String?
         let timeoutSeconds: Double?
