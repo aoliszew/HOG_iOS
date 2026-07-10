@@ -3,6 +3,7 @@ import SwiftUI
 struct BridgeView: View {
     @EnvironmentObject var ship: ShipController
     @State private var destinationText = ""
+    @State private var scanSweep = false
 
     private let amber = Color(red: 1.0, green: 0.72, blue: 0.2)
 
@@ -46,15 +47,57 @@ struct BridgeView: View {
                     if ShipController.voiceInputEnabled {
                         talkButton
                     }
-                    HStack(spacing: 12) {
+                    HStack(spacing: 10) {
                         pauseButton
+                        scanButton
                         gameButton
                         powerButton
                     }
                 }
             }
             .padding()
+
+            if ship.isScanning {
+                scanOverlay
+            }
         }
+        .onChange(of: ship.isScanning) { _, scanning in
+            scanSweep = false
+            if scanning {
+                withAnimation(.linear(duration: 0.9).repeatForever(autoreverses: true)) {
+                    scanSweep = true
+                }
+            }
+        }
+    }
+
+    /// Full-screen sensor sweep: amber scan line + expanding radar rings.
+    private var scanOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.75).ignoresSafeArea()
+            ForEach(0..<3, id: \.self) { ring in
+                Circle()
+                    .stroke(amber.opacity(scanSweep ? 0.05 : 0.5), lineWidth: 2)
+                    .frame(width: scanSweep ? 340 : 60 + CGFloat(ring) * 40,
+                           height: scanSweep ? 340 : 60 + CGFloat(ring) * 40)
+                    .animation(.easeOut(duration: 1.2).repeatForever(autoreverses: false)
+                        .delay(Double(ring) * 0.4), value: scanSweep)
+            }
+            VStack(spacing: 18) {
+                Image(systemName: "dot.radiowaves.left.and.right")
+                    .font(.system(size: 44))
+                    .foregroundStyle(amber)
+                Text("SCANNING VESSEL…")
+                    .font(.system(.title3, design: .monospaced).bold())
+                    .foregroundStyle(amber)
+                Rectangle()
+                    .fill(amber)
+                    .frame(width: 220, height: 3)
+                    .offset(y: scanSweep ? 60 : -60)
+                    .shadow(color: amber, radius: 8)
+            }
+        }
+        .transition(.opacity)
     }
 
     private var header: some View {
@@ -325,13 +368,26 @@ struct BridgeView: View {
         }
     }
 
+    private var scanButton: some View {
+        Button {
+            ship.scanVehicle()
+        } label: {
+            Image(systemName: "dot.radiowaves.left.and.right")
+                .font(.system(size: 22, weight: .bold))
+                .frame(width: 64, height: 60)
+                .background(Color.white.opacity(0.12))
+                .foregroundStyle(amber)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+    }
+
     private var gameButton: some View {
         Button {
             ship.playGame()
         } label: {
             Image(systemName: "gamecontroller.fill")
                 .font(.system(size: 22, weight: .bold))
-                .frame(width: 76, height: 60)
+                .frame(width: 64, height: 60)
                 .background(Color.white.opacity(0.12))
                 .foregroundStyle(amber)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -344,7 +400,7 @@ struct BridgeView: View {
         } label: {
             Image(systemName: "pause.fill")
                 .font(.system(size: 24, weight: .bold))
-                .frame(width: 76, height: 60)
+                .frame(width: 64, height: 60)
                 .background(Color.white.opacity(0.12))
                 .foregroundStyle(amber)
                 .clipShape(RoundedRectangle(cornerRadius: 12))

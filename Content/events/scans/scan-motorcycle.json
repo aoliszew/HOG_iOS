@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-motorcycle",
+  "title": "Scan motorcycle",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Contact: a single-rider craft, open cockpit, maximum wind exposure. Pilot's jacket classification: {pick:vintage|weathered|aspirational}. Scan the pilot's playlist, or their heading?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Scan the playlist",
+            "phrases": [
+              "playlist"
+            ],
+            "next": "playlist"
+          },
+          {
+            "label": "Scan the heading",
+            "phrases": [
+              "heading"
+            ],
+            "next": "heading"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "playlist": {
+        "source": "SENSORS",
+        "text": "Playlist intercepted: {pick:70s road anthems|surprisingly, a podcast about beekeeping|one song, on loop, for 200 miles}. Do we judge, or salute?",
+        "choices": [
+          {
+            "label": "Salute",
+            "phrases": [
+              "salute"
+            ],
+            "next": "salute"
+          },
+          {
+            "label": "Judge (gently)",
+            "phrases": [
+              "judge"
+            ],
+            "next": "judged"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "salute"
+      },
+      "salute": {
+        "source": "SENSORS",
+        "text": "Salute transmitted via respectful nod protocol. The rider nodded back. Two vessels, one understanding. This is the way of the road.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "rider-respect"
+        ]
+      },
+      "judged": {
+        "source": "SENSORS",
+        "text": "Judgment logged, gently. The rider is beyond our judgment anyway \u2014 anyone that committed to one song has achieved a kind of enlightenment.",
+        "next": "end"
+      },
+      "heading": {
+        "source": "SENSORS",
+        "text": "Heading analysis: {pick:nowhere in particular, gloriously|the horizon, generally|a diner known only to riders}. Some vessels navigate by feel. Respect.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

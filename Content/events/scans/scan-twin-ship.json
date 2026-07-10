@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "scan-twin-ship",
+  "title": "Scan twin ship",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Captain... unusual contact. Scanning a vessel of our exact make and model. Same color. It's like looking into a mirror with better tire pressure. Signal them, or study them?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Signal our twin",
+            "phrases": [
+              "signal"
+            ],
+            "next": "signal"
+          },
+          {
+            "label": "Study them",
+            "phrases": [
+              "study"
+            ],
+            "next": "study"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "signal": {
+        "source": "SENSORS",
+        "text": "Signal sent. They flashed their lights in the exact pattern we would have used. This is getting eerie. One more exchange could establish {pick:an alliance|a paradox|a friendship}. Proceed?",
+        "choices": [
+          {
+            "label": "Proceed",
+            "phrases": [
+              "proceed"
+            ],
+            "next": "twinned"
+          },
+          {
+            "label": "Preserve the mystery",
+            "phrases": [
+              "mystery"
+            ],
+            "next": "mystery"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "mystery"
+      },
+      "twinned": {
+        "source": "SENSORS",
+        "text": "Exchange complete. We are now ship-twins. Should we ever meet in a parking structure, tradition demands we park adjacent. It is law.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "ship-twin"
+        ]
+      },
+      "mystery": {
+        "source": "SENSORS",
+        "text": "The twin vessel exits, unexplained. Perhaps we are the reflection. Perhaps they are. The road keeps its symmetries private.",
+        "next": "end",
+        "sfx": "static"
+      },
+      "study": {
+        "source": "SENSORS",
+        "text": "Study complete: identical in all respects except a {pick:parking permit|faded bumper sticker|small dent with a story}. We contain the same multitudes, differently arranged.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

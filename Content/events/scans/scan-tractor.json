@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "scan-tractor",
+  "title": "Scan tractor",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Slow contact ahead: an agricultural vessel at {n:14-22} miles per hour. It is in no hurry. It has never been in a hurry. We will be behind it for some time. Scan its cargo, or embrace the slowness?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Scan the cargo",
+            "phrases": [
+              "cargo"
+            ],
+            "next": "cargo"
+          },
+          {
+            "label": "Embrace the slowness",
+            "phrases": [
+              "embrace"
+            ],
+            "next": "slow"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "cargo": {
+        "source": "SENSORS",
+        "text": "Cargo: {pick:hay, architecturally stacked|seed for next season|one very comfortable farm dog}. Also detected: a wave forming. The farmer is about to wave. Prepare response?",
+        "choices": [
+          {
+            "label": "Wave back big",
+            "phrases": [
+              "wave"
+            ],
+            "next": "waved"
+          },
+          {
+            "label": "Solemn nod",
+            "phrases": [
+              "nod"
+            ],
+            "next": "nodded"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "waved"
+      },
+      "waved": {
+        "source": "SENSORS",
+        "text": "Wave exchanged at full amplitude. Rural diplomacy: flawless. The tractor pulled aside at the next wide spot. A gentleman of the road.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "farmer-friend"
+        ]
+      },
+      "nodded": {
+        "source": "SENSORS",
+        "text": "Solemn nod delivered and returned. Two vessels acknowledging the ancient contract of the road. The hay approves.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "slow": {
+        "source": "SENSORS",
+        "text": "Slowness embraced. For three minutes we lived at tractor speed and saw {pick:a hawk|the texture of the fields|our own thoughts, finally}. The universe was not in a hurry either.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "tractor-zen"
+        ]
+      }
+    }
+  }
+}

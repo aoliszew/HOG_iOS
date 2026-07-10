@@ -484,14 +484,42 @@ final class ShipController: ObservableObject {
         region.check(location: location)
     }
 
-    /// Captain wants to play: pull an on-demand trivia event.
-    func playGame() {
-        guard poweredUp, !isPaused, activeBranching == nil, activeSequence == nil else { return }
+    /// Sensor sweep of a nearby vehicle: animation + scan sound, then an
+    /// on-demand "scan" encounter. Pure content underneath — same system as trivia.
+    @Published var isScanning = false
+
+    func scanVehicle() {
+        guard poweredUp, !isPaused, !isScanning,
+              activeBranching == nil, activeSequence == nil else { return }
+        isScanning = true
+        audio.play(.scan)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) { [weak self] in
+            guard let self else { return }
+            self.isScanning = false
+            guard let playable = self.requestOnDemand(tag: "scan") else {
+                self.say(source: "SENSORS", "Sensor sweep complete. Every vehicle in range has already been scanned this trip, Captain. They're starting to notice.")
+                return
+            }
+            switch playable {
+            case .message(let event): self.deliver(event)
+            case .sequence(let definition): self.startSequence(definition)
+            case .branching(let definition): self.startBranching(definition)
+            }
+        }
+    }
+
+    private func requestOnDemand(tag: String) -> PlayableEvent? {
         let context = ShipContext(mode: mode, personality: personality,
                                   speedMPH: trip.speedMPH, tripDistanceMiles: trip.distanceMiles,
                                   stopped: trip.speedMPH < 1, hardAccelRecently: trip.hardAccelRecently,
                                   flags: [])
-        guard let playable = eventSource.requestEvent(tag: "trivia", context: context) else {
+        return eventSource.requestEvent(tag: tag, context: context)
+    }
+
+    /// Captain wants to play: pull an on-demand trivia event.
+    func playGame() {
+        guard poweredUp, !isPaused, activeBranching == nil, activeSequence == nil else { return }
+        guard let playable = requestOnDemand(tag: "trivia") else {
             say(source: "AI CORE", "The games library is exhausted for this trip, Captain. I could make up facts instead — historically popular, rarely accurate.")
             return
         }

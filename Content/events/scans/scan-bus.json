@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-bus",
+  "title": "Scan bus",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Large transport: a passenger bus, {n:12-48} souls aboard, each mid-story. Destination plate reads {pick:DOWNTOWN|EXPRESS|CHARTER}. Sample the collective mood, or scan the driver?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Sample the mood",
+            "phrases": [
+              "mood"
+            ],
+            "next": "mood"
+          },
+          {
+            "label": "Scan the driver",
+            "phrases": [
+              "driver"
+            ],
+            "next": "driver"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "mood": {
+        "source": "SENSORS",
+        "text": "Mood sample: {n:20-60} percent commute-resigned, {n:10-30} percent audiobook-content, one passenger inexplicably euphoric. Investigate the euphoric one?",
+        "choices": [
+          {
+            "label": "Investigate",
+            "phrases": [
+              "investigate"
+            ],
+            "next": "euphoric"
+          },
+          {
+            "label": "Let them be",
+            "phrases": [
+              "let them"
+            ],
+            "next": "letbe"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "letbe"
+      },
+      "euphoric": {
+        "source": "SENSORS",
+        "text": "Findings: they just got the job. THE job. They haven't told anyone yet \u2014 except, unknowingly, us. Their secret is safe, Captain. Congratulations, stranger.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "strangers-secret"
+        ]
+      },
+      "letbe": {
+        "source": "SENSORS",
+        "text": "Correct call. Unexplained joy should be left running. It's self-charging.",
+        "next": "end"
+      },
+      "driver": {
+        "source": "SENSORS",
+        "text": "Driver analysis: {n:8-30} years of service, thermos at 60 percent, patience at levels our instruments can't measure. A quiet master of the craft.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "id": "scan-minivan",
+  "title": "Scan minivan",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scanning... a family transport vessel. Occupants: {n:3-6}. Snack entropy: advanced. A juice box has achieved zero gravity. There's a sticker chart on the aft viewport. Analyze the chart, or scan the cargo?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Analyze sticker chart",
+            "phrases": [
+              "chart",
+              "stickers"
+            ],
+            "next": "chart"
+          },
+          {
+            "label": "Scan the cargo",
+            "phrases": [
+              "cargo"
+            ],
+            "next": "cargo"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "chart": {
+        "source": "SENSORS",
+        "text": "The chart shows {n:4-9} gold stars for someone named {pick:Maddie|Leo|Juniper}. One star from a reward. Do we beam over an honorary star?",
+        "choices": [
+          {
+            "label": "Beam the star",
+            "phrases": [
+              "beam",
+              "star"
+            ],
+            "next": "starred"
+          },
+          {
+            "label": "Don't interfere",
+            "phrases": [
+              "don't"
+            ],
+            "next": "neutral"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "neutral"
+      },
+      "starred": {
+        "source": "SENSORS",
+        "text": "Honorary star transmitted on a frequency only childhood hope can receive. Somewhere in that van, a small human feels inexplicably victorious today.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "star-giver"
+        ]
+      },
+      "neutral": {
+        "source": "SENSORS",
+        "text": "Wise. The star must be earned. The chart's integrity endures.",
+        "next": "end"
+      },
+      "cargo": {
+        "source": "SENSORS",
+        "text": "Cargo manifest: {n:2-6} scooters, one cooler, {pick:a diaper bag of infinite depth|folding chairs from three eras|a kite with a grudge}. A vessel prepared for anything.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}
