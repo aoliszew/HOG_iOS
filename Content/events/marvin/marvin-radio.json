@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-radio",
+  "title": "Marvin radio",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "The crew sang along to the radio again. I have filed it under 'sounds, hostile.'"
+  }
+}

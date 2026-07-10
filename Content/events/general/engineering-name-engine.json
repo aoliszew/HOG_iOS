@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "engineering-name-engine",
+  "title": "Engineering name engine",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "The drive performs {n:2-11} percent better when spoken to kindly. Requesting the captain say something nice.",
+    "responses": [
+      {
+        "label": "Good engine",
+        "reaction": {
+          "source": "ENGINEERING",
+          "text": "It heard you. RPMs are purring. Engineering is a little misty-eyed, honestly."
+        }
+      },
+      {
+        "label": "It's a machine",
+        "reaction": {
+          "source": "ENGINEERING",
+          "text": "Understood. The drive has switched to 'strictly professional' mode. Very efficient. Slightly cold in here now."
+        }
+      }
+    ]
+  }
+}

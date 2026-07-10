@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "marvin-scenery-review",
+  "title": "Marvin scenery review",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "The captain may wish to look at the scenery. I've already looked. Zero stars. But don't let me stop you.",
+    "responses": [
+      {
+        "label": "It's lovely",
+        "reaction": {
+          "source": "MARVIN",
+          "text": "'Lovely.' I'll take your word for it. I take everyone's word for everything. It's exhausting."
+        }
+      },
+      {
+        "label": "You're right",
+        "reaction": {
+          "source": "MARVIN",
+          "text": "Finally, someone with taste. This is the best conversation I've had in {n:40-4000} years."
+        }
+      }
+    ]
+  }
+}

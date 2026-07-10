@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-sample-request",
+  "title": "Science sample request",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Requesting permission to collect a sample of {pick:the local atmosphere|whatever that smell is|roadside gravel|the vibe}. For science. Mostly."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "navigation-star-request",
+  "title": "Navigation star request",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "The stars have requested we stop navigating by vibes. Denied. The vibes have an excellent record."
+  }
+}

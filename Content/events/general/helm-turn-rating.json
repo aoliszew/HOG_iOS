@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "helm-turn-rating",
+  "title": "Helm turn rating",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "HELM",
+    "text": "That last maneuver scored {n:6-10} out of 10 from the crew judges. The Russian judge remains unmoved."
+  }
+}

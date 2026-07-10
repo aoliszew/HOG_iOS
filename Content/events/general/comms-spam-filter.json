@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-spam-filter",
+  "title": "Comms spam filter",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Spam filter report: blocked {n:40-9000} offers to extend the ship's warranty, {n:2-40} chain letters, and one genuinely tempting timeshare on a comet."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "ship-compliment",
+  "title": "Ship compliment",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Unprompted status: you're doing great, Captain. The universe disagrees on many things, but the bridge is unanimous."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-butterflies",
+  "title": "Science butterflies",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Observed {n:2-40} butterflies since departure. Chaos theory suggests we brace for {pick:weather|romance|a mild Tuesday}."
+  }
+}

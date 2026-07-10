@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-postcard",
+  "title": "Comms postcard",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "We received a postcard from the space whale. It's a picture of krill. It says 'thinking of you.' The crew is emotional."
+  }
+}

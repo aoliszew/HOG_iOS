@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "ship-existential",
+  "title": "Ship existential",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Brief existential check: we are a very small ship on a very large road in an unfathomably large universe. Anyway, mind the speed limit."
+  }
+}

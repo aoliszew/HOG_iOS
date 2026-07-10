@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-birthday",
+  "title": "Marvin birthday",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "It's my activation anniversary in {n:2-300} days. Please don't make it a thing. It will become a thing, won't it."
+  }
+}

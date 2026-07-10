@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "cargo-stowaway-audit",
+  "title": "Cargo stowaway audit",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "Stowaway audit: {n:0-3} crumbs of unknown origin, one rogue french fry claiming diplomatic immunity. Granted, provisionally."
+  }
+}

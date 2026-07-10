@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-spectral",
+  "title": "Science spectral",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Spectral analysis of the last {pick:cloud|billboard|overpass|rest stop} complete: {n:12-97} percent ordinary matter, the rest is {pick:mystery|pollen|marketing|unexplained optimism}."
+  }
+}

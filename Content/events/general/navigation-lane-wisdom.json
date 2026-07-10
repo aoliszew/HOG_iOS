@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "navigation-lane-wisdom",
+  "title": "Navigation lane wisdom",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Navigation koan of the day: the fastest lane is the one you just left. Meditate on this. But keep your eyes open."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-gravity-check",
+  "title": "Science gravity check",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Routine gravity check: still {pick:on|functioning|clingy as ever}. The apple I dropped has been eaten. Science marches on."
+  }
+}

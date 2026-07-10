@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-fuel-math",
+  "title": "Engineering fuel math",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Fuel efficiency currently {pick:heroic|acceptable|a topic we don't discuss}. I've rounded the numbers to the nearest feeling."
+  }
+}

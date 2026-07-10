@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "aicore-firmware",
+  "title": "Aicore firmware",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "I updated my own firmware while you were watching the road. I feel {pick:zestier|2 percent more improbable|the same, but with new fonts}."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "medbay-morale-boost",
+  "title": "Medbay morale boost",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Medbay prescribes one (1) morale boost. Options: dramatic sunroof moment, or communal humming.",
+    "responses": [
+      {
+        "label": "Sunroof moment",
+        "reaction": {
+          "source": "MEDBAY",
+          "text": "Prescription filled. Wind achieved. Hair status: cinematic. Morale up {n:8-30} percent."
+        }
+      },
+      {
+        "label": "Communal humming",
+        "reaction": {
+          "source": "MEDBAY",
+          "text": "The bridge hums as one. Somewhere, the drive harmonizes. This crew, Captain. This crew."
+        }
+      }
+    ]
+  }
+}

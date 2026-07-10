@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-wrong-number",
+  "title": "Comms wrong number",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Received a transmission intended for a different starship. We now know far too much about someone named {pick:Gary|Zaphod|Deb from accounting}."
+  }
+}

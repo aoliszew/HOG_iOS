@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "helm-cruise-form",
+  "title": "Helm cruise form",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "HELM",
+    "text": "Helm notes the captain's cruising form is {pick:textbook|artistic|jazz}. Logging for the training archives."
+  }
+}

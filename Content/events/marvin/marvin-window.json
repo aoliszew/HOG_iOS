@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-window",
+  "title": "Marvin window",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "The crew keeps pointing at things out the window. I have seen {n:400000-99999999} things. None of them helped."
+  }
+}

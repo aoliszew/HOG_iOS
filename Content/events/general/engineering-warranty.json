@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-warranty",
+  "title": "Engineering warranty",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Good news: the Improbability Drive is still under warranty. Bad news: the warranty is with the freighter people from earlier."
+  }
+}

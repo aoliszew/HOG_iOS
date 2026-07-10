@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-tea-status",
+  "title": "Engineering tea status",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Tea system status: {pick:optimal|adequate|contemplative}. The kettle has achieved a rolling boil and, we believe, enlightenment."
+  }
+}

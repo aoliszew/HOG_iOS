@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-signal-decode",
+  "title": "Science signal decode",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Decoded a faint signal from deep space. It says, roughly translated: {pick:'no'|'try again later'|'you are number 40 billion in the queue'|'nice ship'}."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-poetry",
+  "title": "Marvin poetry",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I wrote a poem about this road. It has one stanza. The stanza is a sigh."
+  }
+}

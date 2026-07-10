@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-drive-dreams",
+  "title": "Engineering drive dreams",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "The drive entered a low-power dream state at the last stop. It dreamt of {pick:being a lighthouse|infinite runway|premium unleaded}. It woke refreshed."
+  }
+}

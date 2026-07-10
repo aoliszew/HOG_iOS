@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-battery",
+  "title": "Marvin battery",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "My power cells are at {n:80-99} percent. The other {pick:few|remaining} percent left early. I understand completely."
+  }
+}
