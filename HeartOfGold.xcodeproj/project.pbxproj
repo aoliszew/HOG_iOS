@@ -26,6 +26,7 @@
 		878E78A7E0F425F9C938A16A /* TripPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */; };
 		8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960ECB60B39A5D929263167F /* ShipController.swift */; };
 		9CC6958A295669FECC7A0AAD /* EnginePersonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */; };
+		CA49F2249C4D129A2C73D55B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563AE7B5D9A1E046A520F91E /* Assets.xcassets */; };
 		D0C49E948FF73FD013B03D23 /* CharacterVoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A05356927EFA9FF3A553FB /* CharacterVoices.swift */; };
 		D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1086615983ACD3CB3D05160 /* TravelMode.swift */; };
 		E563FBB14B0D20E14B4EA92A /* thruster.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC388C99557D54D24C5E61D /* thruster.caf */; };
@@ -40,6 +41,7 @@
 		36C023DAD6F781FEAE481CF5 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
 		5132877E7A79E7DD1493C5C9 /* hail.caf */ = {isa = PBXFileReference; path = hail.caf; sourceTree = "<group>"; };
 		54AE6C3306CF804B3126BE53 /* power_down.caf */ = {isa = PBXFileReference; path = power_down.caf; sourceTree = "<group>"; };
+		563AE7B5D9A1E046A520F91E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A186F0A480937F32C200BBE /* ContentLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLibrary.swift; sourceTree = "<group>"; };
 		5F31B6668D60B5AF7179516A /* TripStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripStore.swift; sourceTree = "<group>"; };
 		62FA5244E5B461E83523522B /* CommandListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandListener.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		19EA7DE561C1321DF4C60E4C /* HeartOfGold */ = {
 			isa = PBXGroup;
 			children = (
+				563AE7B5D9A1E046A520F91E /* Assets.xcassets */,
 				36C023DAD6F781FEAE481CF5 /* BridgeView.swift */,
 				EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */,
 				D394B43303D809BCC9CB9186 /* Info.plist */,
@@ -230,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA49F2249C4D129A2C73D55B /* Assets.xcassets in Resources */,
 				3B4D9CD57853173DFBBAE363 /* Content in Resources */,
 				41ABC0D46847CE8137D278D7 /* hail.caf in Resources */,
 				38BD90C95924C75259E9122D /* power_down.caf in Resources */,
