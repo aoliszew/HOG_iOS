@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-spare-parts",
+  "title": "Engineering spare parts",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Inventory: we carry {n:2-9} spare fuses, one mystery bolt, and a manual in {pick:Vogon|IKEA pictograms|a language predating the ship}. Confidence: high."
+  }
+}

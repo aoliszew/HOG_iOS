@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "aicore-daydream",
+  "title": "Aicore daydream",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "I processed {n:1200-999999} thoughts since the last update. {n:2-9} were about the mission. The rest were about {pick:birds|the nature of doors|a really good sandwich}."
+  }
+}

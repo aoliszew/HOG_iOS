@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-entropy",
+  "title": "Science entropy",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Entropy report: increasing, as usual. The cup holder region shows particularly advanced decay. Recommend archaeology."
+  }
+}

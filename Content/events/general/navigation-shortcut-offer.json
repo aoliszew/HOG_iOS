@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "navigation-shortcut-offer",
+  "title": "Navigation shortcut offer",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "I found a 'shortcut.' The quotation marks are load-bearing. Interested?",
+    "responses": [
+      {
+        "label": "Tell me",
+        "reaction": {
+          "source": "NAVIGATION",
+          "text": "It saves {n:2-9} minutes but involves {pick:three unmarked turns|a questionable bridge|a road that may be a driveway}. I'll leave it on your chart, unjudged."
+        }
+      },
+      {
+        "label": "Hard pass",
+        "reaction": {
+          "source": "NAVIGATION",
+          "text": "Wise. The shortcut has claimed better captains. We honor them by driving past."
+        }
+      }
+    ]
+  }
+}

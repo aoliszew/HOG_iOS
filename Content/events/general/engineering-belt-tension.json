@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "engineering-belt-tension",
+  "title": "Engineering belt tension",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "All belts, hoses, and morale-bearing components at {n:88-99} percent tension. The remaining percent is being saved for emergencies."
+  }
+}

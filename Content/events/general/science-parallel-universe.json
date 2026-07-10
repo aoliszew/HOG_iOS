@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-parallel-universe",
+  "title": "Science parallel universe",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Instruments briefly detected a parallel universe where we {pick:left on time|took the other route|remembered everything on the list}. It looked smug."
+  }
+}

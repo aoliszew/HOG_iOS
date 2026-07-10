@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "security-drill-tuesday",
+  "title": "Security drill tuesday",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Reminder: surprise security drill scheduled. The surprise is that there is no drill. Stand down. You did great."
+  }
+}

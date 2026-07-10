@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "security-badge-audit",
+  "title": "Security badge audit",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Badge audit complete. Everyone is who they say they are, except the cat, who has {n:2-9} identities. Monitoring."
+  }
+}

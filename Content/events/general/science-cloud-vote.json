@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "science-cloud-vote",
+  "title": "Science cloud vote",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "That cloud at eleven o'clock: I say it's {pick:a rabbit|a frigate|the concept of Tuesday}. The crew disagrees. Captain's ruling?",
+    "responses": [
+      {
+        "label": "Agree with Science",
+        "reaction": {
+          "source": "SCIENCE",
+          "text": "Vindicated! I shall be insufferable about this for {n:2-9} miles."
+        }
+      },
+      {
+        "label": "Side with the crew",
+        "reaction": {
+          "source": "SCIENCE",
+          "text": "Betrayal. Logged, graphed, and forgiven. Mostly."
+        }
+      }
+    ]
+  }
+}

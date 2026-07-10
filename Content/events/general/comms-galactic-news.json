@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-galactic-news",
+  "title": "Comms galactic news",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Galactic news summary: everything is {pick:mostly fine|complicated|on fire, but politely}. Sports scores unavailable. Weather: yes."
+  }
+}

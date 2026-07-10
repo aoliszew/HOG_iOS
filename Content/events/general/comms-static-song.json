@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-static-song",
+  "title": "Comms static song",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "The static on channel {n:3-88} has developed a melody. We're calling it 'Untitled Cosmic Jam number {n:2-19}'. It slaps, Captain."
+  }
+}

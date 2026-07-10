@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "aicore-count-cars",
+  "title": "Aicore count cars",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "I counted the vehicles we've passed: {n:40-4000}. I have assigned each a small backstory. Ask me about the blue one. Actually don't, it's sad."
+  }
+}

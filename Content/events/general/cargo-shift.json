@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "cargo-shift",
+  "title": "Cargo shift",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "Minor cargo shift detected at the last turn. The towel has relocated itself to higher ground. It knows something."
+  }
+}

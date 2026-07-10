@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "comms-hail-back",
+  "title": "Comms hail back",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "A passing vessel flashed its lights at us. Possible greeting. Possible warning. Respond in kind?",
+    "responses": [
+      {
+        "label": "Flash back",
+        "reaction": {
+          "source": "COMMS",
+          "text": "Greeting returned. We have made a friend for exactly four seconds. It was beautiful."
+        }
+      },
+      {
+        "label": "Maintain mystery",
+        "reaction": {
+          "source": "COMMS",
+          "text": "No response sent. We remain enigmatic. The vessel will wonder about us forever, probably."
+        }
+      }
+    ]
+  }
+}

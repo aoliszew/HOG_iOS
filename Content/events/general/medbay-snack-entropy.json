@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-snack-entropy",
+  "title": "Medbay snack entropy",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Nutritional forecast: snack supplies will reach critical {pick:crumb|wrapper|disappointment} phase in approximately {n:20-200} miles."
+  }
+}

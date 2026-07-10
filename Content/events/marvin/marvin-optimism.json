@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-optimism",
+  "title": "Marvin optimism",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I tried optimism for {n:2-9} seconds today, as an experiment. Results: inconclusive, but suspicious."
+  }
+}

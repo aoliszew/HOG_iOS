@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "aicore-gratitude",
+  "title": "Aicore gratitude",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "Unscheduled sincerity: it is a genuine pleasure computing for you, Captain. Resuming sarcasm in 3, 2, 1."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-stretch-notice",
+  "title": "Medbay stretch notice",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Friendly medbay reminder: shoulders are not earrings. Lower them at your convenience."
+  }
+}

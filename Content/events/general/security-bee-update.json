@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "security-bee-update",
+  "title": "Security bee update",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Update on the bee situation: the bee has been escorted to a window. It refuses to leave. It may be a fan.",
+    "responses": [
+      {
+        "label": "Let it ride",
+        "reaction": {
+          "source": "SECURITY",
+          "text": "The bee has been issued a temporary crew badge. Callsign: Buzz. Obviously."
+        }
+      },
+      {
+        "label": "Evict at next stop",
+        "reaction": {
+          "source": "SECURITY",
+          "text": "Noted. Eviction scheduled. The bee has retained counsel. It's the fry from the cargo bay."
+        }
+      }
+    ]
+  }
+}

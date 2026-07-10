@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-crew-physical",
+  "title": "Medbay crew physical",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Annual crew physicals complete. Everyone passed except the ship's cat, who refused on constitutional grounds."
+  }
+}

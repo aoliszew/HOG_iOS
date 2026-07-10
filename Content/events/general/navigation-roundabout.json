@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "navigation-roundabout",
+  "title": "Navigation roundabout",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Upcoming roundabout classified as a class-{n:2-5} orbital maneuver. Recommend confidence and a firm exit strategy."
+  }
+}

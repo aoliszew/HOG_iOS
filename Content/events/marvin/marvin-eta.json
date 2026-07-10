@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-eta",
+  "title": "Marvin eta",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "We will arrive eventually. Everything does. Even disappointment. Especially disappointment."
+  }
+}

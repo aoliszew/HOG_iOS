@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "security-shield-polish",
+  "title": "Security shield polish",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Shields have been polished to a defensive shine. Any vessel that looks at us funny will see itself, and reflect."
+  }
+}

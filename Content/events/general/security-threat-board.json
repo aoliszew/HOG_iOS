@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "security-threat-board",
+  "title": "Security threat board",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Threat board update: {n:0-2} active threats, {n:2-9} theoretical threats, one bee that got in at the last stop. Prioritizing the bee."
+  }
+}

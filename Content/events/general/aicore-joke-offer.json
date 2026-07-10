@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "aicore-joke-offer",
+  "title": "Aicore joke offer",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "I have prepared a joke about hyperspace bypasses. Warning: it is {pick:extremely|moderately|technically} funny.",
+    "responses": [
+      {
+        "label": "Tell it",
+        "reaction": {
+          "source": "AI CORE",
+          "text": "Why did the bypass cross the planet? Because the planning documents were on display in a locked filing cabinet in a disused lavatory. ...It's a classic, Captain."
+        }
+      },
+      {
+        "label": "Save it",
+        "reaction": {
+          "source": "AI CORE",
+          "text": "Saved for later. It will age like fine milk."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-blink-rate",
+  "title": "Medbay blink rate",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Captain blink-rate within normal parameters. Recommend continuing to blink at your discretion."
+  }
+}
