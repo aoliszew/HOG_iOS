@@ -93,6 +93,10 @@ final class TriggerEvaluator {
         if let stops = c.stopsRemaining {
             guard let remaining = context.stopsRemaining, stops.contains(Double(remaining)) else { return false }
         }
+        if let states = c.states {
+            guard let state = context.state,
+                  states.map({ $0.uppercased() }).contains(state.uppercased()) else { return false }
+        }
 
         // Contexts the ship can't sense yet: any event requiring them stays dormant.
         if c.timeOfDay != nil || c.daysOfWeek != nil || c.weather != nil { return false }

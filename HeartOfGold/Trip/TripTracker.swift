@@ -6,6 +6,8 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var speedMPH: Double = 0
     @Published var distanceMiles: Double = 0
     @Published var authorized = false
+    /// Most recent fix, for region awareness (reverse geocoding).
+    private(set) var currentLocation: CLLocation?
 
     /// Fired when speed crosses a callout threshold (rising edge only).
     var onThresholdCrossed: ((Int) -> Void)?
@@ -65,6 +67,7 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let loc = locations.last, loc.horizontalAccuracy >= 0 else { return }
 
+        currentLocation = loc
         let mph = max(0, loc.speed) * 2.23694
         speedMPH = mph
 

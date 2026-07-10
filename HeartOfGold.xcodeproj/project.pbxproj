@@ -26,6 +26,7 @@
 		878E78A7E0F425F9C938A16A /* TripPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */; };
 		8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960ECB60B39A5D929263167F /* ShipController.swift */; };
 		9CC6958A295669FECC7A0AAD /* EnginePersonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFA1B80C0F74E5D5B994169 /* EnginePersonality.swift */; };
+		BDA49450C591274BA7F4757D /* RegionAwareness.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D4602C40695F103C1ED63 /* RegionAwareness.swift */; };
 		CA49F2249C4D129A2C73D55B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563AE7B5D9A1E046A520F91E /* Assets.xcassets */; };
 		D0C49E948FF73FD013B03D23 /* CharacterVoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A05356927EFA9FF3A553FB /* CharacterVoices.swift */; };
 		D75A83C52D23D61B77AB4391 /* TravelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1086615983ACD3CB3D05160 /* TravelMode.swift */; };
@@ -56,6 +57,7 @@
 		B5630FEF15FE073B79669AEB /* TriggerEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerEvaluator.swift; sourceTree = "<group>"; };
 		BD3975AF298726332F369C53 /* TripTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTracker.swift; sourceTree = "<group>"; };
 		C405401DE777C5535E9C50B3 /* SequencePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencePlayer.swift; sourceTree = "<group>"; };
+		C45D4602C40695F103C1ED63 /* RegionAwareness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionAwareness.swift; sourceTree = "<group>"; };
 		C9DCB1167A3C7DB871965408 /* EventEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEngine.swift; sourceTree = "<group>"; };
 		CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPlan.swift; sourceTree = "<group>"; };
 		D394B43303D809BCC9CB9186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		FB737DD02ED3A5971895A45A /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				C45D4602C40695F103C1ED63 /* RegionAwareness.swift */,
 				CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */,
 				5F31B6668D60B5AF7179516A /* TripStore.swift */,
 				BD3975AF298726332F369C53 /* TripTracker.swift */,
@@ -261,6 +264,7 @@
 				7F623D4017426B50E2DFB844 /* EventModels.swift in Sources */,
 				238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */,
 				0DD5262849E38DF7837A29D0 /* MessageTemplate.swift in Sources */,
+				BDA49450C591274BA7F4757D /* RegionAwareness.swift in Sources */,
 				EAA276B60630FE8BDEDCA8B4 /* SequencePlayer.swift in Sources */,
 				8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */,
 				6264F53319BD3D413906054C /* ShipVoice.swift in Sources */,
