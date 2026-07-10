@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "id": "freight-convoy",
+  "title": "The convoy",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "longhaul"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "min": 50
+      },
+      "tripDistanceMiles": {
+        "min": 8
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "spotted",
+    "nodes": {
+      "spotted": {
+        "source": "SENSORS",
+        "text": "We've fallen in with a convoy of {n:3-8} freighters. There's an old tradition: match speed and become an honorary member, or overtake and assert independence.",
+        "choices": [
+          {
+            "label": "Join the convoy",
+            "phrases": [
+              "join"
+            ],
+            "next": "join"
+          },
+          {
+            "label": "Overtake them",
+            "phrases": [
+              "overtake",
+              "pass"
+            ],
+            "nextOneOf": [
+              "pass-clean",
+              "pass-drama"
+            ]
+          }
+        ],
+        "timeoutSeconds": 120,
+        "timeoutNext": "drift-along"
+      },
+      "join": {
+        "source": "SENSORS",
+        "text": "Formation joined. The lead freighter flashed its lights in welcome. For the next stretch, we are convoy. We are family. We are slightly slower than we'd like.",
+        "setFlags": [
+          "convoy-member"
+        ],
+        "next": "end"
+      },
+      "pass-clean": {
+        "source": "SENSORS",
+        "text": "Overtake executed flawlessly. The convoy salutes our audacity. One driver mouthed 'nice ship.' Day: made.",
+        "setFlags": [
+          "convoy-respect"
+        ],
+        "next": "end"
+      },
+      "pass-drama": {
+        "source": "SENSORS",
+        "text": "Overtake complete, but the lead freighter has taken it personally. Expect to see them again at every rest stop for the remainder of your natural life.",
+        "setFlags": [
+          "convoy-rival"
+        ],
+        "next": "end"
+      },
+      "drift-along": {
+        "source": "SENSORS",
+        "text": "No orders received. We drifted alongside the convoy in comfortable ambiguity. Sometimes that's enough.",
+        "next": "end"
+      }
+    }
+  }
+}
