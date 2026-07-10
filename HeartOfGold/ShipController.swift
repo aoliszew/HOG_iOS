@@ -261,6 +261,9 @@ final class ShipController: ObservableObject {
         audio.play(.powerUp)
 
         plan.stopsCompleted = 0
+        hasMovedThisTrip = false
+        stoppedSince = nil
+        docked = false
         let shields = Int.random(in: 94...99)
         let startup = "Systems online. Shields at \(shields) percent. Infinite Improbability Drive on standby. \(mode.startupGreeting)"
         say(source: "SHIP", startup, delay: 1.2) { [weak self] in
@@ -284,6 +287,9 @@ final class ShipController: ObservableObject {
         plan = TripPlan(length: saved.planLength.flatMap(TripPlan.Length.init(rawValue:)),
                         plannedStops: saved.plannedStops,
                         stopsCompleted: saved.stopsCompleted ?? 0)
+        hasMovedThisTrip = false
+        stoppedSince = nil
+        docked = false
         poweredUp = true
         trip.resetTrip()
         trip.restoreDistance(saved.distanceMiles)
@@ -335,12 +341,19 @@ final class ShipController: ObservableObject {
 
     private var stoppedSince: Date?
     private var docked = false
+    private var hasMovedThisTrip = false
 
     /// Stationary 4+ minutes = a docking (traffic lights don't count);
     /// pulling away afterwards ticks off an errand objective.
+    /// Arms only after the ship has actually moved — otherwise loading the car
+    /// in the driveway would count as the first completed objective.
     private func updateStopDetection() {
         guard poweredUp, !isPaused else { return }
         let speed = trip.speedMPH
+        if !hasMovedThisTrip {
+            if speed > 8 { hasMovedThisTrip = true }
+            return
+        }
         if speed < 2 {
             if let since = stoppedSince {
                 if !docked, Date().timeIntervalSince(since) > 240 { docked = true }
@@ -420,7 +433,12 @@ final class ShipController: ObservableObject {
         let player = SequencePlayer(
             event: definition,
             currentDistance: { [weak self] in self?.trip.distanceMiles ?? 0 },
-            deliver: { [weak self] event in self?.deliver(event) },
+            deliver: { [weak self] event in
+                // Plot beats flow hands-free (hail + speak), matching branching —
+                // a story shouldn't demand a PLAY MESSAGE tap for every chapter.
+                self?.audio.play(.hail)
+                self?.say(source: event.source, event.text, delay: 0.8)
+            },
             onComplete: { [weak self] in
                 guard let self else { return }
                 self.eventSource.completed(eventID: definition.id, extraFlags: [])

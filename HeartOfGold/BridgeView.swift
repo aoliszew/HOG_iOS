@@ -238,13 +238,11 @@ struct BridgeView: View {
         } label: {
             Image(systemName: "pause.fill")
                 .font(.system(size: 24, weight: .bold))
-                .frame(width: 76)
-                .frame(maxHeight: .infinity)
+                .frame(width: 76, height: 60)
                 .background(Color.white.opacity(0.12))
                 .foregroundStyle(amber)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .fixedSize(horizontal: true, vertical: false)
     }
 
     private var pausedScreen: some View {
