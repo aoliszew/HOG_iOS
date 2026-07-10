@@ -19,10 +19,16 @@ final class ShipController: ObservableObject {
     @Published var log: [LogEntry] = []
     @Published var pendingMessages: [ShipEvent] = []
     @Published var activeChoices: [EventDefinition.Choice] = []
+    /// Quick tap-replies for the message that just played (ambient banter).
+    @Published var quickResponses: [EventDefinition.QuickResponse] = []
     /// A crashed/interrupted mission that can be resumed (set at launch).
     @Published var resumableTrip: TripSnapshot?
     /// Video-game pause: all story clocks frozen, GPS tracking suspended.
     @Published var isPaused = false
+
+    /// Voice input is parked while speech reliability is debugged — tap-first.
+    /// Flip this to re-enable the talk button, auto-listen, and voice briefing.
+    static let voiceInputEnabled = false
 
     struct LogEntry: Identifiable {
         let id = UUID()
@@ -250,7 +256,7 @@ final class ShipController: ObservableObject {
         let startup = "Systems online. Shields at \(shields) percent. Infinite Improbability Drive on standby. \(mode.startupGreeting)"
         say(source: "SHIP", startup, delay: 1.2) { [weak self] in
             Task { @MainActor in
-                guard let self, self.poweredUp else { return }
+                guard Self.voiceInputEnabled, let self, self.poweredUp else { return }
                 if !self.plan.isComplete { self.askBriefing() }
             }
         }
@@ -296,6 +302,7 @@ final class ShipController: ObservableObject {
         commands.stopListening()
         audio.exitListeningMode()
         voice.stopSpeaking()
+        offerQuickResponses([])
         trip.stop()
         persistIfFlying()
     }
@@ -380,6 +387,7 @@ final class ShipController: ObservableObject {
         }
         poweredUp = false
         isPaused = false
+        offerQuickResponses([])
         briefingQuery = nil
         stoppedSince = nil
         docked = false
@@ -422,7 +430,8 @@ final class ShipController: ObservableObject {
                     // the captain can answer hands-free. One shot; the on-screen
                     // buttons and the node timeout remain the fallbacks.
                     Task { @MainActor in
-                        guard let self, self.activeBranching != nil,
+                        guard Self.voiceInputEnabled,
+                              let self, self.activeBranching != nil,
                               !self.activeChoices.isEmpty else { return }
                         self.audio.enterListeningMode { [weak self] in
                             self?.commands.startListening()
@@ -470,10 +479,32 @@ final class ShipController: ObservableObject {
             return
         }
         let event = pendingMessages.removeFirst()
+        offerQuickResponses(event.responses)
         say(source: event.source, event.text)
         if !pendingMessages.isEmpty {
             say(source: "COMMS", "\(pendingMessages.count) more message\(pendingMessages.count == 1 ? "" : "s") waiting.", delay: 0.5)
         }
+    }
+
+    // MARK: - Quick responses (ambient banter, no plot effects)
+
+    private var quickResponseTimer: Timer?
+
+    private func offerQuickResponses(_ responses: [EventDefinition.QuickResponse]) {
+        quickResponseTimer?.invalidate()
+        quickResponses = responses
+        guard !responses.isEmpty else { return }
+        // The offer quietly expires — it's banter, not a decision point.
+        quickResponseTimer = Timer.scheduledTimer(withTimeInterval: 90, repeats: false) { [weak self] _ in
+            Task { @MainActor in self?.quickResponses = [] }
+        }
+    }
+
+    func respond(_ response: EventDefinition.QuickResponse) {
+        quickResponseTimer?.invalidate()
+        quickResponses = []
+        log.insert(LogEntry(source: "CAPTAIN", text: response.label), at: 0)
+        say(source: response.reaction.source, MessageTemplate.render(response.reaction.text))
     }
 
     private func say(source: String, _ text: String, delay: TimeInterval = 0,

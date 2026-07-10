@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "id": "coolant-dilemma",
+  "title": "Coolant dilemma",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "challenge"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 5
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "alarm",
+    "nodes": {
+      "alarm": {
+        "source": "ENGINEERING",
+        "text": "Captain, minor crisis: the coolant loop is running warm. I can reroute through the tea machine, or throttle the drive for a while. The tea option is faster but the crew will notice.",
+        "choices": [
+          {
+            "label": "Reroute via tea machine",
+            "phrases": [
+              "tea",
+              "reroute"
+            ],
+            "nextOneOf": [
+              "tea-good",
+              "tea-bad"
+            ]
+          },
+          {
+            "label": "Throttle the drive",
+            "phrases": [
+              "throttle",
+              "slow"
+            ],
+            "next": "throttle"
+          }
+        ],
+        "timeoutSeconds": 120,
+        "timeoutNext": "ignored"
+      },
+      "tea-good": {
+        "source": "ENGINEERING",
+        "text": "Rerouted. Coolant nominal, and as a side effect the tea is now excellent. Engineering claims this was the plan all along.",
+        "setFlags": [
+          "crisis-ace"
+        ],
+        "next": "end"
+      },
+      "tea-bad": {
+        "source": "ENGINEERING",
+        "text": "Rerouted. Coolant is fine, but the tea now tastes of regret and slightly of coolant. The crew has formed a committee.",
+        "setFlags": [
+          "tea-incident"
+        ],
+        "next": "end"
+      },
+      "throttle": {
+        "source": "ENGINEERING",
+        "text": "Throttling. Slow and steady. Coolant recovering. Boring, effective, and the tea is safe. A respectable captain's choice.",
+        "setFlags": [
+          "crisis-steady"
+        ],
+        "next": "end"
+      },
+      "ignored": {
+        "source": "ENGINEERING",
+        "text": "No orders received, so I improvised with duct tape and optimism. It held. This time. The duct tape has been promoted.",
+        "setFlags": [
+          "duct-tape-hero"
+        ],
+        "next": "end"
+      }
+    }
+  }
+}

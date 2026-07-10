@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "longhaul-hyperspace-lane",
+  "title": "Longhaul hyperspace lane",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "roadtrip"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "We have merged onto a major hyperspace lane. Estimated {n:200-4000} fellow travelers. All of them believe they are the main character."
+  }
+}

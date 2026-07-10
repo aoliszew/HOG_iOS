@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "longrange-scenic-vote",
+  "title": "Longrange scenic vote",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "roadtrip"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripModes": [
+        "roadtrip"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "LONG RANGE",
+    "text": "Long range sensors report a {pick:scenic overlook|world's largest something|suspiciously charming diner} in {n:5-40} miles. The crew is voting.",
+    "responses": [
+      {
+        "label": "Note it",
+        "reaction": {
+          "source": "LONG RANGE",
+          "text": "Noted and logged. The crew's hopes are now officially your responsibility."
+        }
+      },
+      {
+        "label": "Stay on course",
+        "reaction": {
+          "source": "LONG RANGE",
+          "text": "Course maintained. The crew respects your discipline. Quietly. Resentfully."
+        }
+      }
+    ]
+  }
+}

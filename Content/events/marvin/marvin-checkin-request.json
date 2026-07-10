@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "marvin-checkin-request",
+  "title": "Marvin checkin request",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "Marvin here. I'm told captains sometimes check on crew wellbeing. Consider this your opportunity to pretend.",
+    "responses": [
+      {
+        "label": "How are you?",
+        "reaction": {
+          "source": "MARVIN",
+          "text": "Terrible, thank you for asking. It's the asking that makes it bearable. Slightly."
+        }
+      },
+      {
+        "label": "Carry on",
+        "reaction": {
+          "source": "MARVIN",
+          "text": "As expected. I'll add it to the log. The log is very long."
+        }
+      }
+    ]
+  }
+}

@@ -30,7 +30,13 @@ final class TriggerEvaluator {
     }
 
     func pick(from events: [EventDefinition], context: ShipContext) -> EventDefinition? {
-        let qualified = events.filter { qualifies($0, context: context) }
+        var qualified = events.filter { qualifies($0, context: context) }
+        if qualified.isEmpty {
+            // Long-haul fallback: the once-per-trip pool is exhausted. Rather
+            // than going silent for hours, allow ambient events to encore once
+            // they've rested 45+ minutes (templating keeps them fresh).
+            qualified = events.filter { encoreQualifies($0, context: context) }
+        }
         guard !qualified.isEmpty else { return nil }
 
         let total = qualified.reduce(0) { $0 + weight(of: $1) }
@@ -46,6 +52,16 @@ final class TriggerEvaluator {
         max(event.trigger?.weight ?? 1, 0.001)
     }
 
+    /// Relaxed rules for an exhausted pool: ambient singles only, contexts must
+    /// still match, and the event must not have played in the last 45 minutes.
+    private func encoreQualifies(_ event: EventDefinition, context: ShipContext) -> Bool {
+        guard event.type == .single, event.messageClass == .ambient,
+              event.id != lastFiredID else { return false }
+        if let last = lastFired[event.id],
+           Date.now.timeIntervalSince(last) < 45 * 60 { return false }
+        return contextsMatch(event, context: context)
+    }
+
     func qualifies(_ event: EventDefinition, context: ShipContext) -> Bool {
         // Never the same event twice in a row, regardless of authoring.
         if event.id == lastFiredID { return false }
@@ -56,6 +72,10 @@ final class TriggerEvaluator {
            let last = lastFired[event.id],
            Date.now.timeIntervalSince(last) < cooldown * 60 { return false }
 
+        return contextsMatch(event, context: context)
+    }
+
+    private func contextsMatch(_ event: EventDefinition, context: ShipContext) -> Bool {
         guard let c = event.trigger?.contexts else { return true }
 
         if let modes = c.tripModes, !modes.contains(context.mode.rawValue.lowercased()) { return false }

@@ -62,7 +62,7 @@ final class BranchingPlayer {
         currentChoices = []
         setChoices([])
         if let flags = choice.setFlags { collectedFlags.formUnion(flags) }
-        goto(choice.next)
+        goto(choice.resolvedNext)
     }
 
     private(set) var currentChoices: [EventDefinition.Choice] = []
