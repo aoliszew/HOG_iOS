@@ -16,6 +16,7 @@ struct BridgeView: View {
                     modePicker
                     personalityPicker
                     briefingPickers
+                    messageModePicker
                     eventLog
                     if ship.resumableTrip != nil {
                         resumeButton
@@ -199,6 +200,20 @@ struct BridgeView: View {
         }
     }
 
+    private var messageModePicker: some View {
+        HStack {
+            Text("MSGS")
+                .font(.system(.caption2, design: .monospaced))
+                .foregroundStyle(.gray)
+                .frame(width: 54, alignment: .leading)
+            Picker("Messages", selection: $ship.autoPlayMessages) {
+                Text("AUTO-PLAY").tag(true)
+                Text("ON REQUEST").tag(false)
+            }
+            .pickerStyle(.segmented)
+        }
+    }
+
     /// Optional pre-flight mission briefing; skip it and the ship asks by voice.
     private var briefingPickers: some View {
         VStack(spacing: 8) {
@@ -255,6 +270,7 @@ struct BridgeView: View {
                 .font(.system(.caption, design: .monospaced))
                 .foregroundStyle(.gray)
                 .multilineTextAlignment(.center)
+            messageModePicker
             Spacer()
             Button {
                 ship.resumeFromPause()
