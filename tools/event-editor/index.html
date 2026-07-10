@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Heart of Gold — Event Editor</title>
+<style>
+  :root { --amber: #ffb833; --bg: #0a0a10; --panel: #14141d; --dim: #888; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: #eee; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  header { padding: 14px 20px; border-bottom: 1px solid #2a2a38; display: flex; gap: 14px; align-items: center; }
+  h1 { font-size: 15px; color: var(--amber); margin: 0; letter-spacing: 2px; }
+  button { background: var(--amber); color: #000; border: 0; border-radius: 8px; padding: 8px 14px;
+           font: inherit; font-weight: 700; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--amber); border: 1.5px solid var(--amber); }
+  main { display: grid; grid-template-columns: 270px 1fr 1fr; gap: 0; height: calc(100vh - 61px); }
+  #list { border-right: 1px solid #2a2a38; overflow-y: auto; }
+  #list .item { padding: 9px 14px; cursor: pointer; font-size: 12px; border-bottom: 1px solid #1a1a26; }
+  #list .item:hover, #list .item.sel { background: var(--panel); color: var(--amber); }
+  #list .item .kind { color: var(--dim); font-size: 10px; }
+  #form { overflow-y: auto; padding: 18px; border-right: 1px solid #2a2a38; }
+  #preview { overflow-y: auto; padding: 18px; }
+  label { display: block; font-size: 10px; color: var(--dim); margin: 14px 0 4px; letter-spacing: 1px; text-transform: uppercase; }
+  input, select, textarea { width: 100%; background: var(--panel); color: #eee; border: 1px solid #2a2a38;
+                            border-radius: 6px; padding: 8px; font: inherit; font-size: 13px; }
+  textarea { min-height: 72px; resize: vertical; }
+  .row { display: flex; gap: 10px; } .row > div { flex: 1; }
+  .chips { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .chips button { font-size: 11px; padding: 4px 8px; background: #23233a; color: var(--amber); }
+  pre { background: var(--panel); border: 1px solid #2a2a38; border-radius: 8px; padding: 12px;
+        font-size: 12px; white-space: pre-wrap; word-break: break-word; }
+  #problems { color: #ff7a7a; font-size: 12px; white-space: pre-wrap; }
+  #problems.ok { color: #7aff9e; }
+  .hint { font-size: 11px; color: var(--dim); margin-top: 4px; }
+  .resp { border: 1px dashed #2a2a38; border-radius: 8px; padding: 10px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HEART OF GOLD · EVENT EDITOR</h1>
+  <button id="open">Open Content/events…</button>
+  <button id="new" class="ghost" disabled>New event</button>
+  <button id="save" disabled>Save</button>
+  <span id="status" style="color:var(--dim);font-size:12px"></span>
+</header>
+<main>
+  <div id="list"></div>
+  <div id="form">
+    <div class="hint">Open the repo's <b>Content/events</b> folder (Chrome/Edge — uses the File System Access API).
+    This v1 edits <b>single</b> events with quick responses; sequences & branching are shown read-only (edit JSON directly for now — the node editor is v2).</div>
+    <div id="fields" style="display:none">
+      <div class="row">
+        <div><label>ID (kebab-case, = filename)</label><input id="f-id"></div>
+        <div><label>Folder</label><select id="f-folder"></select></div>
+      </div>
+      <div class="row">
+        <div><label>Source (crew station)</label>
+          <select id="f-source">
+            <option>SHIP</option><option>AI CORE</option><option>SCIENCE</option><option>ENGINEERING</option>
+            <option>MEDBAY</option><option>COMMS</option><option>SECURITY</option><option>NAVIGATION</option>
+            <option>HELM</option><option>CARGO BAY</option><option>MARVIN</option><option>SENSORS</option>
+            <option>MISSION OPS</option><option>DOCKING</option><option>LONG RANGE</option><option>CREW</option>
+          </select></div>
+        <div><label>Class</label><select id="f-class"><option>ambient</option><option>plot</option></select></div>
+        <div><label>Weight</label><input id="f-weight" type="number" value="1" min="0.1" step="0.5"></div>
+      </div>
+      <label>Text (what the crew says)</label>
+      <textarea id="f-text"></textarea>
+      <div class="chips">
+        <button data-ins="{n:88-99}">insert {n:LO-HI}</button>
+        <button data-ins="{pick:option one|option two|option three}">insert {pick:a|b|c}</button>
+      </div>
+      <label>Trigger contexts (leave blank = any)</label>
+      <div class="row">
+        <div><label>Trip modes</label><select id="f-modes"><option value="">any</option><option value="errands">errands</option><option value="roadtrip">roadtrip</option></select></div>
+        <div><label>Trip phase</label><select id="f-phase"><option value="">any</option><option>beginning</option><option>middle</option><option>final</option></select></div>
+      </div>
+      <div class="row">
+        <div><label>Min speed (mph)</label><input id="f-speedmin" type="number" placeholder="—"></div>
+        <div><label>Min distance (mi)</label><input id="f-distmin" type="number" placeholder="—"></div>
+        <div><label>Only while stopped</label><select id="f-stopped"><option value="">any</option><option value="true">yes</option></select></div>
+      </div>
+      <div class="row">
+        <div><label>Cooldown (min)</label><input id="f-cooldown" type="number" placeholder="—"></div>
+        <div><label>Max per trip</label><input id="f-maxtrip" type="number" placeholder="1 (default)"></div>
+      </div>
+      <label>Quick responses (0–2, tap → spoken reaction)</label>
+      <div id="responses"></div>
+      <button id="addresp" class="ghost" style="margin-top:8px">+ add response</button>
+    </div>
+  </div>
+  <div id="preview">
+    <label>Validation</label>
+    <div id="problems">Open a folder to begin.</div>
+    <label>JSON</label>
+    <pre id="json"></pre>
+  </div>
+</main>
+<script>
+let dirHandle = null, files = [], current = null, model = null;
+
+const $ = id => document.getElementById(id);
+const TEMPLATE_RE = /\{([^{}]*)\}/g;
+
+async function openDir() {
+  dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+  await refresh();
+  $('new').disabled = false;
+  $('status').textContent = `${files.length} events`;
+}
+
+async function refresh() {
+  files = [];
+  async function walk(handle, prefix) {
+    for await (const [name, h] of handle.entries()) {
+      if (h.kind === 'directory') await walk(h, prefix + name + '/');
+      else if (name.endsWith('.json')) files.push({ path: prefix + name, handle: h, dir: prefix });
+    }
+  }
+  await walk(dirHandle, '');
+  files.sort((a, b) => a.path.localeCompare(b.path));
+  const list = $('list'); list.innerHTML = '';
+  const folders = new Set();
+  for (const f of files) {
+    folders.add(f.dir);
+    const div = document.createElement('div');
+    div.className = 'item'; div.dataset.path = f.path;
+    div.innerHTML = `<div>${f.path.split('/').pop().replace('.json','')}</div><div class="kind">${f.dir || './'}</div>`;
+    div.onclick = () => load(f);
+    list.appendChild(div);
+  }
+  const sel = $('f-folder'); sel.innerHTML = '';
+  for (const d of [...folders].sort()) sel.add(new Option(d || './', d));
+}
+
+async function load(f) {
+  const text = await (await f.handle.getFile()).text();
+  current = f; model = JSON.parse(text);
+  document.querySelectorAll('.item').forEach(el => el.classList.toggle('sel', el.dataset.path === f.path));
+  if (model.type === 'single') { fillForm(); $('fields').style.display = 'block'; $('save').disabled = false; }
+  else { $('fields').style.display = 'none'; $('save').disabled = true; }
+  render();
+}
+
+function fillForm() {
+  $('f-id').value = model.id || '';
+  $('f-folder').value = current ? current.dir : $('f-folder').value;
+  $('f-source').value = model.content?.source || 'SHIP';
+  $('f-class').value = model.class || 'ambient';
+  $('f-weight').value = model.trigger?.weight ?? 1;
+  $('f-text').value = model.content?.text || '';
+  const c = model.trigger?.contexts || {};
+  $('f-modes').value = c.tripModes?.[0] || '';
+  $('f-phase').value = c.tripPhase?.[0] || '';
+  $('f-speedmin').value = c.speedMPH?.min ?? '';
+  $('f-distmin').value = c.tripDistanceMiles?.min ?? '';
+  $('f-stopped').value = c.stopped ? 'true' : '';
+  $('f-cooldown').value = model.trigger?.cooldownMinutes ?? '';
+  $('f-maxtrip').value = model.trigger?.maxPerTrip ?? '';
+  renderResponses();
+}
+
+function renderResponses() {
+  const wrap = $('responses'); wrap.innerHTML = '';
+  (model.content.responses || []).forEach((r, i) => {
+    const d = document.createElement('div'); d.className = 'resp';
+    d.innerHTML = `<div class="row">
+        <div><label>Label (button text)</label><input data-r="${i}" data-k="label" value="${r.label || ''}"></div>
+        <div><label>Reaction source</label><input data-r="${i}" data-k="rsource" value="${r.reaction?.source || ''}"></div>
+        <div style="flex:0"><label>&nbsp;</label><button class="ghost" data-del="${i}">✕</button></div>
+      </div>
+      <label>Reaction text</label><textarea data-r="${i}" data-k="rtext">${r.reaction?.text || ''}</textarea>`;
+    wrap.appendChild(d);
+  });
+}
+
+function collect() {
+  const contexts = {};
+  if ($('f-modes').value) contexts.tripModes = [$('f-modes').value];
+  if ($('f-phase').value) contexts.tripPhase = [$('f-phase').value];
+  if ($('f-speedmin').value) contexts.speedMPH = { min: +$('f-speedmin').value };
+  if ($('f-distmin').value) contexts.tripDistanceMiles = { min: +$('f-distmin').value };
+  if ($('f-stopped').value) contexts.stopped = true;
+  const trigger = { contexts, weight: +$('f-weight').value || 1 };
+  if ($('f-cooldown').value) trigger.cooldownMinutes = +$('f-cooldown').value;
+  if ($('f-maxtrip').value) trigger.maxPerTrip = +$('f-maxtrip').value;
+  model.schema = 1;
+  model.id = $('f-id').value.trim();
+  model.title = model.title || model.id.replace(/-/g, ' ');
+  model.author = model.author || 'alex';
+  model.type = 'single';
+  model.class = $('f-class').value;
+  model.trigger = trigger;
+  model.content = { source: $('f-source').value, text: $('f-text').value,
+                    ...(model.content.responses?.length ? { responses: model.content.responses } : {}) };
+}
+
+function validate() {
+  const p = [];
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(model.id || '')) p.push('id must be kebab-case');
+  if (!model.content?.text) p.push('text is required');
+  const text = model.content?.text || '';
+  for (const m of text.matchAll(TEMPLATE_RE)) {
+    const b = m[1];
+    if (b.startsWith('n:')) { if (!/^n:-?\d+--?\d+$/.test(b) && !/^n:\d+-\d+$/.test(b)) p.push(`bad {${b}}`); }
+    else if (b.startsWith('pick:')) { if (b.slice(5).split('|').length < 2) p.push(`bad {${b}} — need 2+ options`); }
+    else p.push(`unknown placeholder {${b}}`);
+  }
+  if ((text.match(/\{/g) || []).length !== [...text.matchAll(TEMPLATE_RE)].length) p.push('unbalanced braces');
+  const rs = model.content?.responses || [];
+  if (rs.length > 2) p.push('max 2 quick responses');
+  rs.forEach((r, i) => {
+    if (!r.label) p.push(`response ${i + 1}: label required`);
+    if (!r.reaction?.source || !r.reaction?.text) p.push(`response ${i + 1}: reaction source+text required`);
+  });
+  return p;
+}
+
+function render() {
+  $('json').textContent = JSON.stringify(model, null, 2);
+  const probs = model.type === 'single' ? validate() : [];
+  const el = $('problems');
+  if (model.type !== 'single') { el.textContent = `${model.type} events are read-only in v1 — edit the JSON file directly.`; el.className = ''; }
+  else if (probs.length) { el.textContent = probs.map(x => '✗ ' + x).join('\n'); el.className = ''; }
+  else { el.textContent = '✓ valid'; el.className = 'ok'; }
+  $('save').disabled = !(model.type === 'single' && probs.length === 0);
+}
+
+async function save() {
+  collect();
+  const folder = $('f-folder').value;
+  const name = model.id + '.json';
+  let dh = dirHandle;
+  for (const part of folder.split('/').filter(Boolean)) dh = await dh.getDirectoryHandle(part, { create: true });
+  const fh = await dh.getFileHandle(name, { create: true });
+  const w = await fh.createWritable();
+  await w.write(JSON.stringify(model, null, 2) + '\n');
+  await w.close();
+  $('status').textContent = `saved ${folder}${name} — commit via git/agent as usual`;
+  await refresh();
+}
+
+$('open').onclick = openDir;
+$('save').onclick = save;
+$('new').onclick = () => {
+  current = null;
+  model = { schema: 1, id: '', title: '', author: 'alex', type: 'single', class: 'ambient',
+            tags: [], trigger: { contexts: {}, weight: 1 }, content: { source: 'SHIP', text: '' } };
+  fillForm(); $('fields').style.display = 'block'; render();
+};
+$('addresp').onclick = () => {
+  model.content.responses = model.content.responses || [];
+  if (model.content.responses.length < 2)
+    model.content.responses.push({ label: '', reaction: { source: model.content.source || 'SHIP', text: '' } });
+  renderResponses(); collect(); render();
+};
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.r !== undefined) {
+    const r = model.content.responses[+t.dataset.r];
+    if (t.dataset.k === 'label') r.label = t.value;
+    if (t.dataset.k === 'rsource') r.reaction.source = t.value;
+    if (t.dataset.k === 'rtext') r.reaction.text = t.value;
+  }
+  if ($('fields').style.display !== 'none') { collect(); render(); }
+});
+document.addEventListener('click', e => {
+  if (e.target.dataset.ins) {
+    const ta = $('f-text');
+    ta.setRangeText(e.target.dataset.ins, ta.selectionStart, ta.selectionEnd, 'end');
+    collect(); render();
+  }
+  if (e.target.dataset.del !== undefined) {
+    model.content.responses.splice(+e.target.dataset.del, 1);
+    renderResponses(); collect(); render();
+  }
+});
+</script>
+</body>
+</html>
