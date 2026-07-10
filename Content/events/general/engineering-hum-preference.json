@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "engineering-hum-preference",
+  "title": "Engineering hum preference",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Engineering. The drive can hum in B flat or D minor today. Captain's preference?",
+    "responses": [
+      {
+        "label": "B flat",
+        "reaction": {
+          "source": "ENGINEERING",
+          "text": "B flat it is. Very classic. The hull approves."
+        }
+      },
+      {
+        "label": "D minor",
+        "reaction": {
+          "source": "ENGINEERING",
+          "text": "D minor. The saddest of all keys. Marvin has requested a transfer to this deck."
+        }
+      }
+    ]
+  }
+}

@@ -99,6 +99,18 @@ def check_content(path, event):
         return
     if etype == "single":
         check_line(path, content, "content")
+        responses = content.get("responses", [])
+        if not isinstance(responses, list) or len(responses) > 2:
+            err(path, "responses must be a list of at most 2 quick replies")
+        else:
+            for i, r in enumerate(responses):
+                if not r.get("label"):
+                    err(path, f"responses[{i}]: missing 'label'")
+                reaction = r.get("reaction")
+                if not isinstance(reaction, dict):
+                    err(path, f"responses[{i}]: missing 'reaction' object")
+                else:
+                    check_line(path, reaction, f"responses[{i}].reaction")
     elif etype == "sequence":
         steps = content.get("steps")
         if not isinstance(steps, list) or not steps:
@@ -121,7 +133,18 @@ def check_content(path, event):
         targets = set()
         for name, node in nodes.items():
             check_line(path, node, f"node '{name}'")
-            nexts = [c.get("next") for c in node.get("choices", [])]
+            nexts = []
+            for c in node.get("choices", []):
+                has_next, has_one_of = "next" in c, "nextOneOf" in c
+                if has_next == has_one_of:
+                    err(path, f"node '{name}': each choice needs exactly one of 'next' or 'nextOneOf'")
+                if has_next:
+                    nexts.append(c["next"])
+                if has_one_of:
+                    if not isinstance(c["nextOneOf"], list) or len(c["nextOneOf"]) < 2:
+                        err(path, f"node '{name}': nextOneOf needs 2+ node ids")
+                    else:
+                        nexts.extend(c["nextOneOf"])
             if len(node.get("choices", [])) > 3:
                 err(path, f"node '{name}': max 3 choices (driver-safe glanceable UI)")
             for c in node.get("choices", []):

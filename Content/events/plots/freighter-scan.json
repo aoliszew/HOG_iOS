@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "id": "freighter-scan",
+  "title": "Freighter scan",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "vessels"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "min": 45
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1,
+    "cooldownMinutes": 60
+  },
+  "content": {
+    "entry": "contact",
+    "nodes": {
+      "contact": {
+        "source": "SENSORS",
+        "text": "A large cargo freighter is traveling nearby. We could run a discreet scan of its hold. Or a thorough one. Thorough is... less discreet.",
+        "choices": [
+          {
+            "label": "Discreet scan",
+            "phrases": [
+              "discreet",
+              "careful"
+            ],
+            "nextOneOf": [
+              "scan-success",
+              "scan-partial"
+            ]
+          },
+          {
+            "label": "Thorough scan",
+            "phrases": [
+              "thorough",
+              "full scan"
+            ],
+            "nextOneOf": [
+              "scan-jackpot",
+              "scan-caught"
+            ]
+          },
+          {
+            "label": "Leave it be",
+            "phrases": [
+              "leave",
+              "no scan"
+            ],
+            "next": "leave"
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "leave"
+      },
+      "scan-success": {
+        "source": "SENSORS",
+        "text": "Discreet scan complete. The hold contains {pick:fourteen tons of breakfast cereal|a full carousel, disassembled|mattresses. Just... mattresses|artisanal gravel}. They never knew we were there.",
+        "setFlags": [
+          "scanner-skilled"
+        ],
+        "next": "end"
+      },
+      "scan-partial": {
+        "source": "SENSORS",
+        "text": "Partial result only. The hold contains either {pick:penguins or pillows|soup or circuitry|hats or hazardous materials}. The universe keeps its mysteries today.",
+        "next": "end"
+      },
+      "scan-jackpot": {
+        "source": "SENSORS",
+        "text": "Full manifest acquired! {pick:Forty thousand rubber ducks|A single, very large bell|Every sock that has ever gone missing}. Also their lunch orders. We know everything.",
+        "setFlags": [
+          "scanner-skilled"
+        ],
+        "next": "end"
+      },
+      "scan-caught": {
+        "source": "SENSORS",
+        "text": "They detected the scan. The freighter has responded with an extremely rude light pattern and is now driving with theatrical slowness in front of us. We deserve this.",
+        "setFlags": [
+          "freighter-grudge"
+        ],
+        "next": "end"
+      },
+      "leave": {
+        "source": "SENSORS",
+        "text": "Understood. The freighter passes unexamined, its secrets intact. Somewhere, a mystery is grateful.",
+        "next": "end"
+      }
+    }
+  }
+}

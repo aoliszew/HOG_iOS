@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "nebula-panic",
+  "title": "Nebula panic",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "humor"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 2
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "panic",
+    "nodes": {
+      "panic": {
+        "source": "SCIENCE",
+        "text": "Oh no. Oh no no no. Captain, there is a NEBULA ahead. It's enormous. It's beautiful. It's... probably a cloud. But what do we DO?",
+        "choices": [
+          {
+            "label": "Fly through it",
+            "phrases": [
+              "through",
+              "fly through"
+            ],
+            "nextOneOf": [
+              "through-good",
+              "through-weird"
+            ]
+          },
+          {
+            "label": "Go around",
+            "phrases": [
+              "around",
+              "go around"
+            ],
+            "next": "around"
+          },
+          {
+            "label": "Stay calm",
+            "phrases": [
+              "calm",
+              "stay calm"
+            ],
+            "next": "calm"
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "drift"
+      },
+      "through-good": {
+        "source": "SCIENCE",
+        "text": "WE'RE IN THE NEBULA. It's... fine. It's completely fine. I touched it with a sensor. Logging this as the bravest thing we've ever done.",
+        "setFlags": [
+          "nebula-veteran"
+        ],
+        "next": "end"
+      },
+      "through-weird": {
+        "source": "SCIENCE",
+        "text": "We're through! Minor note: all our readings now display in an unknown language, and the ship smells faintly of cinnamon. Investigating. Probably forever.",
+        "setFlags": [
+          "cinnamon-incident"
+        ],
+        "next": "end"
+      },
+      "around": {
+        "source": "HELM",
+        "text": "Going around. The nebula watched us the whole way. Science is writing a poem about it. We couldn't stop them.",
+        "next": "end"
+      },
+      "calm": {
+        "source": "SCIENCE",
+        "text": "You're right. Deep breaths. It's just interstellar gas and dust and majesty. I'm calm now. I'm going to name it Gerald.",
+        "setFlags": [
+          "named-gerald"
+        ],
+        "next": "end"
+      },
+      "drift": {
+        "source": "SCIENCE",
+        "text": "The nebula has drifted astern. I panicked for nothing. This changes nothing about future panics.",
+        "next": "end"
+      }
+    }
+  }
+}

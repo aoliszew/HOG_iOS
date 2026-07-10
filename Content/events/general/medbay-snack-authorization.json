@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "medbay-snack-authorization",
+  "title": "Medbay snack authorization",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Medbay to bridge. The crew formally requests emergency snack authorization. Medical necessity rating: {n:3-9} out of ten.",
+    "responses": [
+      {
+        "label": "Authorize",
+        "reaction": {
+          "source": "MEDBAY",
+          "text": "Authorization received. Morale is soaring. Crumbs are everywhere. Worth it."
+        }
+      },
+      {
+        "label": "Deny",
+        "reaction": {
+          "source": "MEDBAY",
+          "text": "Understood. The crew has responded with what can only be described as theatrical sighing."
+        }
+      }
+    ]
+  }
+}

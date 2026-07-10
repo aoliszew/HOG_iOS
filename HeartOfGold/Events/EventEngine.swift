@@ -6,6 +6,8 @@ struct ShipEvent {
     /// Ambient chatter may be dropped if it sits unheard too long; plot never is.
     var ambient: Bool = false
     var queuedAt: Date = .now
+    /// Quick tap-replies offered after the message plays (spoken reaction, no plot effect).
+    var responses: [EventDefinition.QuickResponse] = []
 }
 
 /// What an encounter slot produced: a one-shot message, or a multi-step

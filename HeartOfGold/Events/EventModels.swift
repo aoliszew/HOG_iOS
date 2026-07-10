@@ -68,11 +68,25 @@ struct EventDefinition: Decodable, Identifiable {
         // single
         let source: String?
         let text: String?
+        /// Optional quick replies (max 2) on a single: tap → spoken reaction.
+        /// No long-term effects — ambient banter, not plot.
+        let responses: [QuickResponse]?
         // sequence
         let steps: [Step]?
         // branching
         let entry: String?
         let nodes: [String: Node]?
+    }
+
+    struct QuickResponse: Decodable {
+        let label: String
+        let phrases: [String]?
+        let reaction: Line
+    }
+
+    struct Line: Decodable {
+        let source: String
+        let text: String
     }
 
     struct Step: Decodable {
@@ -99,8 +113,16 @@ struct EventDefinition: Decodable, Identifiable {
     struct Choice: Decodable {
         let label: String
         let phrases: [String]
-        let next: String
+        /// Deterministic destination…
+        let next: String?
+        /// …or a dice roll: one of these is picked at random. Exactly one of
+        /// next/nextOneOf must be set (validator-enforced).
+        let nextOneOf: [String]?
         let setFlags: [String]?
+
+        var resolvedNext: String {
+            next ?? nextOneOf?.randomElement() ?? "end"
+        }
     }
 
     struct Effects: Decodable {

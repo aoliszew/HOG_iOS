@@ -60,7 +60,14 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
 
 ### `type: "single"` — one transmission
 ```jsonc
-"content": { "source": "COMMS", "text": "A passing Vogon freighter is broadcasting poetry. Recommend we do not answer." }
+"content": {
+  "source": "COMMS",
+  "text": "A passing Vogon freighter is broadcasting poetry. Recommend we do not answer.",
+  "responses": [                        // optional, max 2: tap → spoken reaction, no plot effects
+    { "label": "Answer it", "reaction": { "source": "COMMS", "text": "A bold mistake. Patching through." } },
+    { "label": "Ignore",    "reaction": { "source": "COMMS", "text": "Wise. Channel closed." } }
+  ]
+}
 ```
 
 ### `type: "sequence"` — scripted multi-step (no choices)
@@ -91,8 +98,9 @@ the captain ignoring the ship (consequences for not responding).
       "text": "An unidentified ship requests docking. Do we allow it, or raise shields?",
       "choices": [
         { "label": "Allow docking", "phrases": ["allow", "dock", "let them in"], "next": "dock" },
+        { "label": "Scan them", "phrases": ["scan"], "nextOneOf": ["scan-ok", "scan-caught"] },
         { "label": "Raise shields", "phrases": ["shields", "raise shields"],     "next": "shields" }
-      ],
+      ],                                 // nextOneOf = dice roll: random outcome
       "timeoutSeconds": 120,
       "timeoutNext": "ignored"
     },

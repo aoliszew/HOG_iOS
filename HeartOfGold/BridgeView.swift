@@ -27,15 +27,21 @@ struct BridgeView: View {
                     // A question is on the table: choices own the screen.
                     Spacer(minLength: 0)
                     choiceButtons
-                    talkButton
+                    if ShipController.voiceInputEnabled {
+                        talkButton
+                    }
                 } else {
                     personalityPicker
                     eventLog
+                    if !ship.quickResponses.isEmpty {
+                        quickResponseButtons
+                    }
                     if !ship.pendingMessages.isEmpty {
                         playMessageButton
                     }
-                    // In flight, talking to the ship is the primary control.
-                    talkButton
+                    if ShipController.voiceInputEnabled {
+                        talkButton
+                    }
                     HStack(spacing: 12) {
                         pauseButton
                         powerButton
@@ -134,6 +140,27 @@ struct BridgeView: View {
                         .foregroundStyle(amber)
                         .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber, lineWidth: 2))
                         .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+            }
+        }
+    }
+
+    // Tap replies to the message that just played — big enough for a car mount.
+    private var quickResponseButtons: some View {
+        HStack(spacing: 10) {
+            ForEach(ship.quickResponses, id: \.label) { response in
+                Button {
+                    ship.respond(response)
+                } label: {
+                    Text(response.label.uppercased())
+                        .font(.system(.headline, design: .monospaced).bold())
+                        .minimumScaleFactor(0.6)
+                        .lineLimit(2)
+                        .frame(maxWidth: .infinity, minHeight: 64)
+                        .background(Color.white.opacity(0.1))
+                        .foregroundStyle(amber)
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(amber.opacity(0.7), lineWidth: 1.5))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
             }
         }

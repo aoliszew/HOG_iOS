@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "science-name-a-star",
+  "title": "Science name a star",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Science here. We have discovered an uncatalogued star. Shall we name it after you, or after the ship's cat?",
+    "responses": [
+      {
+        "label": "After me",
+        "reaction": {
+          "source": "SCIENCE",
+          "text": "Done. It's a lovely star. Slightly smug now, but lovely."
+        }
+      },
+      {
+        "label": "The cat",
+        "reaction": {
+          "source": "SCIENCE",
+          "text": "Excellent choice. The cat remains unimpressed, which is how we know it's pleased."
+        }
+      }
+    ]
+  }
+}
