@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "voyage-hundred-club",
+  "title": "Voyage hundred club",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "outbound"
+      ],
+      "milesToDestination": {
+        "min": 80,
+        "max": 100
+      }
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Milestone: under 100 miles to destination. The ship has entered what deep-space crews call 'the almost-there'. Symptoms include seat adjusting and ETA arithmetic."
+  }
+}

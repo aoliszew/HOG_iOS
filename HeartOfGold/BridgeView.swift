@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BridgeView: View {
     @EnvironmentObject var ship: ShipController
+    @State private var destinationText = ""
 
     private let amber = Color(red: 1.0, green: 0.72, blue: 0.2)
 
@@ -17,6 +18,7 @@ struct BridgeView: View {
                     personalityPicker
                     briefingPickers
                     messageModePicker
+                    voyageSection
                     eventLog
                     if ship.resumableTrip != nil {
                         resumeButton
@@ -76,6 +78,11 @@ struct BridgeView: View {
             Text(String(format: "MISSION DISTANCE  %.1f MI", ship.trip.distanceMiles))
                 .font(.system(.caption, design: .monospaced))
                 .foregroundStyle(.gray)
+            if let remaining = ship.milesToDestination {
+                Text(String(format: "DEST  %.0f MI", remaining))
+                    .font(.system(.caption, design: .monospaced).bold())
+                    .foregroundStyle(.green)
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
@@ -197,6 +204,75 @@ struct BridgeView: View {
             .foregroundStyle(ship.commands.isListening ? .black : amber)
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(amber.opacity(0.5), lineWidth: 1.5))
             .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+    }
+
+    /// Multi-day voyage controls: set home once, plot a destination, begin the
+    /// return leg when it's time to head back.
+    @ViewBuilder
+    private var voyageSection: some View {
+        VStack(spacing: 8) {
+            if !ship.homeIsSet {
+                Button { ship.setHomeHere() } label: {
+                    Text("⌂ SET HOME BASE HERE")
+                        .font(.system(.caption, design: .monospaced).bold())
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(Color.white.opacity(0.1))
+                        .foregroundStyle(amber)
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(amber.opacity(0.5)))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+            }
+            if let voyage = ship.voyage {
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("VOYAGE · DAY \(voyage.dayNumber) · \(voyage.phase == .returning ? "RETURN LEG" : voyage.phase == .atDestination ? "AT DESTINATION" : "OUTBOUND")")
+                            .font(.system(.caption2, design: .monospaced).bold())
+                            .foregroundStyle(.green)
+                        Text(voyage.destinationName.uppercased())
+                            .font(.system(.caption, design: .monospaced))
+                            .foregroundStyle(amber)
+                    }
+                    Spacer()
+                    if voyage.phase == .atDestination && ship.homeIsSet {
+                        Button("⟲ HEAD HOME") { ship.beginReturnVoyage() }
+                            .font(.system(.caption, design: .monospaced).bold())
+                            .padding(8)
+                            .background(Color.green.opacity(0.8))
+                            .foregroundStyle(.black)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+                    Button("✕") { ship.clearVoyage() }
+                        .foregroundStyle(.gray)
+                }
+                .padding(10)
+                .background(Color.white.opacity(0.05))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+            } else {
+                HStack {
+                    TextField("Destination address…", text: $destinationText)
+                        .textFieldStyle(.plain)
+                        .padding(8)
+                        .background(Color.white.opacity(0.07))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .font(.system(.caption, design: .monospaced))
+                    Button("PLOT") {
+                        ship.setDestination(destinationText)
+                        destinationText = ""
+                    }
+                    .font(.system(.caption, design: .monospaced).bold())
+                    .padding(8)
+                    .background(amber)
+                    .foregroundStyle(.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+                if let status = ship.destinationStatus {
+                    Text(status)
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(.gray)
+                }
+            }
         }
     }
 

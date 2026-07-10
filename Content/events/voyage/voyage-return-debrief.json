@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "voyage-return-debrief",
+  "title": "Voyage return debrief",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "returning"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Return leg, Captain. Standard debrief question from the crew: best moment of the expedition?",
+    "responses": [
+      {
+        "label": "It was great",
+        "reaction": {
+          "source": "SHIP",
+          "text": "Logged: 'it was great.' The log accepts this. The log was there for some of it. The log agrees."
+        }
+      },
+      {
+        "label": "Glad to head home",
+        "reaction": {
+          "source": "SHIP",
+          "text": "Understood completely. The best part of any voyage is designed to be both ends of it."
+        }
+      }
+    ]
+  }
+}

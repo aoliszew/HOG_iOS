@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "voyage-outbound-charts",
+  "title": "Voyage outbound charts",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "outbound"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Charts for the destination loaded. Local customs research: {pick:inconclusive|promising|mostly restaurant reviews}. We'll learn by doing, as explorers must."
+  }
+}

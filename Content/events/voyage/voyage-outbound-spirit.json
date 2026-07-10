@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "voyage-outbound-spirit",
+  "title": "Voyage outbound spirit",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "outbound"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Outbound leg, Captain. The crew has that expedition feeling: {n:70-98} percent excitement, the rest is wondering if we locked the door. We locked the door. Probably."
+  }
+}

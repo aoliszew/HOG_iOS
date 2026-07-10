@@ -42,6 +42,23 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.startUpdatingLocation()
     }
 
+    /// One-shot fix while on standby (e.g. SET HOME HERE).
+    private var oneShotCompletion: ((CLLocation?) -> Void)?
+    func requestFix(completion: @escaping (CLLocation?) -> Void) {
+        if let current = currentLocation, Date().timeIntervalSince(current.timestamp) < 60 {
+            completion(current)
+            return
+        }
+        oneShotCompletion = completion
+        manager.requestWhenInUseAuthorization()
+        manager.requestLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        oneShotCompletion?(nil)
+        oneShotCompletion = nil
+    }
+
     func stop() {
         manager.stopUpdatingLocation()
         speedMPH = 0
@@ -68,6 +85,8 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let loc = locations.last, loc.horizontalAccuracy >= 0 else { return }
 
         currentLocation = loc
+        oneShotCompletion?(loc)
+        oneShotCompletion = nil
         let mph = max(0, loc.speed) * 2.23694
         speedMPH = mph
 

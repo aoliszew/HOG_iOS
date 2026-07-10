@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "voyage-marvin-return",
+  "title": "Voyage marvin return",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "returning"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "Returning home. The place we left in order to have the experiences we're now returning from. I find the whole cycle... well, honestly, a little comforting. Delete that from the log."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "voyage-return-home-pull",
+  "title": "Voyage return home pull",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "voyage"
+  ],
+  "trigger": {
+    "contexts": {
+      "voyagePhase": [
+        "returning"
+      ]
+    },
+    "weight": 3
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Navigation notes the ship is tracking home with unusual precision. Vessels do this. Pigeons do this. There's no shame in it."
+  }
+}
