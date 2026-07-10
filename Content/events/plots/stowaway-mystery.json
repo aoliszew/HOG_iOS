@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "id": "stowaway-mystery",
+  "title": "The stowaway mystery",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 6
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "noise",
+    "nodes": {
+      "noise": {
+        "source": "SECURITY",
+        "text": "Captain, we're hearing intermittent sounds from the aft compartment. Something small. Possibly alive. Possibly organized. Investigate personally, or send the cat?",
+        "choices": [
+          {
+            "label": "Send the cat",
+            "phrases": [
+              "cat"
+            ],
+            "nextOneOf": [
+              "cat-solves",
+              "cat-defects"
+            ]
+          },
+          {
+            "label": "Investigate at next stop",
+            "phrases": [
+              "investigate"
+            ],
+            "next": "next-stop"
+          }
+        ],
+        "timeoutSeconds": 100,
+        "timeoutNext": "escalates"
+      },
+      "cat-solves": {
+        "source": "SECURITY",
+        "text": "The cat has returned, escorting the culprit: a loose water bottle with delusions of percussion. The cat has been awarded a medal. It ate the ribbon.",
+        "setFlags": [
+          "cat-hero"
+        ],
+        "next": "end"
+      },
+      "cat-defects": {
+        "source": "SECURITY",
+        "text": "Update: the cat has joined the noise. There are now two things back there, and one of them purrs. We've decided to call it a party and monitor from a distance.",
+        "setFlags": [
+          "aft-party"
+        ],
+        "next": "end"
+      },
+      "next-stop": {
+        "source": "SECURITY",
+        "text": "Logged for investigation at next docking. The noise, hearing this, has grown self-conscious and stopped. Classic. They always stop when you make a plan.",
+        "next": "end"
+      },
+      "escalates": {
+        "source": "SECURITY",
+        "text": "No orders received, and the noise has unionized with the cargo. Their first demand: smoother roads. Honestly? Reasonable. Monitoring continues.",
+        "setFlags": [
+          "aft-union"
+        ],
+        "next": "end"
+      }
+    }
+  }
+}

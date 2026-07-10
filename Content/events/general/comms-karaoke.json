@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "comms-karaoke",
+  "title": "Comms karaoke",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Intercepted: a nearby vessel is doing karaoke. Full crew. Windows up, hearts open. Rating their rendition {n:6-10} out of 10 for spirit."
+  }
+}

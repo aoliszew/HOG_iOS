@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "science-bug-windshield",
+  "title": "Science bug windshield",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "A bug has made contact with the forward viewport. Observing a moment of silence. It died doing what it loved: {pick:flying|commuting|absolutely nothing of consequence}."
+  }
+}

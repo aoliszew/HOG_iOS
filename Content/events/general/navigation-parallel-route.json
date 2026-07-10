@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "navigation-parallel-route",
+  "title": "Navigation parallel route",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "Fun fact: there's a parallel road {n:1-5} miles that way carrying people to entirely different lives. We wave at them in spirit."
+  }
+}

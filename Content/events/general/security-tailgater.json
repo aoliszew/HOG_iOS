@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "security-tailgater",
+  "title": "Security tailgater",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "speedMPH": {
+        "min": 40
+      }
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Vessel astern is following at insufficient distance. Options considered: shields, harsh language, dignity. Deploying dignity. It's very effective."
+  }
+}

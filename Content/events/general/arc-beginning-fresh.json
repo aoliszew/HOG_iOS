@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "arc-beginning-fresh",
+  "title": "Arc beginning fresh",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "beginning"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "Early-mission engine report: everything is crisp and hopeful. Even the check-engine light is minding its own business."
+  }
+}

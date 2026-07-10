@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "arc-final-inventory",
+  "title": "Arc final inventory",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "final"
+      ]
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "Final-leg inventory: everything we left with, plus {pick:memories|receipts|one suspiciously good mood|a story about a freighter}. Net gain confirmed."
+  }
+}

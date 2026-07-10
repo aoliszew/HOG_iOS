@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "science-bet",
+  "title": "Science bet",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SCIENCE",
+    "text": "Science and Navigation have a bet about the next {pick:overpass|water tower|billboard}. I can't tell you the stakes. Pick a side?",
+    "responses": [
+      {
+        "label": "Team Science",
+        "reaction": {
+          "source": "SCIENCE",
+          "text": "A wise alliance. If we win, you get half my share. My share is the satisfaction. So, half the satisfaction."
+        }
+      },
+      {
+        "label": "Team Navigation",
+        "reaction": {
+          "source": "NAVIGATION",
+          "text": "Excellent judgment, Captain. Science never checks the charts before betting. This is why we always... acquire satisfaction."
+        }
+      }
+    ]
+  }
+}

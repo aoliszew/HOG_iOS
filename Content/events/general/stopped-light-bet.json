@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "id": "stopped-light-bet",
+  "title": "Stopped light bet",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "stopped": true
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "Red light duration prediction: {n:12-90} more seconds. If I'm right, I get bragging rights. I'm always right. The bragging rights account is substantial."
+  }
+}
