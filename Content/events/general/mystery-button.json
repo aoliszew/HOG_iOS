@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "id": "mystery-button",
+  "title": "Mystery button",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "During cleaning we found a button labeled 'DO NOT'. Just 'DO NOT'. The label may be truncated. Or a warning. Or a dare.",
+    "responses": [
+      {
+        "label": "Press it",
+        "reaction": {
+          "source": "ENGINEERING",
+          "text": "You pressed it. Somewhere in the ship, a small light turned {pick:on|off|purple}. Nothing else happened. Yet. We've labeled it 'PROBABLY FINE'."
+        }
+      },
+      {
+        "label": "Do not",
+        "reaction": {
+          "source": "ENGINEERING",
+          "text": "Restraint. The button remains unpressed, radiating potential. It will outlive us all."
+        }
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "found-the-button"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "id": "stopped-neighbor-scan",
+  "title": "Stopped neighbor scan",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {
+      "stopped": true
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "While we wait: the vessel beside us contains a driver {pick:singing bravely|eating a sandwich with both hands|rehearsing an argument they will never have}. Solidarity, friend."
+  }
+}

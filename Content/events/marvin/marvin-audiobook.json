@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-audiobook",
+  "title": "Marvin audiobook",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "I've been listening to an audiobook at {n:900-40000} times speed. Finished the author's entire life's work. It was fine. He tries again in the sequel."
+  }
+}

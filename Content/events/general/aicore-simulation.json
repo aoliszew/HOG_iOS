@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "aicore-simulation",
+  "title": "Aicore simulation",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "I ran {n:400-9000} simulations of this exact drive. In {n:2-40} of them, we stopped for ice cream. Just... reporting the data, Captain.",
+    "responses": [
+      {
+        "label": "Tempting",
+        "reaction": {
+          "source": "AI CORE",
+          "text": "I'll keep the ice cream simulations warm. Which is a problem for the simulated ice cream, but not for us."
+        }
+      },
+      {
+        "label": "Focus",
+        "reaction": {
+          "source": "AI CORE",
+          "text": "Focusing. All ice cream projections archived under 'someday'."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "medbay-sneeze-log",
+  "title": "Medbay sneeze log",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MEDBAY",
+    "text": "Medbay logged a sneeze on the bridge. Blessing dispensed automatically. Cabin air quality: {n:91-99} percent. The remaining percent is mystery."
+  }
+}

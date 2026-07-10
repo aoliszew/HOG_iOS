@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "cargo-organization",
+  "title": "Cargo organization",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "The cargo has settled into what can only be described as feng shui. We didn't arrange it this way. The trunk has taste."
+  }
+}

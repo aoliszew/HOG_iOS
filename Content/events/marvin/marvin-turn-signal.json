@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "id": "marvin-turn-signal",
+  "title": "Marvin turn signal",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "The vehicle behind us has had its turn signal on for {n:2-14} miles. I find its commitment to a decision it will never make... deeply relatable."
+  }
+}

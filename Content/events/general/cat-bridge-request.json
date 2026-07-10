@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "id": "cat-bridge-request",
+  "title": "Cat bridge request",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "The ship's cat has arrived on the bridge and is staring at the captain's chair. Your chair. It is doing the slow blink.",
+    "responses": [
+      {
+        "label": "Allow it",
+        "reaction": {
+          "source": "SHIP",
+          "text": "The cat has assumed command of the chair. Morale up {n:10-25} percent. Your authority: technically intact."
+        }
+      },
+      {
+        "label": "Hold the line",
+        "reaction": {
+          "source": "SHIP",
+          "text": "You maintained eye contact with the cat and kept your chair. History will call this the ship's finest standoff."
+        }
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "cat-on-bridge"
+    ]
+  }
+}

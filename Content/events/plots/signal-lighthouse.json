@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "signal-lighthouse",
+  "title": "The last lighthouse",
+  "author": "claude",
+  "type": "sequence",
+  "class": "plot",
+  "tags": [
+    "plots"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripPhase": [
+        "middle"
+      ],
+      "tripDistanceMiles": {
+        "min": 10
+      }
+    },
+    "weight": 2,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "steps": [
+      {
+        "source": "COMMS",
+        "text": "Picking up an automated beacon, very old. It repeats: 'Still here. Still lit. Come by if you're passing.' Signal source: unclear. Tone: friendly."
+      },
+      {
+        "wait": {
+          "miles": 3
+        }
+      },
+      {
+        "source": "COMMS",
+        "text": "The beacon noticed our approach vector. New message: 'You're the first in {n:40-4000} days. I'll put the kettle on.' Captain, I believe it's a lighthouse. For roads."
+      },
+      {
+        "wait": {
+          "miles": 3,
+          "seconds": 60
+        }
+      },
+      {
+        "source": "COMMS",
+        "text": "We've passed the beacon's point of closest approach. Final message: 'Safe travels. Tell someone about me.' ...Logging it in the ship's chart, Captain. Permanently. Someone will always know."
+      }
+    ]
+  },
+  "effects": {
+    "setFlags": [
+      "lighthouse-friend"
+    ]
+  }
+}

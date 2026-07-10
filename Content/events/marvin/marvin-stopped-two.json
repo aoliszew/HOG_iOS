@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "id": "marvin-stopped-two",
+  "title": "Marvin stopped two",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "marvin"
+  ],
+  "trigger": {
+    "contexts": {
+      "stopped": true
+    },
+    "weight": 1
+  },
+  "content": {
+    "source": "MARVIN",
+    "text": "We've stopped again. I've used the time to compose my memoirs. Chapter one: 'We Stopped Again.'"
+  }
+}
