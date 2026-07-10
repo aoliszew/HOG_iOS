@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "id": "scan-ice-cream",
+  "title": "Scan ice cream",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "PRIORITY SCAN: an ice cream vessel detected. Musical broadcast: active. Freezer integrity: {n:88-99} percent. The crew requests we shadow it. Shadow the vessel, or scan its route?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Shadow it",
+            "phrases": [
+              "shadow",
+              "follow"
+            ],
+            "next": "shadow"
+          },
+          {
+            "label": "Scan its route",
+            "phrases": [
+              "route"
+            ],
+            "next": "route"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "shadow": {
+        "source": "SENSORS",
+        "text": "Shadowing... it's turning. It's slowing. Captain, it may be initiating a STOP. The crew is vibrating. Orders?",
+        "choices": [
+          {
+            "label": "Break off pursuit",
+            "phrases": [
+              "break off"
+            ],
+            "next": "broke"
+          },
+          {
+            "label": "Note the location",
+            "phrases": [
+              "note"
+            ],
+            "next": "noted"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "broke"
+      },
+      "broke": {
+        "source": "SENSORS",
+        "text": "Pursuit broken. The mission comes first. The crew has logged this under 'sacrifices' in very large letters.",
+        "next": "end",
+        "sfx": "chime_bad"
+      },
+      "noted": {
+        "source": "SENSORS",
+        "text": "Location starred on all charts. The ship will remember. On some future voyage, there will be ice cream, and it will be earned.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "ice-cream-intel"
+        ]
+      },
+      "route": {
+        "source": "SENSORS",
+        "text": "Route analysis: it serves {n:4-9} neighborhoods with a {n:88-99} percent joy delivery rate. A public service vessel. We salute it with our headlights.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "scan-rv",
+  "title": "Scan rv",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan result: a long-range habitat vessel. Registered occupants: {n:2-4} plus one dog co-pilot. Bumper stickers indicate {n:12-38} previous star systems visited. Hail the dog, or scan the itinerary?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Hail the dog",
+            "phrases": [
+              "dog"
+            ],
+            "next": "dog"
+          },
+          {
+            "label": "Scan the itinerary",
+            "phrases": [
+              "itinerary"
+            ],
+            "next": "itin"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "dog": {
+        "source": "SENSORS",
+        "text": "The dog has noticed us. Ears: deployed. Head: tilted {n:12-40} degrees. It awaits our message. This is a delicate first contact, Captain.",
+        "choices": [
+          {
+            "label": "Who's a good boy",
+            "phrases": [
+              "good boy"
+            ],
+            "next": "goodboy"
+          },
+          {
+            "label": "Formal greetings",
+            "phrases": [
+              "formal"
+            ],
+            "next": "formal"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "goodboy"
+      },
+      "goodboy": {
+        "source": "SENSORS",
+        "text": "Message received. Tail telemetry off the charts. The dog has accepted us into its extended pack. This alliance will outlast empires.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "dog-alliance"
+        ]
+      },
+      "formal": {
+        "source": "SENSORS",
+        "text": "Formal greetings delivered. The dog respects protocol and has responded with one dignified boof. Diplomatic relations: established.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "dog-alliance"
+        ]
+      },
+      "itin": {
+        "source": "SENSORS",
+        "text": "Itinerary: {pick:every national park in reachable space|a slow spiral toward a grandchild|nowhere twice}. These are professionals of wandering. We are but apprentices.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

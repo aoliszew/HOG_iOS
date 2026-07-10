@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-log-hauler",
+  "title": "Scan log hauler",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan complete: a log-hauling freighter. The logs are {pick:oak|pine|suspiciously uniform}. One reading anomalous: a faint heat signature amid the timber. Investigate deeper, or log and release?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Deep scan the anomaly",
+            "phrases": [
+              "deep scan"
+            ],
+            "next": "deeper"
+          },
+          {
+            "label": "Log and release",
+            "phrases": [
+              "release"
+            ],
+            "next": "release"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "deeper": {
+        "source": "SENSORS",
+        "text": "Focusing sensors... the heat signature is moving. It's small. It's furry. Do we alert the hauler, or respect the stowaway's journey?",
+        "choices": [
+          {
+            "label": "Alert the hauler",
+            "phrases": [
+              "alert"
+            ],
+            "next": "alerted"
+          },
+          {
+            "label": "Respect the journey",
+            "phrases": [
+              "respect"
+            ],
+            "next": "respected"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "respected"
+      },
+      "alerted": {
+        "source": "SENSORS",
+        "text": "Hauler notified. They pulled over and discovered a raccoon with, and I quote, 'the confidence of a paying customer.' It has been given a granola bar and a stern talking-to.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "respected": {
+        "source": "SENSORS",
+        "text": "Understood. Somewhere in that timber, a raccoon rides toward destiny. Safe travels, small captain.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "raccoon-solidarity"
+        ]
+      },
+      "release": {
+        "source": "SENSORS",
+        "text": "Logged and released. The freighter continues, unaware it was ever interesting. Most of us are.",
+        "next": "end"
+      }
+    }
+  }
+}

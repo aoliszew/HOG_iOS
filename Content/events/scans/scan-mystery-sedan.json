@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "id": "scan-mystery-sedan",
+  "title": "Scan mystery sedan",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Odd one, Captain. A gray sedan scanning as... perfectly average. Too average. Every reading is exactly the median. Statistically, that's the strangest thing we've seen all day. Probe deeper, or leave it?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Probe deeper",
+            "phrases": [
+              "probe"
+            ],
+            "next": "probe"
+          },
+          {
+            "label": "Leave it be",
+            "phrases": [
+              "leave"
+            ],
+            "next": "leave"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "probe": {
+        "source": "SENSORS",
+        "text": "Deep probe returns: the car is {n:7-15} years old, immaculate, and its only cargo is a single umbrella. The driver hums at precisely 440 hertz. Push one more layer, or back away slowly?",
+        "choices": [
+          {
+            "label": "One more layer",
+            "phrases": [
+              "one more"
+            ],
+            "next": "layer"
+          },
+          {
+            "label": "Back away slowly",
+            "phrases": [
+              "back away"
+            ],
+            "next": "away"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "away"
+      },
+      "layer": {
+        "source": "SENSORS",
+        "text": "Final layer: the glovebox contains {pick:mints, arranged by size|a map of roads that don't exist|nothing. It has never been opened}. We have gazed into the beige abyss, Captain, and it politely gazed back.",
+        "next": "end",
+        "sfx": "static",
+        "setFlags": [
+          "beige-abyss"
+        ]
+      },
+      "away": {
+        "source": "SENSORS",
+        "text": "Backing away. Some mysteries maintain the universe's structural integrity. The gray sedan is load-bearing.",
+        "next": "end"
+      },
+      "leave": {
+        "source": "SENSORS",
+        "text": "Agreed. It passes on, flawlessly unremarkable. Sensors will dream of it.",
+        "next": "end"
+      }
+    }
+  }
+}

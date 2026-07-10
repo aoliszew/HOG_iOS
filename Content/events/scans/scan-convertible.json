@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "scan-convertible",
+  "title": "Scan convertible",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: open-top vessel, shields deliberately down, music at {n:70-100} percent. Occupants' hair: cinematic. They are having a better day than most. Analyze the source of their joy, or match their energy?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Analyze the joy",
+            "phrases": [
+              "analyze"
+            ],
+            "next": "joy"
+          },
+          {
+            "label": "Match their energy",
+            "phrases": [
+              "match"
+            ],
+            "next": "match"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "joy": {
+        "source": "SENSORS",
+        "text": "Joy analysis: {n:40-70} percent sunshine, {n:20-40} percent the right song, remainder unexplained. Science wants to publish. Publish, or keep it folk knowledge?",
+        "choices": [
+          {
+            "label": "Publish",
+            "phrases": [
+              "publish"
+            ],
+            "next": "publish"
+          },
+          {
+            "label": "Folk knowledge",
+            "phrases": [
+              "folk"
+            ],
+            "next": "folk"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "folk"
+      },
+      "publish": {
+        "source": "SENSORS",
+        "text": "Findings submitted to the Journal of Obvious But Nice Things. Peer review: 'yeah.' Landmark work, Captain.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "folk": {
+        "source": "SENSORS",
+        "text": "Agreed \u2014 some knowledge belongs to the wind. The finding is released back into the wild.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "match": {
+        "source": "SENSORS",
+        "text": "Energy matched within safe parameters: windows cracked, volume up {n:8-20} percent. The convertible's crew flashed a peace sign. Contact successful.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "good-vibes"
+        ]
+      }
+    }
+  }
+}
