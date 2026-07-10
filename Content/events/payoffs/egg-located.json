@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "egg-located",
+  "title": "Egg located",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "egg-incident"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "The eggs from the labor dispute have been located. They were under the seat, unbroken, smug. The union has claimed this as a victory. So has the ship. Everyone wins."
+  }
+}

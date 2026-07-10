@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "wisdom-echo",
+  "title": "Wisdom echo",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "hitchhiker-wisdom"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Recalling the hitchhiker's advice from earlier: always know where your towel is. Towel status: known. Location: cargo bay, high ground. All is well."
+  }
+}

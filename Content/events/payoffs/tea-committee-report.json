@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "tea-committee-report",
+  "title": "Tea committee report",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "tea-incident"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "ENGINEERING",
+    "text": "The tea committee has issued its findings on the coolant incident: the tea has been forgiven. A commemorative mug is being designed. You're on it, Captain."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "guide-entry-used",
+  "title": "Guide entry used",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "guide-entry-received"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "I cross-referenced the Guide entry we received. It was right about the fries at that exit. It's right about most things. 'Mostly harmless' remains the kindest review any of us will get."
+  }
+}

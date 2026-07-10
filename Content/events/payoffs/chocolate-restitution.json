@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "chocolate-restitution",
+  "title": "Chocolate restitution",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "solved-chocolate-case"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Justice update: Science has completed their sentence for the chocolate incident and shared the backup bar. Security confirms it was excellent. Case formally, deliciously closed."
+  }
+}

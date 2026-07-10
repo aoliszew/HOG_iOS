@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "karma-payoff",
+  "title": "Karma payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "helped-a-stranger"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "Incoming transmission from the escape pod we helped: they've reached their destination and named their houseplant after us. The karma economy is real, Captain, and we are rich."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "scanner-reputation",
+  "title": "Scanner reputation",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "scanner-skilled"
+      ]
+    },
+    "weight": 4
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "Word of our scanning skills has spread. A passing vessel just politely requested we scan it. It wanted to feel interesting. We obliged: it's carrying gravel. It seemed thrilled."
+  }
+}
