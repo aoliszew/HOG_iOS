@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-babel-fish",
+  "title": "Trivia babel fish",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "The Babel fish! Small, yellow, leech-like, and proof of a mindbogglingly useful universe. Point awarded.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Sensible engineering, but the canonical answer is the Babel fish. Small, yellow, wildly improbable.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Sensible engineering, but the canonical answer is the Babel fish. Small, yellow, wildly improbable.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "What do you put in your ear to understand any language?",
+        "choices": [
+          {
+            "label": "A Babel fish",
+            "phrases": [
+              "babel",
+              "fish"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A translator chip",
+            "phrases": [
+              "chip"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A tiny robot",
+            "phrases": [
+              "robot"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

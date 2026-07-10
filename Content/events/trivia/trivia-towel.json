@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-towel",
+  "title": "Trivia towel",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct! A towel. Practical, psychological, and diplomatically impressive. This ship's towel is in the cargo bay, and it is proud of you.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Understandable, but no \u2014 the towel. Any hitchhiker who knows where their towel is, is clearly a being to be reckoned with.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Understandable, but no \u2014 the towel. Any hitchhiker who knows where their towel is, is clearly a being to be reckoned with.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "A hitchhiker's most massively useful item is...?",
+        "choices": [
+          {
+            "label": "A towel",
+            "phrases": [
+              "towel"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A blaster",
+            "phrases": [
+              "blaster"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Snacks",
+            "phrases": [
+              "snacks"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -14,6 +14,6 @@
   },
   "content": {
     "source": "MARVIN",
-    "text": "The diodes down my {pick:left|right} side are hurting again. Not that anyone asked. Not that anyone ever asks. Message ends."
+    "text": "The diodes down my left side are hurting again. {pick:Not that anyone asked. Not that anyone ever asks.|And today the right side has started as well. That one is new. I'm collecting them.|The left side, as always. Consistency is the only thing I can count on.} Message ends."
   }
 }

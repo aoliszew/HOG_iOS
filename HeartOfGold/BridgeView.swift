@@ -48,6 +48,7 @@ struct BridgeView: View {
                     }
                     HStack(spacing: 12) {
                         pauseButton
+                        gameButton
                         powerButton
                     }
                 }
@@ -321,6 +322,19 @@ struct BridgeView: View {
                 }
                 .pickerStyle(.segmented)
             }
+        }
+    }
+
+    private var gameButton: some View {
+        Button {
+            ship.playGame()
+        } label: {
+            Image(systemName: "gamecontroller.fill")
+                .font(.system(size: 22, weight: .bold))
+                .frame(width: 76, height: 60)
+                .background(Color.white.opacity(0.12))
+                .foregroundStyle(amber)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
 

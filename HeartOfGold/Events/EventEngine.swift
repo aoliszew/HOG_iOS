@@ -30,6 +30,9 @@ protocol EventSource {
     /// Called when a multi-step event finishes playback (applies its effects
     /// plus any flags collected along the way, e.g. from branching choices).
     func completed(eventID: String, extraFlags: Set<String>)
+    /// Captain-requested on-demand event by tag (e.g. "trivia"), or nil if
+    /// the pool for this trip is exhausted.
+    func requestEvent(tag: String, context: ShipContext) -> PlayableEvent?
 }
 
 /// Schedules random encounters while the ship is powered up.

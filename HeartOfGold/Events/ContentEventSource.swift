@@ -63,6 +63,24 @@ final class ContentEventSource: EventSource {
         }
     }
 
+    func requestEvent(tag: String, context: ShipContext) -> PlayableEvent? {
+        var context = context
+        context.flags.formUnion(flags)
+        guard let event = evaluator.pickRequested(tag: tag, from: library.events, context: context) else { return nil }
+        evaluator.recordFired(event)
+        switch event.type {
+        case .branching: return .branching(event)
+        case .sequence: return .sequence(event)
+        case .single:
+            guard let source = event.content.source, let text = event.content.text else { return nil }
+            applyEffects(of: event)
+            return .message(ShipEvent(source: source, text: MessageTemplate.render(text),
+                                      ambient: event.messageClass == .ambient,
+                                      responses: event.content.responses ?? [],
+                                      sfx: event.content.sfx))
+        }
+    }
+
     func completed(eventID: String, extraFlags: Set<String>) {
         flags.formUnion(extraFlags)
         guard let event = library.events.first(where: { $0.id == eventID }) else { return }

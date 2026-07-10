@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-vogon-poetry",
+  "title": "Trivia vogon poetry",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 third worst. Ahead of it: the Azgoths of Kria, and the late Paula Nancy Millstone Jennings of Greenbridge, Essex. Point!",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Close, but Vogon poetry is merely the THIRD worst in the universe. It gets so much darker from there.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Close, but Vogon poetry is merely the THIRD worst in the universe. It gets so much darker from there.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Vogon poetry ranks where among the worst in the universe?",
+        "choices": [
+          {
+            "label": "Third worst",
+            "phrases": [
+              "third"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "The worst",
+            "phrases": [
+              "worst",
+              "first"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Second worst",
+            "phrases": [
+              "second"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

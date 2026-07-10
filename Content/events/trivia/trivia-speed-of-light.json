@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "id": "trivia-speed-of-light",
+  "title": "Trivia speed of light",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 bad news, which obeys its own special laws. Ships powered by it are, however, terribly unwelcome wherever they arrive.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "A trick question, Captain: the Guide holds that nothing travels faster than bad news.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Faster: light in a vacuum, or bad news?",
+        "choices": [
+          {
+            "label": "Bad news",
+            "phrases": [
+              "bad news",
+              "news"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Light",
+            "phrases": [
+              "light"
+            ],
+            "next": "a1"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

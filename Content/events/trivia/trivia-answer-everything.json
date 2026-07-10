@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-answer-everything",
+  "title": "Trivia answer everything",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct: forty-two. Computed over seven and a half million years, delivered in under seven seconds by this crew. Point awarded.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "A romantic guess, but no \u2014 it's forty-two. The real problem, of course, is knowing the Question.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "A romantic guess, but no \u2014 it's forty-two. The real problem, of course, is knowing the Question.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Trivia time, Captain. According to the Guide: what is the Answer to the Ultimate Question of Life, the Universe, and Everything?",
+        "choices": [
+          {
+            "label": "42",
+            "phrases": [
+              "forty two",
+              "42"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Love",
+            "phrases": [
+              "love"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Towels",
+            "phrases": [
+              "towels"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}
