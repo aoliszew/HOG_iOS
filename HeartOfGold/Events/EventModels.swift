@@ -50,6 +50,8 @@ struct EventDefinition: Decodable, Identifiable {
         let tripPhase: [String]?
         /// Errand objectives left before home (from the mission briefing).
         let stopsRemaining: RangeCondition?
+        /// US state/province codes the ship must be operating in (e.g. ["OH"]).
+        let states: [String]?
     }
 
     struct RangeCondition: Decodable {
@@ -150,5 +152,7 @@ struct ShipContext {
     var tripPhase: String?
     /// Errand objectives remaining (nil when no briefing given).
     var stopsRemaining: Int?
+    /// Current US state code, if region awareness has a fix (e.g. "OH").
+    var state: String?
     var date: Date = .now
 }

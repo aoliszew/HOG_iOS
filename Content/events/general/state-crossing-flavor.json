@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "id": "state-crossing-flavor",
+  "title": "State crossing flavor",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "general",
+    "region"
+  ],
+  "trigger": {
+    "contexts": {},
+    "weight": 1,
+    "cooldownMinutes": 60,
+    "maxPerTrip": 3
+  },
+  "content": {
+    "source": "AI CORE",
+    "text": "Fun regional fact: local gravity here is {pick:identical to everywhere else|regulation strength|working beautifully}. The Guide's entry for this region reads: {pick:'mostly harmless'|'good diners'|'watch for deer'|'improbably scenic'}."
+  }
+}

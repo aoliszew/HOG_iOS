@@ -39,6 +39,7 @@ final class ShipController: ObservableObject {
 
     let trip = TripTracker()
     let commands = CommandListener()
+    private let region = RegionAwareness()
 
     private let audio = AudioEngine()
     private let shipVoice = ShipVoice()
@@ -61,7 +62,8 @@ final class ShipController: ObservableObject {
                            longFormActive: self.activeSequence != nil || self.activeBranching != nil,
                            queuedMessages: self.pendingMessages.count,
                            tripPhase: self.plan.phase(distanceMiles: self.trip.distanceMiles),
-                           stopsRemaining: self.plan.stopsRemaining)
+                           stopsRemaining: self.plan.stopsRemaining,
+                           state: self.region.stateCode)
     }
 
     private var cancellables: Set<AnyCancellable> = []
@@ -84,9 +86,16 @@ final class ShipController: ObservableObject {
             .sink { [weak self] in
                 self?.objectWillChange.send()
                 self?.updateStopDetection()
+                self?.updateRegion()
                 self?.persistIfFlying()
             }
             .store(in: &cancellables)
+        region.onStateChange = { [weak self] _, name in
+            Task { @MainActor in
+                guard let self, self.poweredUp, !self.isPaused else { return }
+                self.say(source: "NAVIGATION", "Crossing into \(name), Captain. Updating local improbability regulations. They are \(Int.random(in: 2...40)) percent different here.")
+            }
+        }
 
         resumableTrip = TripStore.loadResumable()
         trip.onThresholdCrossed = { [weak self] mph in
@@ -315,6 +324,11 @@ final class ShipController: ObservableObject {
         activeSequence?.resume()
         activeBranching?.resume()
         say(source: "SHIP", "Resuming, Captain.")
+    }
+
+    private func updateRegion() {
+        guard poweredUp, !isPaused, let location = trip.currentLocation else { return }
+        region.check(location: location)
     }
 
     // MARK: - Stop (docking) detection

@@ -46,7 +46,8 @@ Event Editor web tool (`tools/event-editor/`, see Authoring below).
       "requiresFlags": ["met-aliens"], // story state                    (Phase: flags)
       "forbidsFlags": ["ship-damaged"],
       "tripPhase": ["final"],          // arc: beginning | middle | final (needs briefing)
-      "stopsRemaining": { "max": 1 }   // errand objectives left (needs briefing)
+      "stopsRemaining": { "max": 1 },  // errand objectives left (needs briefing)
+      "states": ["OH", "IN"]           // 2-letter codes; needs a geocode fix
     },
     "weight": 3,                       // selection weight vs other qualified events
     "cooldownMinutes": 45,             // min gap before this event can repeat
