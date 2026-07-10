@@ -35,6 +35,7 @@ struct BridgeView: View {
                     }
                 } else {
                     personalityPicker
+                    messageModePicker
                     eventLog
                     if !ship.quickResponses.isEmpty {
                         quickResponseButtons
