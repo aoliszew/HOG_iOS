@@ -18,6 +18,7 @@
   },
   "content": {
     "source": "COMMS",
-    "text": "Faint signal from far behind us: the lighthouse beacon updated its message. It now says 'Still here. Still lit. A kind ship told me I'm on a chart now.' Worth the whole trip, Captain."
+    "text": "Faint signal from far behind us: the lighthouse beacon updated its message. It now says 'Still here. Still lit. A kind ship told me I'm on a chart now.' Worth the whole trip, Captain.",
+    "sfx": "chime_good"
   }
 }

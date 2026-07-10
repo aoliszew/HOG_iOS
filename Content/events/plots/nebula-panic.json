@@ -54,7 +54,8 @@
           }
         ],
         "timeoutSeconds": 90,
-        "timeoutNext": "drift"
+        "timeoutNext": "drift",
+        "sfx": "alert"
       },
       "through-good": {
         "source": "SCIENCE",
@@ -62,7 +63,8 @@
         "setFlags": [
           "nebula-veteran"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "through-weird": {
         "source": "SCIENCE",
@@ -70,7 +72,8 @@
         "setFlags": [
           "cinnamon-incident"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "static"
       },
       "around": {
         "source": "HELM",
@@ -83,7 +86,8 @@
         "setFlags": [
           "named-gerald"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "drift": {
         "source": "SCIENCE",

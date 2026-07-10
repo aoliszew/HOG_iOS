@@ -48,7 +48,8 @@
           }
         ],
         "timeoutSeconds": 90,
-        "timeoutNext": "pass"
+        "timeoutNext": "pass",
+        "sfx": "static"
       },
       "hiker-guide": {
         "source": "COMMS",
@@ -56,7 +57,8 @@
         "setFlags": [
           "guide-entry-received"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "hiker-story": {
         "source": "COMMS",
@@ -64,7 +66,8 @@
         "setFlags": [
           "hitchhiker-wisdom"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "pass": {
         "source": "COMMS",

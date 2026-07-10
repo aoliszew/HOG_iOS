@@ -25,7 +25,8 @@
     "steps": [
       {
         "source": "COMMS",
-        "text": "We've tuned into an ancient radio drama mid-episode. A voice says: 'The airlock was empty... and yet, the sandwiches were GONE.' Recording for the captain."
+        "text": "We've tuned into an ancient radio drama mid-episode. A voice says: 'The airlock was empty... and yet, the sandwiches were GONE.' Recording for the captain.",
+        "sfx": "static"
       },
       {
         "wait": {

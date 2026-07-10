@@ -8,6 +8,8 @@ struct ShipEvent {
     var queuedAt: Date = .now
     /// Quick tap-replies offered after the message plays (spoken reaction, no plot effect).
     var responses: [EventDefinition.QuickResponse] = []
+    /// Optional sound effect (file name) played as this message arrives.
+    var sfx: String?
 }
 
 /// What an encounter slot produced: a one-shot message, or a multi-step

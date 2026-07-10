@@ -4,10 +4,15 @@
   "title": "Unidentified docking request",
   "author": "claude",
   "type": "branching",
-  "tags": ["encounter", "choice"],
+  "tags": [
+    "encounter",
+    "choice"
+  ],
   "trigger": {
     "contexts": {
-      "tripDistanceMiles": { "min": 3 }
+      "tripDistanceMiles": {
+        "min": 3
+      }
     },
     "weight": 2,
     "cooldownMinutes": 90,
@@ -20,27 +25,49 @@
         "source": "COMMS",
         "text": "Captain, an unidentified vessel is requesting permission to dock. They claim to be selling encyclopedias. Do we allow docking, or raise shields?",
         "choices": [
-          { "label": "Allow docking", "phrases": ["allow", "dock", "let them in"], "next": "dock" },
-          { "label": "Raise shields", "phrases": ["shields", "raise shields", "no"], "next": "shields" }
+          {
+            "label": "Allow docking",
+            "phrases": [
+              "allow",
+              "dock",
+              "let them in"
+            ],
+            "next": "dock"
+          },
+          {
+            "label": "Raise shields",
+            "phrases": [
+              "shields",
+              "raise shields",
+              "no"
+            ],
+            "next": "shields"
+          }
         ],
         "timeoutSeconds": 120,
-        "timeoutNext": "ignored"
+        "timeoutNext": "ignored",
+        "sfx": "static"
       },
       "dock": {
         "source": "SECURITY",
         "text": "They were not selling encyclopedias. They were selling snacks. This is the greatest day in the ship's history, Captain.",
-        "setFlags": ["made-friends-with-snack-vendors"],
-        "next": "end"
+        "setFlags": [
+          "made-friends-with-snack-vendors"
+        ],
+        "next": "end",
+        "sfx": "dock_clunk"
       },
       "shields": {
         "source": "SECURITY",
         "text": "Shields raised. The vessel has departed. Their parting transmission was a rude gesture rendered in surprisingly high resolution.",
-        "next": "end"
+        "next": "end",
+        "sfx": "shield_up"
       },
       "ignored": {
         "source": "SHIP",
         "text": "The vessel got bored and left. They attached a note to our hull. It reads, in seventeen languages: rude.",
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_bad"
       }
     }
   }

@@ -18,6 +18,7 @@
   },
   "content": {
     "source": "SENSORS",
-    "text": "Heads up: the freighter that caught us scanning is two lanes over. It has not forgotten. It has, however, gotten a new bumper sticker. It says 'NO SCANS.' That's fair."
+    "text": "Heads up: the freighter that caught us scanning is two lanes over. It has not forgotten. It has, however, gotten a new bumper sticker. It says 'NO SCANS.' That's fair.",
+    "sfx": "chime_bad"
   }
 }

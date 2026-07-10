@@ -58,7 +58,8 @@
           }
         ],
         "timeoutSeconds": 90,
-        "timeoutNext": "leave"
+        "timeoutNext": "leave",
+        "sfx": "scan"
       },
       "scan-success": {
         "source": "SENSORS",
@@ -66,12 +67,14 @@
         "setFlags": [
           "scanner-skilled"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "scan-partial": {
         "source": "SENSORS",
         "text": "Partial result only. The hold contains either {pick:penguins or pillows|soup or circuitry|hats or hazardous materials}. The universe keeps its mysteries today.",
-        "next": "end"
+        "next": "end",
+        "sfx": "static"
       },
       "scan-jackpot": {
         "source": "SENSORS",
@@ -79,7 +82,8 @@
         "setFlags": [
           "scanner-skilled"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "scan-caught": {
         "source": "SENSORS",
@@ -87,7 +91,8 @@
         "setFlags": [
           "freighter-grudge"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_bad"
       },
       "leave": {
         "source": "SENSORS",

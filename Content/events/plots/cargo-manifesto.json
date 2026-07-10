@@ -47,7 +47,8 @@
           }
         ],
         "timeoutSeconds": 90,
-        "timeoutNext": "deal"
+        "timeoutNext": "deal",
+        "sfx": "alert"
       },
       "deal": {
         "source": "CARGO BAY",
@@ -55,7 +56,8 @@
         "setFlags": [
           "cargo-peace"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_good"
       },
       "firm-ok": {
         "source": "CARGO BAY",
@@ -68,7 +70,8 @@
         "setFlags": [
           "egg-incident"
         ],
-        "next": "end"
+        "next": "end",
+        "sfx": "chime_bad"
       }
     }
   }

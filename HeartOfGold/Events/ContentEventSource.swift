@@ -53,7 +53,8 @@ final class ContentEventSource: EventSource {
             applyEffects(of: event)
             return .message(ShipEvent(source: source, text: MessageTemplate.render(text),
                                       ambient: event.messageClass == .ambient,
-                                      responses: event.content.responses ?? []))
+                                      responses: event.content.responses ?? [],
+                                      sfx: event.content.sfx))
         case .sequence:
             // Effects apply on completion, via completed(eventID:extraFlags:).
             return .sequence(event)

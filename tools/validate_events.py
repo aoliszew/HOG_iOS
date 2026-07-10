@@ -14,6 +14,8 @@ TIMES = {"morning", "afternoon", "evening", "night"}
 DAYS = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"}
 WEATHER = {"clear", "cloudy", "rain", "storm", "snow", "fog", "wind"}
 PHASES = {"beginning", "middle", "final"}
+SFX = {"hail", "shield_up", "alert", "scan", "chime_good", "chime_bad", "dock_clunk",
+       "static", "thruster", "power_up", "power_down"}
 CONTEXT_KEYS = {
     "tripModes", "personalities", "speedMPH", "tripDistanceMiles", "stopped",
     "hardAccelRecently", "timeOfDay", "daysOfWeek", "weather",
@@ -58,6 +60,8 @@ def check_templates(path, text, where):
 
 
 def check_line(path, node, where):
+    if node.get("sfx") is not None and node["sfx"] not in SFX:
+        err(path, f"{where}: unknown sfx '{node['sfx']}' (allowed: {sorted(SFX)})")
     if not isinstance(node.get("source"), str) or not node["source"]:
         err(path, f"{where}: missing 'source'")
     if not isinstance(node.get("text"), str) or not node["text"]:

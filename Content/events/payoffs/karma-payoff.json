@@ -18,6 +18,7 @@
   },
   "content": {
     "source": "COMMS",
-    "text": "Incoming transmission from the escape pod we helped: they've reached their destination and named their houseplant after us. The karma economy is real, Captain, and we are rich."
+    "text": "Incoming transmission from the escape pod we helped: they've reached their destination and named their houseplant after us. The karma economy is real, Captain, and we are rich.",
+    "sfx": "chime_good"
   }
 }
