@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-dont-panic",
+  "title": "Trivia dont panic",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "DON'T PANIC \u2014 correct, and eternally sound advice. Especially in this traffic.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "That's elsewhere in the Guide. The cover says DON'T PANIC \u2014 large, friendly letters. Words to drive by.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "That's elsewhere in the Guide. The cover says DON'T PANIC \u2014 large, friendly letters. Words to drive by.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "What is written in large friendly letters on the cover of the Guide?",
+        "choices": [
+          {
+            "label": "Don't Panic",
+            "phrases": [
+              "don't panic",
+              "dont panic"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Mostly Harmless",
+            "phrases": [
+              "mostly harmless"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "So Long",
+            "phrases": [
+              "so long"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

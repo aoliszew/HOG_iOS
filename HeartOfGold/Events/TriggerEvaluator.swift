@@ -52,6 +52,19 @@ final class TriggerEvaluator {
         max(event.trigger?.weight ?? 1, 0.001)
     }
 
+    /// Captain-requested pick (GAME button): on-demand events by tag,
+    /// honoring per-trip limits and contexts.
+    func pickRequested(tag: String, from events: [EventDefinition], context: ShipContext) -> EventDefinition? {
+        let candidates = events.filter { event in
+            event.onDemand == true
+            && (event.tags ?? []).contains(tag)
+            && firedCounts[event.id, default: 0] < (event.trigger?.maxPerTrip ?? 1)
+            && contextsMatch(event, context: context)
+        }
+        guard let pick = candidates.randomElement() else { return nil }
+        return pick
+    }
+
     /// Relaxed rules for an exhausted pool: ambient singles only, contexts must
     /// still match, and the event must not have played in the last 45 minutes.
     private func encoreQualifies(_ event: EventDefinition, context: ShipContext) -> Bool {
@@ -63,6 +76,8 @@ final class TriggerEvaluator {
     }
 
     func qualifies(_ event: EventDefinition, context: ShipContext) -> Bool {
+        // On-demand events (trivia etc.) never fire on the random clock.
+        if event.onDemand == true { return false }
         // Never the same event twice in a row, regardless of authoring.
         if event.id == lastFiredID { return false }
         // Unique-per-trip by default; repetition is opt-in via explicit maxPerTrip.

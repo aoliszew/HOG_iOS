@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-marvin-brain",
+  "title": "Trivia marvin brain",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A planet \u2014 correct. And they ask him to pick up pieces of paper. He'd want you to know your getting this right changes nothing.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Larger. A PLANET. Marvin has asked me to log your underestimate. It's a very long log.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Larger. A PLANET. Marvin has asked me to log your underestimate. It's a very long log.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Marvin's brain is the size of what?",
+        "choices": [
+          {
+            "label": "A planet",
+            "phrases": [
+              "planet"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A star",
+            "phrases": [
+              "star"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A grapefruit",
+            "phrases": [
+              "grapefruit"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

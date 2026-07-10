@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "id": "trivia-planets-sol",
+  "title": "Trivia planets sol",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Eight, correct \u2014 with apologies to Pluto, who remains beloved and unbothered. Point!",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The books say eight these days. Pluto took the demotion with more grace than most of us would.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The books say eight these days. Pluto took the demotion with more grace than most of us would.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "How many planets does our solar system currently claim?",
+        "choices": [
+          {
+            "label": "Eight",
+            "phrases": [
+              "eight",
+              "8"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Nine",
+            "phrases": [
+              "nine",
+              "9"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Ten",
+            "phrases": [
+              "ten",
+              "10"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -19,6 +19,9 @@ struct EventDefinition: Decodable, Identifiable {
     let tags: [String]?
     /// Defaults by type: single → ambient, sequence/branching → plot.
     let `class`: MessageClass?
+    /// On-demand events never fire randomly — only when the captain asks
+    /// (e.g. trivia via the GAME button). Selected by tag.
+    let onDemand: Bool?
     let trigger: Trigger?
     let content: Content
     let effects: Effects?

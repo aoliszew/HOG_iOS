@@ -314,6 +314,8 @@ final class ShipController: ObservableObject {
         hasMovedThisTrip = false
         stoppedSince = nil
         docked = false
+        voyageLegInitialMiles = nil
+        announcedMilestones = []
         poweredUp = true
         trip.resetTrip()
         trip.restoreDistance(saved.distanceMiles)
@@ -427,6 +429,9 @@ final class ShipController: ObservableObject {
         guard var v = voyage, v.phase == .atDestination, VoyageStore.home != nil else { return }
         v.phase = .returning
         voyage = v
+        // Fresh leg: arc and milestones restart against the distance home.
+        voyageLegInitialMiles = nil
+        announcedMilestones = []
         log.insert(LogEntry(source: "SHIP", text: "Return voyage plotted. Day \(v.dayNumber)."), at: 0)
     }
 
@@ -477,6 +482,24 @@ final class ShipController: ObservableObject {
     private func updateRegion() {
         guard poweredUp, !isPaused, let location = trip.currentLocation else { return }
         region.check(location: location)
+    }
+
+    /// Captain wants to play: pull an on-demand trivia event.
+    func playGame() {
+        guard poweredUp, !isPaused, activeBranching == nil, activeSequence == nil else { return }
+        let context = ShipContext(mode: mode, personality: personality,
+                                  speedMPH: trip.speedMPH, tripDistanceMiles: trip.distanceMiles,
+                                  stopped: trip.speedMPH < 1, hardAccelRecently: trip.hardAccelRecently,
+                                  flags: [])
+        guard let playable = eventSource.requestEvent(tag: "trivia", context: context) else {
+            say(source: "AI CORE", "The games library is exhausted for this trip, Captain. I could make up facts instead — historically popular, rarely accurate.")
+            return
+        }
+        switch playable {
+        case .message(let event): deliver(event)
+        case .sequence(let definition): startSequence(definition)
+        case .branching(let definition): startBranching(definition)
+        }
     }
 
     // MARK: - Stop (docking) detection

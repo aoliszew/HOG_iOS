@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-mice",
+  "title": "Trivia mice",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "The mice \u2014 correct! Hyperintelligent pandimensional beings. The wheel-running was a cover story. Point awarded.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The dolphins merely left politely. It was the MICE \u2014 hyperintelligent, pandimensional, excellent at grant funding.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The dolphins merely left politely. It was the MICE \u2014 hyperintelligent, pandimensional, excellent at grant funding.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "In the Guide, who actually commissioned the Earth?",
+        "choices": [
+          {
+            "label": "Mice",
+            "phrases": [
+              "mice",
+              "the mice"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Dolphins",
+            "phrases": [
+              "dolphins"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Vogons",
+            "phrases": [
+              "vogons"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}
