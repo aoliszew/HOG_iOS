@@ -15,6 +15,10 @@ final class ContentEventSource: EventSource {
         self.library = library
     }
 
+    func event(withID id: String) -> EventDefinition? {
+        library.events.first { $0.id == id }
+    }
+
     func tripStarted() {
         evaluator.resetTrip()
         flags = []

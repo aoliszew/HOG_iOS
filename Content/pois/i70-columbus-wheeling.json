@@ -1,0 +1,103 @@
+{
+  "pois": [
+    {
+      "id": "poi-ohio-statehouse",
+      "name": "Ohio Statehouse",
+      "lat": 39.9612,
+      "lon": -83.0007,
+      "radiusMiles": 2.0,
+      "source": "NAVIGATION",
+      "text": "Sensors detect the Ohio Statehouse nearby \u2014 the local seat of planetary governance, Greek Revival class. Its dome was left unfinished for 68 years, proving all great projects have a task board."
+    },
+    {
+      "id": "poi-john-glenn-airport",
+      "name": "John Glenn International",
+      "lat": 39.998,
+      "lon": -82.8919,
+      "radiusMiles": 2.5,
+      "source": "NAVIGATION",
+      "text": "Passing John Glenn International \u2014 a spaceport named for a man who orbited Earth three times in a ship smaller than our cargo bay. Local craft are limited to the troposphere. Adorable."
+    },
+    {
+      "id": "poi-buckeye-lake",
+      "name": "Buckeye Lake",
+      "lat": 39.9337,
+      "lon": -82.4796,
+      "radiusMiles": 3.0,
+      "source": "SCIENCE",
+      "text": "To starboard: Buckeye Lake, Ohio's oldest state park \u2014 a hand-dug canal reservoir from the 1820s. Early terraforming, Captain. Crude but heartfelt."
+    },
+    {
+      "id": "poi-zanesville-ybridge",
+      "name": "Zanesville Y-Bridge",
+      "lat": 39.9403,
+      "lon": -82.0132,
+      "radiusMiles": 2.5,
+      "source": "NAVIGATION",
+      "text": "Approaching Zanesville, home of the legendary Y-Bridge \u2014 one of the only bridges in the galaxy you can cross and still be on. Amelia Earhart used it as a landmark. So do we."
+    },
+    {
+      "id": "poi-new-concord",
+      "name": "New Concord \u2014 John Glenn's hometown",
+      "lat": 39.9937,
+      "lon": -81.734,
+      "radiusMiles": 2.5,
+      "source": "SHIP",
+      "text": "Captain. All stations, attention. We are passing New Concord, Ohio \u2014 hometown of John Glenn: fighter pilot, first American to orbit the Earth, and at 77 the oldest human in space. This vessel dips its shields in respect. Godspeed, hometown of Godspeed."
+    },
+    {
+      "id": "poi-national-road-museum",
+      "name": "National Road & Zane Grey Museum",
+      "lat": 39.995,
+      "lon": -81.7885,
+      "radiusMiles": 2.0,
+      "source": "AI CORE",
+      "text": "Nearby: the National Road Museum. This very highway follows America's first federal road, built starting 1811 \u2014 the original hyperspace bypass, minus the Vogons. We travel in ancient wheel-ruts, Captain."
+    },
+    {
+      "id": "poi-s-bridge",
+      "name": "Old Washington S-Bridge",
+      "lat": 40.0378,
+      "lon": -81.4442,
+      "radiusMiles": 2.0,
+      "source": "SCIENCE",
+      "text": "Historical anomaly nearby: an original S-shaped bridge of the old National Road. Engineers curved it to cross the creek square-on. Or to confuse oxen. Records differ. Science honors both theories."
+    },
+    {
+      "id": "poi-cambridge-glass",
+      "name": "Cambridge \u2014 Glass City",
+      "lat": 40.0287,
+      "lon": -81.5884,
+      "radiusMiles": 2.5,
+      "source": "CARGO BAY",
+      "text": "Passing Cambridge, Ohio \u2014 once a galactic capital of glassmaking. The cargo bay reports our own glassware rattling in what can only be professional respect."
+    },
+    {
+      "id": "poi-blaine-bridge",
+      "name": "Blaine Hill Bridge",
+      "lat": 40.069,
+      "lon": -80.822,
+      "radiusMiles": 2.0,
+      "source": "NAVIGATION",
+      "text": "Just below us: the Blaine Hill Bridge, built 1828 \u2014 the oldest bridge in Ohio, three sandstone arches still standing off the starboard bow. They built for the ages back then, Captain. So do we, in our way."
+    },
+    {
+      "id": "poi-wheeling-suspension",
+      "name": "Wheeling Suspension Bridge",
+      "lat": 40.0695,
+      "lon": -80.7259,
+      "radiusMiles": 2.0,
+      "source": "SHIP",
+      "text": "Final approach flourish: the Wheeling Suspension Bridge, dead ahead \u2014 when it opened in 1849 it was the longest suspension span on the planet. It carried the National Road across the Ohio River. Welcome to Wheeling, Captain."
+    },
+    {
+      "id": "poi-oglebay",
+      "name": "Oglebay Resort",
+      "lat": 40.1245,
+      "lon": -80.665,
+      "radiusMiles": 3.0,
+      "source": "LONG RANGE",
+      "text": "Long range detects Oglebay to the north \u2014 2,000 acres of park, gardens, and a festival of lights visible from considerable altitude. Local terraforming at its most decorative."
+    }
+  ]
+}

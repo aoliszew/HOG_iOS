@@ -18,6 +18,17 @@ struct TripSnapshot: Codable {
     var planLength: String?
     var plannedStops: Int?
     var stopsCompleted: Int?
+    // Unplayed message queue (field bug: held messages vanished on restart)
+    var queuedMessages: [QueuedMessage]?
+    var pendingBranchingID: String?
+
+    struct QueuedMessage: Codable {
+        var source: String
+        var text: String
+        var ambient: Bool
+        var sfx: String?
+        var startsBranching: Bool
+    }
 }
 
 enum TripStore {

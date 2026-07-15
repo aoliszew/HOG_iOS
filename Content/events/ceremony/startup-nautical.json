@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "startup-nautical",
+  "title": "Startup nautical",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "startup"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "All hands: moorings slipped, hull sound, shields {n:90-99} percent, horizon acquired. The Heart of Gold answers the helm. Fair winds, Captain."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "shutdown-poetic",
+  "title": "Shutdown poetic",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "shutdown"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Engines cooling, stars holding, story saved. Every voyage ends where the next one starts. Goodnight, Captain."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "startup-poetic",
+  "title": "Startup poetic",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "startup"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Good {pick:morning|day|to see you}, Captain. The engines are humming, the stars are where we left them, and the shields stand at {n:90-99} percent. Let's go be improbable."
+  }
+}
