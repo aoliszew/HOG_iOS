@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-continents-move",
+  "title": "Trivia continents move",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Fingernail speed again \u2014 correct! Geology and grooming share a velocity. The universe reuses good numbers.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Fingernail pace: centimeters a year. The Atlantic is widening beneath every crossing.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Fingernail pace: centimeters a year. The Atlantic is widening beneath every crossing.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Continents drift about as fast as...?",
+        "choices": [
+          {
+            "label": "Fingernails grow",
+            "phrases": [
+              "fingernails"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Snails travel",
+            "phrases": [
+              "snails"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Rivers flow",
+            "phrases": [
+              "rivers"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

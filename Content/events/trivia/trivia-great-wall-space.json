@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-great-wall-space",
+  "title": "Trivia great wall space",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 it's a myth. It's long but thin; astronauts confirm highways and airports show up better. Sorry, Wall.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "A famous myth, Captain. Too narrow. Astronauts spot city grids and runways instead.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "A famous myth, Captain. Too narrow. Astronauts spot city grids and runways instead.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Can you see the Great Wall of China from low orbit with the naked eye?",
+        "choices": [
+          {
+            "label": "No, that's a myth",
+            "phrases": [
+              "no",
+              "myth"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Yes, easily",
+            "phrases": [
+              "yes"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Only at night",
+            "phrases": [
+              "night"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

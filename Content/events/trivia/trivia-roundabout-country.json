@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-roundabout-country",
+  "title": "Trivia roundabout country",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "France \u2014 correct! Tens of thousands of them. The national dance is performed at 30 kph, indicating left.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "France, remarkably \u2014 the roundabout capital of the universe, per capita.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "France, remarkably \u2014 the roundabout capital of the universe, per capita.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which country has by far the most roundabouts per capita?",
+        "choices": [
+          {
+            "label": "France",
+            "phrases": [
+              "france"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "The UK",
+            "phrases": [
+              "uk",
+              "britain"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Canada",
+            "phrases": [
+              "canada"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-bananas-radioactive",
+  "title": "Trivia bananas radioactive",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Potassium-40 \u2014 correct! The 'banana equivalent dose' is a real unit physicists use for fun.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Potassium-40. Harmless, but yes: the fruit bowl emits. Science named a dose after it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Potassium-40. Harmless, but yes: the fruit bowl emits. Science named a dose after it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Bananas are very slightly radioactive because of...?",
+        "choices": [
+          {
+            "label": "Potassium-40",
+            "phrases": [
+              "potassium"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Carbon-14",
+            "phrases": [
+              "carbon"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Ripeness",
+            "phrases": [
+              "ripeness"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

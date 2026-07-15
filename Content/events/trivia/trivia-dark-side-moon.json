@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-dark-side-moon",
+  "title": "Trivia dark side moon",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 the far side gets just as much sun; we simply never see it. Pink Floyd owes astronomy an asterisk.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "It's the FAR side, not dark \u2014 sunlit half the time, just always facing away from our gossip.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "It's the FAR side, not dark \u2014 sunlit half the time, just always facing away from our gossip.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Is there a permanently dark side of the Moon?",
+        "choices": [
+          {
+            "label": "No \u2014 a far side, not a dark one",
+            "phrases": [
+              "no",
+              "far side"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Yes",
+            "phrases": [
+              "yes"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Only in winter",
+            "phrases": [
+              "winter"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

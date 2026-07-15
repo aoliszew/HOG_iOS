@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-lightning-temp",
+  "title": "Trivia lightning temp",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Hotter than the Sun's surface \u2014 about five times over. Correct, and a compelling reason to admire from indoors.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Roughly five times the Sun's surface temperature, for a few microseconds of showing off.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Roughly five times the Sun's surface temperature, for a few microseconds of showing off.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "A lightning bolt is briefly hotter than...?",
+        "choices": [
+          {
+            "label": "The Sun's surface",
+            "phrases": [
+              "sun"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Molten steel",
+            "phrases": [
+              "steel"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A jet engine",
+            "phrases": [
+              "jet"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

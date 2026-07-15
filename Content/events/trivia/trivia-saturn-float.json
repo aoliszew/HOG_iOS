@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-saturn-float",
+  "title": "Trivia saturn float",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Saturn \u2014 less dense than water. Correct! Finding the bathtub remains an open engineering problem.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Saturn, whose density is below water's. The ring stains would be terrible.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Saturn, whose density is below water's. The ring stains would be terrible.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which planet would float if you had a large enough bathtub?",
+        "choices": [
+          {
+            "label": "Saturn",
+            "phrases": [
+              "saturn"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Neptune",
+            "phrases": [
+              "neptune"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Mars",
+            "phrases": [
+              "mars"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

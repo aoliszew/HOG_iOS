@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-classic-car",
+  "title": "Scan classic car",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a classic vessel, {n:50-70} years old, chrome at ceremonial polish levels. The driver wears {pick:driving gloves|a flat cap|sunglasses older than us}. Request its story, or pace it in tribute?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Request its story",
+            "phrases": [
+              "story"
+            ],
+            "next": "story"
+          },
+          {
+            "label": "Pace in tribute",
+            "phrases": [
+              "pace"
+            ],
+            "next": "pace"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "story": {
+        "source": "SENSORS",
+        "text": "Story received: {pick:three owners, one family|rebuilt from a barn find|won its class at a show nobody remembers but everybody misses}. It has a name. Do we ask the name?",
+        "choices": [
+          {
+            "label": "Ask the name",
+            "phrases": [
+              "name"
+            ],
+            "next": "name"
+          },
+          {
+            "label": "Some things stay private",
+            "phrases": [
+              "private"
+            ],
+            "next": "priv"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "name"
+      },
+      "name": {
+        "source": "SENSORS",
+        "text": "The name is {pick:Eleanor|Betsy|The Duchess|Old Blue}. Of course it is. Perfect. Log it in the registry of good ships, where we also live.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "classic-registry"
+        ]
+      },
+      "priv": {
+        "source": "SENSORS",
+        "text": "Wise. A name unspoken keeps its power. The chrome flared in what we choose to believe was approval.",
+        "next": "end"
+      },
+      "pace": {
+        "source": "SENSORS",
+        "text": "Tribute pace held for one respectful mile. Two eras of machine, briefly side by side. The old one purred. Ours hummed back.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

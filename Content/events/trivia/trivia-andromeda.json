@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-andromeda",
+  "title": "Trivia andromeda",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Merge with the Milky Way \u2014 correct! The resulting galaxy will need a name. I've submitted suggestions.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Collide-and-merge with us. Don't cancel plans; individual stars will almost certainly miss each other.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Collide-and-merge with us. Don't cancel plans; individual stars will almost certainly miss each other.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The Andromeda galaxy is on course to do what in ~4 billion years?",
+        "choices": [
+          {
+            "label": "Merge with the Milky Way",
+            "phrases": [
+              "merge",
+              "collide"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Miss us entirely",
+            "phrases": [
+              "miss"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Explode",
+            "phrases": [
+              "explode"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

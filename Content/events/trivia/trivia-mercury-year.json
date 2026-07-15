@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "trivia-mercury-year",
+  "title": "Trivia mercury year",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "88 days \u2014 correct! Birthdays every three months. Mercury parties efficiently.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Just 88 Earth days. Mercury sprints its laps.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Just 88 Earth days. Mercury sprints its laps.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "A year on Mercury lasts about how many Earth days?",
+        "choices": [
+          {
+            "label": "88",
+            "phrases": [
+              "88",
+              "eighty eight"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "365",
+            "phrases": [
+              "365"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "12",
+            "phrases": [
+              "12",
+              "twelve"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

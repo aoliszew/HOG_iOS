@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-magrathea",
+  "title": "Trivia magrathea",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Magrathea \u2014 correct! Home of Slartibartfast and the finest bespoke planets money could buy.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Magrathea. Krikkit had... other hobbies. Mostly involving destroying everything.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Magrathea. Krikkit had... other hobbies. Mostly involving destroying everything.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which legendary planet built luxury custom planets?",
+        "choices": [
+          {
+            "label": "Magrathea",
+            "phrases": [
+              "magrathea"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Krikkit",
+            "phrases": [
+              "krikkit"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Vogsphere",
+            "phrases": [
+              "vogsphere"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

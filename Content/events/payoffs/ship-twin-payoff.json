@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "ship-twin-payoff",
+  "title": "Ship twin payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "ship-twin"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "Long-range ping received... it's our twin ship, Captain. One flash, our exact pattern, from {n:20-200} miles away. The pact holds. Somewhere, we are parked adjacent in spirit.",
+    "sfx": "static"
+  }
+}

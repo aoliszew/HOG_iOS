@@ -10,8 +10,8 @@ enum TravelMode: String, CaseIterable, Identifiable {
     /// Seconds between random encounters (min...max).
     var encounterInterval: ClosedRange<TimeInterval> {
         switch self {
-        case .roadtrip: return 120...300
-        case .errands: return 60...150
+        case .roadtrip: return 240...540
+        case .errands: return 150...330
         }
     }
 

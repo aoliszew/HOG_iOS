@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-uranus-tilt",
+  "title": "Trivia uranus tilt",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Uranus \u2014 correct! Knocked sideways long ago; its seasons last twenty years. Commitment.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Uranus, at a 98-degree tilt \u2014 it rolls around the Sun like a dropped marble.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Uranus, at a 98-degree tilt \u2014 it rolls around the Sun like a dropped marble.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which planet orbits tipped over on its side?",
+        "choices": [
+          {
+            "label": "Uranus",
+            "phrases": [
+              "uranus"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Neptune",
+            "phrases": [
+              "neptune"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Mercury",
+            "phrases": [
+              "mercury"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

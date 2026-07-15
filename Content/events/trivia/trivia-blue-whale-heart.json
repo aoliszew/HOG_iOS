@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-blue-whale-heart",
+  "title": "Trivia blue whale heart",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A small car \u2014 correct! Its heartbeat can be detected from 3 kilometers. Our space whale sends regards.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Small-car sized, around 400 pounds. The space whale insists its own is bigger. Unverifiable.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Small-car sized, around 400 pounds. The space whale insists its own is bigger. Unverifiable.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "A blue whale's heart is roughly the size of...?",
+        "choices": [
+          {
+            "label": "A small car",
+            "phrases": [
+              "car"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A basketball",
+            "phrases": [
+              "basketball"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A house",
+            "phrases": [
+              "house"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

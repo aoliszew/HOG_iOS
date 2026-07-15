@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-ford-home",
+  "title": "Trivia ford home",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Betelgeuse \u2014 correct! Not Guildford after all.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Near Betelgeuse. The Guildford story was a cover with remarkable staying power.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Near Betelgeuse. The Guildford story was a cover with remarkable staying power.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Ford Prefect is actually from a small planet somewhere near...?",
+        "choices": [
+          {
+            "label": "Betelgeuse",
+            "phrases": [
+              "betelgeuse"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Alpha Centauri",
+            "phrases": [
+              "centauri"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Sirius",
+            "phrases": [
+              "sirius"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

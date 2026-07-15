@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-day-length-change",
+  "title": "Trivia day length change",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Longer \u2014 the Moon's tides brake our spin by milliseconds per century. Correct! Eventually, gloriously lazy days.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Longer, by about 2 milliseconds per century, courtesy of lunar tides. The Moon steals our spin as it leaves.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Longer, by about 2 milliseconds per century, courtesy of lunar tides. The Moon steals our spin as it leaves.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: Earth's days are slowly getting...?",
+        "choices": [
+          {
+            "label": "Longer",
+            "phrases": [
+              "longer"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Shorter",
+            "phrases": [
+              "shorter"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Exactly stable",
+            "phrases": [
+              "stable"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

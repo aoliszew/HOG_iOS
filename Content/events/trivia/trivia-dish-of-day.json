@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-dish-of-day",
+  "title": "Trivia dish of day",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 a bovine bred to want to be eaten, and articulate about it. The table found it unsettling. The Dish found them rude.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "It introduces itself and suggests parts of its body. Arthur ordered a salad. The Dish disapproved.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "It introduces itself and suggests parts of its body. Arthur ordered a salad. The Dish disapproved.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "At Milliways, the Dish of the Day famously...?",
+        "choices": [
+          {
+            "label": "Introduces itself and recommends cuts",
+            "phrases": [
+              "introduces",
+              "recommends"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Escapes",
+            "phrases": [
+              "escapes"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Sings",
+            "phrases": [
+              "sings"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

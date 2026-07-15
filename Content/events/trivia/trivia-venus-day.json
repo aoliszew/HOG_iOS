@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-venus-day",
+  "title": "Trivia venus day",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Its year \u2014 correct! Venus rotates so slowly it orbits the Sun before finishing one spin. Also backwards. Venus commits.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Longer than its YEAR. Venus spins backwards and slowly, like it's making a point.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Longer than its YEAR. Venus spins backwards and slowly, like it's making a point.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: on Venus, a single day (one rotation) is longer than its...?",
+        "choices": [
+          {
+            "label": "Year",
+            "phrases": [
+              "year"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Month",
+            "phrases": [
+              "month"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Winter",
+            "phrases": [
+              "winter"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

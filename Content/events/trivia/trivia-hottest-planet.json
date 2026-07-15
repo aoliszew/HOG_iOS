@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-hottest-planet",
+  "title": "Trivia hottest planet",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Venus \u2014 correct! Mercury is closer, but Venus wears a runaway greenhouse like a winter coat it can't remove.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Venus, surprisingly \u2014 its atmosphere traps heat better than Mercury's proximity can compete with.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Venus, surprisingly \u2014 its atmosphere traps heat better than Mercury's proximity can compete with.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The hottest planet in our solar system is...?",
+        "choices": [
+          {
+            "label": "Venus",
+            "phrases": [
+              "venus"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Mercury",
+            "phrases": [
+              "mercury"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Jupiter",
+            "phrases": [
+              "jupiter"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

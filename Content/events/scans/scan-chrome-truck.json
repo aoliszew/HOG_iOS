@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "scan-chrome-truck",
+  "title": "Scan chrome truck",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a chromed-out semi, lights like a constellation, name plate reading {pick:'ROAD KING'|'MIDNIGHT RIDER'|'STARDUST'}. This is royalty of the long haul. Request an audience, or admire from formation?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Request audience",
+            "phrases": [
+              "audience"
+            ],
+            "next": "aud"
+          },
+          {
+            "label": "Admire from formation",
+            "phrases": [
+              "admire"
+            ],
+            "next": "adm"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "aud": {
+        "source": "SENSORS",
+        "text": "The King acknowledges. One question is permitted, per tradition. Ask about the road ahead, or the road behind?",
+        "choices": [
+          {
+            "label": "The road ahead",
+            "phrases": [
+              "ahead"
+            ],
+            "next": "ahead"
+          },
+          {
+            "label": "The road behind",
+            "phrases": [
+              "behind"
+            ],
+            "next": "behind"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "ahead"
+      },
+      "ahead": {
+        "source": "SENSORS",
+        "text": "The King speaks: '{pick:Weather's clear past the ridge|Watch the left lane at the split|Best coffee is two exits up, tell them Stardust sent you}.' Royal intelligence, Captain. Chart accordingly.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "kings-counsel"
+        ]
+      },
+      "behind": {
+        "source": "SENSORS",
+        "text": "The King speaks: '{n:2-4} million miles, every one of them earned. The road behind builds the driver ahead.' We ride in the wake of greatness.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "kings-counsel"
+        ]
+      },
+      "adm": {
+        "source": "SENSORS",
+        "text": "Formation admiration held. The constellation of marker lights winked once \u2014 the royal acknowledgment. That's enough. That's plenty.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

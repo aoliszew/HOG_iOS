@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-tow-truck",
+  "title": "Scan tow truck",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a recovery vessel \u2014 a tow truck, running empty. It is {pick:hunting|patrolling|between rescues}. Its hook sways with purpose. Hail it respectfully, or track its patrol?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Hail respectfully",
+            "phrases": [
+              "hail"
+            ],
+            "next": "hail"
+          },
+          {
+            "label": "Track its patrol",
+            "phrases": [
+              "track"
+            ],
+            "next": "track"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "hail": {
+        "source": "SENSORS",
+        "text": "The operator responds: {n:15-40} years of rescues, and one great white whale \u2014 a legendary breakdown they never reached in time. Do we ask about the whale?",
+        "choices": [
+          {
+            "label": "Ask about the whale",
+            "phrases": [
+              "whale"
+            ],
+            "next": "whale"
+          },
+          {
+            "label": "Wish them well",
+            "phrases": [
+              "wish"
+            ],
+            "next": "well"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "well"
+      },
+      "whale": {
+        "source": "SENSORS",
+        "text": "The story: a '73 wagon, a mountain pass, a snowstorm. They still drive that pass sometimes. Some rescues stay with you, Captain. We salute the long-haulers of the road.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "tow-truck-tale"
+        ]
+      },
+      "well": {
+        "source": "SENSORS",
+        "text": "Well-wishes transmitted. The operator tipped an imaginary cap. May their hook stay empty and their coffee stay warm.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "track": {
+        "source": "SENSORS",
+        "text": "Patrol tracked: a slow loop of the interstate's troubled miles. A shepherd counting sheep that haven't strayed yet. Oddly moving, Captain.",
+        "next": "end"
+      }
+    }
+  }
+}

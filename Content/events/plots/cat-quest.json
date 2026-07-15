@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "id": "cat-quest",
+  "title": "The cat's expedition",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "plots",
+    "cat"
+  ],
+  "trigger": {
+    "contexts": {
+      "tripDistanceMiles": {
+        "min": 5
+      }
+    },
+    "weight": 4,
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "missing",
+    "nodes": {
+      "missing": {
+        "source": "SECURITY",
+        "text": "Captain... the ship's cat is not at its post. It was last seen regarding the cargo bay with intent. We have two theories: expedition, or nap of unusual ambition. Mount a search, or trust the cat?",
+        "sfx": "alert",
+        "choices": [
+          {
+            "label": "Mount a search",
+            "phrases": [
+              "search"
+            ],
+            "next": "search"
+          },
+          {
+            "label": "Trust the cat",
+            "phrases": [
+              "trust"
+            ],
+            "next": "trust"
+          }
+        ],
+        "timeoutSeconds": 90,
+        "timeoutNext": "trust"
+      },
+      "search": {
+        "source": "SECURITY",
+        "text": "Search underway... movement in the aft compartment. It's the cat. It has assembled a small collection: one sock, two bottle caps, and something that glints. Confiscate the hoard, or knight the collection?",
+        "choices": [
+          {
+            "label": "Knight the collection",
+            "phrases": [
+              "knight"
+            ],
+            "next": "knighted"
+          },
+          {
+            "label": "Confiscate it",
+            "phrases": [
+              "confiscate"
+            ],
+            "next": "confiscated"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "knighted"
+      },
+      "knighted": {
+        "source": "SHIP",
+        "text": "The hoard is hereby the Royal Treasury of the Aft Kingdom. The cat has accepted the title of Keeper. The glinting object remains unidentified. The cat's eyes say: mine. All is right aboard, Captain.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "cat-treasury"
+        ],
+        "next": "end"
+      },
+      "confiscated": {
+        "source": "SECURITY",
+        "text": "Confiscation attempted. Results: one sock recovered, dignity losses on both sides, and the glinting object has vanished along with the cat. This isn't over, Captain. The cat's tail said so.",
+        "sfx": "chime_bad",
+        "setFlags": [
+          "cat-grudge"
+        ],
+        "next": "end"
+      },
+      "trust": {
+        "source": "SHIP",
+        "text": "Trust extended. Update from aft: the cat has returned to its post, betraying nothing, carrying the faint air of a completed mission. Whatever happened back there is between the cat and history. Wise call, Captain.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "cat-trusted"
+        ],
+        "next": "end"
+      }
+    }
+  }
+}

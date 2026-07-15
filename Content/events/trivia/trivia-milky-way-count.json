@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-milky-way-count",
+  "title": "Trivia milky way count",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A few hundred billion \u2014 correct! And at least one of them has us. Statistically adorable.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "On the order of 100 to 400 billion. Counting is ongoing; the intern quit.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "On the order of 100 to 400 billion. Counting is ongoing; the intern quit.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Rough number of stars in the Milky Way?",
+        "choices": [
+          {
+            "label": "100\u2013400 billion",
+            "phrases": [
+              "billion",
+              "hundred billion"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "10 million",
+            "phrases": [
+              "million"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "5 trillion",
+            "phrases": [
+              "trillion"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

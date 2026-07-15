@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "scan-horse-trailer",
+  "title": "Scan horse trailer",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a trailer containing {n:1-3} horses, ears visible, tails active. They are watching the traffic with ancient patience. Attempt interspecies contact, or scan their destination?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Contact the horses",
+            "phrases": [
+              "contact",
+              "horses"
+            ],
+            "next": "contact"
+          },
+          {
+            "label": "Scan destination",
+            "phrases": [
+              "destination"
+            ],
+            "next": "dest"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "contact": {
+        "source": "SENSORS",
+        "text": "Contact established. The lead horse regards our vessel. It is {pick:unimpressed|mildly curious|majestic beyond our instruments}. Offer it an honorary crew position?",
+        "choices": [
+          {
+            "label": "Make it crew",
+            "phrases": [
+              "crew"
+            ],
+            "next": "crewed"
+          },
+          {
+            "label": "Respect its freelance status",
+            "phrases": [
+              "freelance"
+            ],
+            "next": "free"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "free"
+      },
+      "crewed": {
+        "source": "SENSORS",
+        "text": "The horse has accepted the rank of Honorary Cavalry Officer. It will never know this. That's what makes it noble, Captain.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "horse-officer"
+        ]
+      },
+      "free": {
+        "source": "SENSORS",
+        "text": "Understood. The horse remains a free agent of the highway. It blinked once, slowly \u2014 the highest honor its kind bestows.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "dest": {
+        "source": "SENSORS",
+        "text": "Destination analysis: {pick:a competition it will win|greener actual pastures|a farrier appointment it doesn't know about yet}. Godspeed, tall passenger.",
+        "next": "end"
+      }
+    }
+  }
+}

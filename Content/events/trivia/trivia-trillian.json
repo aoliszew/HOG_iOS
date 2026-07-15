@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-trillian",
+  "title": "Trivia trillian",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Tricia McMillan \u2014 correct! Astrophysicist, left a party with an alien. Relatable.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "It's Tricia McMillan. She left Earth with the right alien at the right party.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "It's Tricia McMillan. She left Earth with the right alien at the right party.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Trillian's original Earth name was...?",
+        "choices": [
+          {
+            "label": "Tricia McMillan",
+            "phrases": [
+              "tricia",
+              "mcmillan"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Patricia Kane",
+            "phrases": [
+              "kane"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Trish Mercer",
+            "phrases": [
+              "mercer"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

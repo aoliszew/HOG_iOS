@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "id": "trivia-zaphod-heads",
+  "title": "Trivia zaphod heads",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Two heads, three arms, one ego the size of a small moon. Correct!",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Count again \u2014 two heads. The third arm is the one people forget.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Count again \u2014 two heads. The third arm is the one people forget.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "How many heads does Zaphod Beeblebrox have?",
+        "choices": [
+          {
+            "label": "Two",
+            "phrases": [
+              "two",
+              "2"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "One",
+            "phrases": [
+              "one",
+              "1"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Three",
+            "phrases": [
+              "three",
+              "3"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

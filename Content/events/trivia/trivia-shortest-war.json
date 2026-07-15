@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-shortest-war",
+  "title": "Trivia shortest war",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "About 38 minutes \u2014 the Anglo-Zanzibar War of 1896. Correct! Some wars barely outlast a podcast.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Roughly 38 minutes: Anglo-Zanzibar, 1896. Started after breakfast, done before tea.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Roughly 38 minutes: Anglo-Zanzibar, 1896. Started after breakfast, done before tea.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: history's shortest war lasted approximately...?",
+        "choices": [
+          {
+            "label": "38 minutes",
+            "phrases": [
+              "38",
+              "forty"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "38 hours",
+            "phrases": [
+              "hours"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "3.8 days",
+            "phrases": [
+              "days"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

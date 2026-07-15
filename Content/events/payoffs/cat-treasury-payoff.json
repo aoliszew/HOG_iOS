@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "cat-treasury-payoff",
+  "title": "Cat treasury payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "cat-treasury"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "Treasury inspection: the cat's hoard has grown. The glinting object has been joined by {pick:a button of unknown origin|a very small bell|what appears to be a tiny key}. The Aft Kingdom prospers under its Keeper.",
+    "sfx": "chime_good"
+  }
+}

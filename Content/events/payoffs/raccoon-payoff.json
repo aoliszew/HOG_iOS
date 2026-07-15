@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "raccoon-payoff",
+  "title": "Raccoon payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "raccoon-solidarity"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "SECURITY",
+    "text": "News from the timber network: the raccoon completed its journey. It has a new territory, a den with a view, and \u2014 reports insist \u2014 the same confidence. Solidarity honored, Captain.",
+    "sfx": "chime_good"
+  }
+}

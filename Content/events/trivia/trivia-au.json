@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-au",
+  "title": "Trivia au",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Earth to Sun \u2014 about 150 million kilometers. Correct! The measuring tape of the solar system.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The Sun. About 150 million kilometers, or one very long tank of fuel.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The Sun. About 150 million kilometers, or one very long tank of fuel.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "One astronomical unit is the distance from Earth to...?",
+        "choices": [
+          {
+            "label": "The Sun",
+            "phrases": [
+              "sun"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "The Moon",
+            "phrases": [
+              "moon"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Mars",
+            "phrases": [
+              "mars"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

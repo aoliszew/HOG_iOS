@@ -26,7 +26,7 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     private var lastLocation: CLLocation?
     private var announcedThresholds: Set<Int> = []
-    private let thresholds = [30, 55, 75]
+    private let thresholds = [45, 60, 75]
 
     override init() {
         super.init()
@@ -105,11 +105,11 @@ final class TripTracker: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         lastSpeedSample = (mph, loc.timestamp)
 
+        // Each threshold announces at most once per trip (field feedback:
+        // repeated callouts around town speeds got old fast).
         for t in thresholds where mph >= Double(t) && !announcedThresholds.contains(t) {
             announcedThresholds.insert(t)
             onThresholdCrossed?(t)
         }
-        // Re-arm thresholds once we drop well below them.
-        announcedThresholds = announcedThresholds.filter { mph > Double($0) - 10 }
     }
 }

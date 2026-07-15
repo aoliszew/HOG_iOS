@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-earth-entry",
+  "title": "Trivia earth entry",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "'Harmless' \u2014 correct! Ford's fifteen years of research got it expanded to 'Mostly harmless.' Editing is brutal.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Trick question, Captain \u2014 the ORIGINAL said just 'Harmless.' The famous 'Mostly harmless' was the revised edition.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Trick question, Captain \u2014 the ORIGINAL said just 'Harmless.' The famous 'Mostly harmless' was the revised edition.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The Guide's original entry for Earth read, in full...?",
+        "choices": [
+          {
+            "label": "Harmless",
+            "phrases": [
+              "harmless"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Mostly harmless",
+            "phrases": [
+              "mostly"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Avoid",
+            "phrases": [
+              "avoid"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

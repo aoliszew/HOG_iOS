@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-kuiper",
+  "title": "Trivia kuiper",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "The Kuiper Belt \u2014 correct! Pluto has plenty of icy company out there, and a heart on its surface.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The Kuiper Belt \u2014 the Oort Cloud is even farther out where the comets sleep.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The Kuiper Belt \u2014 the Oort Cloud is even farther out where the comets sleep.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Pluto lives in which distant region of the solar system?",
+        "choices": [
+          {
+            "label": "The Kuiper Belt",
+            "phrases": [
+              "kuiper"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "The Oort Cloud",
+            "phrases": [
+              "oort"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "The asteroid belt",
+            "phrases": [
+              "asteroid"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

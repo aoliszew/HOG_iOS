@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-honey",
+  "title": "Trivia honey",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Honey \u2014 correct! Edible honey has been found in ancient tombs. The bees build for eternity.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Honey. Archaeologists have tasted three-thousand-year-old jars and lived to log it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Honey. Archaeologists have tasted three-thousand-year-old jars and lived to log it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which food essentially never spoils?",
+        "choices": [
+          {
+            "label": "Honey",
+            "phrases": [
+              "honey"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Bread",
+            "phrases": [
+              "bread"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Cheese",
+            "phrases": [
+              "cheese"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

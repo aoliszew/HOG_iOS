@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-deep-thought",
+  "title": "Trivia deep thought",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Deep Thought \u2014 correct. Earth was built afterward to find the Question. Layers, Captain.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Deep Thought gave the Answer; Earth was commissioned for the Question. Marvin would have finished faster and hated it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Deep Thought gave the Answer; Earth was commissioned for the Question. Marvin would have finished faster and hated it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which computer calculated the Answer over 7.5 million years?",
+        "choices": [
+          {
+            "label": "Deep Thought",
+            "phrases": [
+              "deep thought"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Earth",
+            "phrases": [
+              "earth"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Marvin",
+            "phrases": [
+              "marvin"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

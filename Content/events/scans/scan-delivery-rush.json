@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "id": "scan-delivery-rush",
+  "title": "Scan delivery rush",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a delivery vessel, {n:40-200} packages aboard, {n:2-9} stops remaining, driver in the zone. One package reads FRAGILE in {n:2-6} languages. Bless the fragile package, or scan the route efficiency?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Bless the package",
+            "phrases": [
+              "bless"
+            ],
+            "next": "bless"
+          },
+          {
+            "label": "Scan route efficiency",
+            "phrases": [
+              "efficiency"
+            ],
+            "next": "eff"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "bless": {
+        "source": "SENSORS",
+        "text": "Blessing protocols ready. Standard care blessing, or the full bubble-wrap benediction?",
+        "choices": [
+          {
+            "label": "Full benediction",
+            "phrases": [
+              "benediction",
+              "full"
+            ],
+            "next": "full"
+          },
+          {
+            "label": "Standard blessing",
+            "phrases": [
+              "standard"
+            ],
+            "next": "std"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "std"
+      },
+      "full": {
+        "source": "SENSORS",
+        "text": "The full benediction is cast. That package will arrive not merely intact but somehow better-rested than when it shipped. Our work here matters, Captain.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "package-blessed"
+        ]
+      },
+      "std": {
+        "source": "SENSORS",
+        "text": "Standard blessing applied. May its corners stay crisp and its tape stay smug.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "eff": {
+        "source": "SENSORS",
+        "text": "Route efficiency: {n:87-99} percent. The remaining percent is one dog that must be greeted at stop {n:3-9}. Efficiency isn't everything.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

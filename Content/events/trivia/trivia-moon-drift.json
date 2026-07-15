@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-moon-drift",
+  "title": "Trivia moon drift",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Fingernail speed \u2014 about 4 centimeters a year. Correct! The Moon is leaving very, very politely.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "About the rate fingernails grow. A slow-motion farewell measured in centimeters.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "About the rate fingernails grow. A slow-motion farewell measured in centimeters.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The Moon is drifting away from Earth at about the rate that...?",
+        "choices": [
+          {
+            "label": "Fingernails grow",
+            "phrases": [
+              "fingernails"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Hair grows",
+            "phrases": [
+              "hair"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Continents sink",
+            "phrases": [
+              "sink"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

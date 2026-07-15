@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-neutron-spoon",
+  "title": "Trivia neutron spoon",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A mountain \u2014 billions of tons in a teaspoon. Correct, and please don't stir it into anything.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "More than that: mountain-class. Neutron stars are the universe's densest flex.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "More than that: mountain-class. Neutron stars are the universe's densest flex.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "A teaspoon of neutron star material weighs about as much as...?",
+        "choices": [
+          {
+            "label": "A mountain",
+            "phrases": [
+              "mountain"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A car",
+            "phrases": [
+              "car"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A whale",
+            "phrases": [
+              "whale"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}
