@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "mirror-friend-payoff",
+  "title": "Mirror friend payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "mirror-friend"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "COMMS",
+    "text": "A condensation message on our OWN window this morning, Captain: 'HI.' We never rolled these windows down. The mirror-window vessel found us. We are known. We are greeted. We are slightly unnerved.",
+    "sfx": "static"
+  }
+}

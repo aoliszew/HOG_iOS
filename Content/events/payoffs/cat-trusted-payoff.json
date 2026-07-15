@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "cat-trusted-payoff",
+  "title": "Cat trusted payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "cat-trusted"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "The cat sat with the captain's chair for a full minute today, purring at cruising frequency. Analysis: trust, returned with interest. The ship runs warmer for it.",
+    "sfx": "chime_good"
+  }
+}

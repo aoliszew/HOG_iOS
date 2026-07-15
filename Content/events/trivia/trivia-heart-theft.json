@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-heart-theft",
+  "title": "Trivia heart theft",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Zaphod \u2014 correct! He was president of the galaxy at the time, which made it easier.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Zaphod stole it, while being President. The presidency exists to distract from power; he used it to acquire a ship.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Zaphod stole it, while being President. The presidency exists to distract from power; he used it to acquire a ship.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Who stole the original Heart of Gold at its unveiling?",
+        "choices": [
+          {
+            "label": "Zaphod Beeblebrox",
+            "phrases": [
+              "zaphod"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Ford Prefect",
+            "phrases": [
+              "ford"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Marvin",
+            "phrases": [
+              "marvin"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

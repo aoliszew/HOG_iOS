@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "star-giver-payoff",
+  "title": "Star giver payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "star-giver"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Follow-up from the sticker-chart incident: statistical modeling suggests one small human recently earned their reward. The honorary star may or may not have helped. We choose 'may.'",
+    "sfx": "chime_good"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-golgafrincham",
+  "title": "Trivia golgafrincham",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Telephone sanitizers, hairdressers, and management consultants \u2014 correct! Their descendants are us. Explains a lot.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The B-Ark carried the telephone sanitizers. Golgafrincham later died of a disease from a dirty telephone. Irony: fatal.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The B-Ark carried the telephone sanitizers. Golgafrincham later died of a disease from a dirty telephone. Irony: fatal.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: the Golgafrinchan B-Ark was filled with which professionals?",
+        "choices": [
+          {
+            "label": "Telephone sanitizers",
+            "phrases": [
+              "telephone",
+              "sanitizers"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Poets",
+            "phrases": [
+              "poets"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Accountants",
+            "phrases": [
+              "accountants"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

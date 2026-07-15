@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-betelgeuse-const",
+  "title": "Trivia betelgeuse const",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Orion \u2014 the shoulder of the hunter. Correct! It could go supernova any millennium now. Ford left at a good time.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Orion. It's the red shoulder star, primed to supernova on a schedule best described as 'eventually'.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Orion. It's the red shoulder star, primed to supernova on a schedule best described as 'eventually'.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Ford's home star, Betelgeuse, sits in which constellation?",
+        "choices": [
+          {
+            "label": "Orion",
+            "phrases": [
+              "orion"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Ursa Major",
+            "phrases": [
+              "ursa"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Cassiopeia",
+            "phrases": [
+              "cassiopeia"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

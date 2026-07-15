@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "trivia-earth-speed",
+  "title": "Trivia earth speed",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "About 107,000 kilometers per hour \u2014 correct! You are, at this moment, the fastest thing you know.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "107,000 km/h around the Sun. Every 'sitting still' is a lie of perspective, Captain.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "107,000 km/h around the Sun. Every 'sitting still' is a lie of perspective, Captain.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Earth orbits the Sun at roughly what speed?",
+        "choices": [
+          {
+            "label": "107,000 km/h",
+            "phrases": [
+              "107",
+              "hundred thousand"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "1,000 km/h",
+            "phrases": [
+              "1,000",
+              "one thousand"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "10 km/h",
+            "phrases": [
+              "10 "
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

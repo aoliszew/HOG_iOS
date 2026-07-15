@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-venus-flyby",
+  "title": "Trivia venus flyby",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Venus \u2014 correct! The Sun rises in its west. Venus read the manual and disagreed with it.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Venus, retrograde queen. Uranus, meanwhile, rolls on its side \u2014 the solar system contains multitudes.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Venus, retrograde queen. Uranus, meanwhile, rolls on its side \u2014 the solar system contains multitudes.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Which planet spins backwards compared to most others?",
+        "choices": [
+          {
+            "label": "Venus",
+            "phrases": [
+              "venus"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Mars",
+            "phrases": [
+              "mars"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Saturn",
+            "phrases": [
+              "saturn"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "scan-student-driver",
+  "title": "Scan student driver",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: STUDENT DRIVER placard detected. Heart rate readings: instructor {n:80-110} bpm, student {n:100-140} bpm. They are about to attempt a merge. All ships: reduce judgment. Assist telepathically, or give space?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Assist telepathically",
+            "phrases": [
+              "assist"
+            ],
+            "next": "assist"
+          },
+          {
+            "label": "Give space",
+            "phrases": [
+              "space"
+            ],
+            "next": "space"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "assist": {
+        "source": "SENSORS",
+        "text": "Broadcasting calm on all frequencies... the merge approaches... Captain, they're signaling correctly. This is textbook. Do we log this as a perfect merge for their permanent record?",
+        "choices": [
+          {
+            "label": "Log it perfect",
+            "phrases": [
+              "perfect"
+            ],
+            "next": "logged"
+          },
+          {
+            "label": "Just watch",
+            "phrases": [
+              "watch"
+            ],
+            "next": "watched"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "logged"
+      },
+      "logged": {
+        "source": "SENSORS",
+        "text": "MERGE COMPLETE. Flawless. Logged with honors in the Registry of First Merges. Somewhere, an instructor exhaled. A driver was born today, Captain.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "merge-witness"
+        ]
+      },
+      "watched": {
+        "source": "SENSORS",
+        "text": "The merge succeeded on its own merits. We were merely witnesses to history. May all their lane changes be so clean.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "space": {
+        "source": "SENSORS",
+        "text": "Space granted \u2014 the greatest gift a road can give. The student merged safely into legend, or at least into the middle lane.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

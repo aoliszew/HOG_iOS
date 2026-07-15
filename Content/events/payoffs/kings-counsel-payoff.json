@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "kings-counsel-payoff",
+  "title": "Kings counsel payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "kings-counsel"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "NAVIGATION",
+    "text": "The Road King's counsel checked out perfectly, Captain. Navigation has framed the exchange and hung it in the chart room. We know royalty now.",
+    "sfx": "chime_good"
+  }
+}

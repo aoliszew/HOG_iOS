@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-bees",
+  "title": "Scan bees",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Priority: a flatbed carrying commercial beehives \u2014 approximately {n:200000-900000} souls aboard. The largest crew on the road today. Salute their fleet, or scan the queen?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Salute the fleet",
+            "phrases": [
+              "salute"
+            ],
+            "next": "salute"
+          },
+          {
+            "label": "Scan for the queen",
+            "phrases": [
+              "queen"
+            ],
+            "next": "queen"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "queen": {
+        "source": "SENSORS",
+        "text": "Deep scan... locating hive royalty... Captain, there are {n:20-60} queens aboard. This is not a transport. This is a royal armada. Do we pledge allegiance?",
+        "choices": [
+          {
+            "label": "Pledge",
+            "phrases": [
+              "pledge"
+            ],
+            "next": "pledge"
+          },
+          {
+            "label": "Remain neutral",
+            "phrases": [
+              "neutral"
+            ],
+            "next": "neutral"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "neutral"
+      },
+      "pledge": {
+        "source": "SENSORS",
+        "text": "Allegiance pledged to the Armada of Queens. In return: safe passage through all clover systems, and one (1) favor, redeemable in honey. The bee from our earlier voyage vouched for us.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "bee-allegiance"
+        ]
+      },
+      "neutral": {
+        "source": "SENSORS",
+        "text": "Neutrality maintained. The armada respects sovereign vessels. Buzz status: cordial.",
+        "next": "end"
+      },
+      "salute": {
+        "source": "SENSORS",
+        "text": "Fleet salute rendered: {n:200000-900000} crew, zero complaints, full production quotas. The hardest-working convoy in the galaxy. Humbling, Captain.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

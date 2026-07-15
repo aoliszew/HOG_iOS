@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-comet-tail",
+  "title": "Trivia comet tail",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Away from the Sun \u2014 correct! Solar wind does the styling, not the comet's motion.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Away from the Sun, regardless of travel direction. The Sun is pushy about hair.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Away from the Sun, regardless of travel direction. The Sun is pushy about hair.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "A comet's tail always points...?",
+        "choices": [
+          {
+            "label": "Away from the Sun",
+            "phrases": [
+              "away"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Behind the comet",
+            "phrases": [
+              "behind"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "North",
+            "phrases": [
+              "north"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

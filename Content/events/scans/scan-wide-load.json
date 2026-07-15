@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "scan-wide-load",
+  "title": "Scan wide load",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Contact: an oversized transport flagged WIDE LOAD, hauling {pick:half a house|a wind turbine blade|an unidentifiable enormous thing under tarps}. Escort protocol, or tarp analysis?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Escort protocol",
+            "phrases": [
+              "escort"
+            ],
+            "next": "escort"
+          },
+          {
+            "label": "Analyze the tarp",
+            "phrases": [
+              "tarp"
+            ],
+            "next": "tarp"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "tarp": {
+        "source": "SENSORS",
+        "text": "Tarp analysis: the shape suggests {pick:a fiberglass dinosaur|a decommissioned carousel|a very large fish, statue hopefully}. Confidence: {n:40-80} percent. Push confidence higher?",
+        "choices": [
+          {
+            "label": "Push the scan",
+            "phrases": [
+              "push"
+            ],
+            "next": "pushed"
+          },
+          {
+            "label": "Preserve the wonder",
+            "phrases": [
+              "wonder"
+            ],
+            "next": "wonder"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "wonder"
+      },
+      "pushed": {
+        "source": "SENSORS",
+        "text": "Confirmed: it IS a fiberglass dinosaur. Destination: a roadside attraction being born. We have witnessed infrastructure of joy in transit, Captain.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "dino-witness"
+        ]
+      },
+      "wonder": {
+        "source": "SENSORS",
+        "text": "Wonder preserved. Under that tarp is everything it could be. This is the correct amount of mystery per mile.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "escort": {
+        "source": "SENSORS",
+        "text": "Informal escort maintained for {n:2-6} miles. The pilot car waved. We are now part of the wide load's story, and it of ours.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

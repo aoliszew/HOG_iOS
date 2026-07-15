@@ -60,6 +60,8 @@ final class ShipController: ObservableObject {
     private let eventSource = ContentEventSource()
     private var activeSequence: SequencePlayer?
     private var activeBranching: BranchingPlayer?
+    /// Branching event waiting behind the PLAY button (ON REQUEST mode).
+    private var pendingBranchingDef: EventDefinition?
     private lazy var events: EventEngine = EventEngine(source: eventSource) { [weak self] in
         guard let self else {
             return ShipContext(mode: .roadtrip, personality: .power, speedMPH: 0,
@@ -72,7 +74,8 @@ final class ShipController: ObservableObject {
                            stopped: self.trip.speedMPH < 1,
                            hardAccelRecently: self.trip.hardAccelRecently,
                            flags: [],
-                           longFormActive: self.activeSequence != nil || self.activeBranching != nil,
+                           longFormActive: self.activeSequence != nil || self.activeBranching != nil
+                               || self.pendingBranchingDef != nil,
                            queuedMessages: self.pendingMessages.count,
                            tripPhase: self.destinationTripPhase ?? self.plan.phase(distanceMiles: self.trip.distanceMiles),
                            stopsRemaining: self.plan.stopsRemaining,
@@ -499,14 +502,14 @@ final class ShipController: ObservableObject {
             self.isScanning = false
             // Ship state may have changed mid-sweep (pause/power-down): abort quietly.
             guard self.poweredUp, !self.isPaused else { return }
-            guard let playable = self.requestOnDemand(tag: "scan") else {
+            guard let playable = self.requestOnDemand(tag: "scans") else {
                 self.say(source: "SENSORS", "Sensor sweep complete. Every vehicle in range has already been scanned this trip, Captain. They're starting to notice.")
                 return
             }
             switch playable {
             case .message(let event): self.deliver(event)
             case .sequence(let definition): self.startSequence(definition)
-            case .branching(let definition): self.startBranching(definition)
+            case .branching(let definition): self.startBranching(definition, userInitiated: true)
             }
         }
     }
@@ -529,7 +532,7 @@ final class ShipController: ObservableObject {
         switch playable {
         case .message(let event): deliver(event)
         case .sequence(let definition): startSequence(definition)
-        case .branching(let definition): startBranching(definition)
+        case .branching(let definition): startBranching(definition, userInitiated: true)
         }
     }
 
@@ -597,6 +600,7 @@ final class ShipController: ObservableObject {
         activeSequence = nil
         activeBranching?.stop()
         activeBranching = nil
+        pendingBranchingDef = nil
         activeChoices = []
         commands.setChoicePhrases([])
         commands.stopListening()
@@ -631,14 +635,10 @@ final class ShipController: ObservableObject {
             event: definition,
             currentDistance: { [weak self] in self?.trip.distanceMiles ?? 0 },
             deliver: { [weak self] event in
-                // Plot beats flow hands-free (hail + speak), matching branching —
-                // a story shouldn't demand a PLAY MESSAGE tap for every chapter.
-                if let sfx = event.sfx {
-                    self?.audio.play(named: sfx)
-                } else {
-                    self?.audio.play(.hail)
-                }
-                self?.say(source: event.source, event.text, delay: 0.8)
+                // Respect the MSGS setting: AUTO-PLAY speaks beats hands-free;
+                // ON REQUEST queues every chapter behind the PLAY button
+                // (field feedback: 'wait to play' must mean *everything* waits).
+                self?.deliver(event)
             },
             onComplete: { [weak self] in
                 guard let self else { return }
@@ -650,8 +650,19 @@ final class ShipController: ObservableObject {
         player.start()
     }
 
-    private func startBranching(_ definition: EventDefinition) {
-        guard activeBranching == nil else { return }
+    private func startBranching(_ definition: EventDefinition, userInitiated: Bool = false) {
+        guard activeBranching == nil, pendingBranchingDef == nil || userInitiated else { return }
+        // ON REQUEST: hold the question behind the PLAY button — its answer
+        // timeout starts only once the captain actually hears it. Encounters
+        // the captain asked for (scan/game buttons) play immediately.
+        if !autoPlayMessages && !userInitiated {
+            pendingBranchingDef = definition
+            let source = definition.content.nodes?[definition.content.entry ?? ""]?.source ?? "COMMS"
+            deliver(ShipEvent(source: source,
+                              text: "Priority transmission standing by, Captain.",
+                              startsBranching: true))
+            return
+        }
         let player = BranchingPlayer(
             event: definition,
             speak: { [weak self] event in
@@ -726,6 +737,11 @@ final class ShipController: ObservableObject {
             return
         }
         let event = pendingMessages.removeFirst()
+        if event.startsBranching, let definition = pendingBranchingDef {
+            pendingBranchingDef = nil
+            startBranching(definition, userInitiated: true)
+            return
+        }
         offerQuickResponses(event.responses)
         say(source: event.source, event.text)
         if !pendingMessages.isEmpty {

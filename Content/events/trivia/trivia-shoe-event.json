@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-shoe-event",
+  "title": "Trivia shoe event",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "The Shoe Event Horizon \u2014 correct! Whole civilizations lost. The Frogstar was its most famous victim. Economics is improbable.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The Shoe Event Horizon, after which a society can only build shoe shops. See: the Frogstar. Grim, well-heeled stuff.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The Shoe Event Horizon, after which a society can only build shoe shops. See: the Frogstar. Grim, well-heeled stuff.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: the economic collapse where every shop becomes a shoe shop is called...?",
+        "choices": [
+          {
+            "label": "The Shoe Event Horizon",
+            "phrases": [
+              "shoe event"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "The Boot Singularity",
+            "phrases": [
+              "boot"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Cobbler's Collapse",
+            "phrases": [
+              "cobbler"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-night-shift",
+  "title": "Scan night shift",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a sedan with hospital parking tags, driver in scrubs, coffee thermos at {n:20-60} percent. Night-shift energy readings detected. Send silent gratitude, or scan their playlist?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Silent gratitude",
+            "phrases": [
+              "gratitude"
+            ],
+            "next": "grat"
+          },
+          {
+            "label": "Scan the playlist",
+            "phrases": [
+              "playlist"
+            ],
+            "next": "play"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "grat": {
+        "source": "SENSORS",
+        "text": "Gratitude beam charged. Standard intensity, or full honors?",
+        "choices": [
+          {
+            "label": "Full honors",
+            "phrases": [
+              "full"
+            ],
+            "next": "full"
+          },
+          {
+            "label": "Standard beam",
+            "phrases": [
+              "standard"
+            ],
+            "next": "std"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "std"
+      },
+      "full": {
+        "source": "SENSORS",
+        "text": "Full honors transmitted: every light we pass for the next mile will feel slightly warmer to them. We can't prove it works. We refuse to stop.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "healer-honored"
+        ]
+      },
+      "std": {
+        "source": "SENSORS",
+        "text": "Gratitude delivered at standard intensity. They'll never know. That's the whole art of it, Captain.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "play": {
+        "source": "SENSORS",
+        "text": "Playlist: {pick:extremely calm piano|extremely loud metal|a true-crime podcast, ironically}. Whatever gets a healer home safe. Respect logged.",
+        "next": "end"
+      }
+    }
+  }
+}

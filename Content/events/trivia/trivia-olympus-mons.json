@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-olympus-mons",
+  "title": "Trivia olympus mons",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Olympus Mons \u2014 correct! Roughly three times Everest's height. Mars doesn't do subtle.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Olympus Mons, on Mars. So wide you couldn't see it as a mountain while standing on it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Olympus Mons, on Mars. So wide you couldn't see it as a mountain while standing on it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The largest volcano in the solar system is...?",
+        "choices": [
+          {
+            "label": "Olympus Mons on Mars",
+            "phrases": [
+              "olympus"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Mauna Loa",
+            "phrases": [
+              "mauna"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Mount Doom",
+            "phrases": [
+              "doom"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

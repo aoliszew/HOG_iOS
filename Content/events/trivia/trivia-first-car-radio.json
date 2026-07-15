@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-first-car-radio",
+  "title": "Trivia first car radio",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Motorola \u2014 correct! The car radio came first; the phones came much later.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Motorola: motor plus Victrola. Your dashboard's oldest tradition.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Motorola: motor plus Victrola. Your dashboard's oldest tradition.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: the company that pioneered the car radio, named for 'motor' plus 'Victrola'?",
+        "choices": [
+          {
+            "label": "Motorola",
+            "phrases": [
+              "motorola"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Ford Audio",
+            "phrases": [
+              "ford"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Radiant",
+            "phrases": [
+              "radiant"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

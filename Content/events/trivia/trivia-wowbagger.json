@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-wowbagger",
+  "title": "Trivia wowbagger",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 insulting the universe, one being at a time, in alphabetical order. A man needs a project.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "He insults everyone in the universe. Alphabetically. Immortality demands structure.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "He insults everyone in the universe. Alphabetically. Immortality demands structure.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Wowbagger the Infinitely Prolonged spends eternity doing what?",
+        "choices": [
+          {
+            "label": "Insulting everyone alphabetically",
+            "phrases": [
+              "insulting",
+              "alphabetical"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Collecting planets",
+            "phrases": [
+              "collecting"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Sleeping",
+            "phrases": [
+              "sleeping"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

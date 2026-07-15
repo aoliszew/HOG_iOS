@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-pluto-heart",
+  "title": "Trivia pluto heart",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A heart \u2014 Tombaugh Regio. Correct! The Kuiper Belt's most sentimental landmark. This ship approves.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "A heart. Pluto was demoted and responded by visibly loving us anyway. Devastating.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "A heart. Pluto was demoted and responded by visibly loving us anyway. Devastating.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The famous bright feature on Pluto is shaped like a...?",
+        "choices": [
+          {
+            "label": "Heart",
+            "phrases": [
+              "heart"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Star",
+            "phrases": [
+              "star"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Whale",
+            "phrases": [
+              "whale"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

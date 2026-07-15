@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-common-star",
+  "title": "Trivia common star",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Red dwarfs \u2014 correct! Small, dim, incredibly long-lived. The tortoises of the stellar world.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Red dwarfs, by a landslide. Our Sun is fancier than average \u2014 don't tell it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Red dwarfs, by a landslide. Our Sun is fancier than average \u2014 don't tell it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The most common type of star in the galaxy is...?",
+        "choices": [
+          {
+            "label": "Red dwarf",
+            "phrases": [
+              "red dwarf"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Yellow like our Sun",
+            "phrases": [
+              "yellow",
+              "sun"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Blue giant",
+            "phrases": [
+              "blue"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

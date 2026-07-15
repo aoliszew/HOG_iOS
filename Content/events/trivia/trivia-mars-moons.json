@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-mars-moons",
+  "title": "Trivia mars moons",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Two \u2014 Phobos and Deimos: Fear and Dread. Mars names things like a metal band. Correct!",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Two: Phobos and Deimos. Small, lumpy, and destined to crash or escape. Very dramatic.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Two: Phobos and Deimos. Small, lumpy, and destined to crash or escape. Very dramatic.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "How many moons does Mars have?",
+        "choices": [
+          {
+            "label": "Two",
+            "phrases": [
+              "two",
+              "2"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "One",
+            "phrases": [
+              "one"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "None",
+            "phrases": [
+              "none"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

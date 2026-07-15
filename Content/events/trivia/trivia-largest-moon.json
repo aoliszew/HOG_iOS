@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-largest-moon",
+  "title": "Trivia largest moon",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Ganymede, of Jupiter \u2014 correct! Bigger than Mercury. An overachiever among moons.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Ganymede \u2014 Jupiter's, and bigger than the planet Mercury. Titan is a close, hazy second.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Ganymede \u2014 Jupiter's, and bigger than the planet Mercury. Titan is a close, hazy second.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The largest moon in the solar system is...?",
+        "choices": [
+          {
+            "label": "Ganymede",
+            "phrases": [
+              "ganymede"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Titan",
+            "phrases": [
+              "titan"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Our Moon",
+            "phrases": [
+              "our moon",
+              "the moon"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

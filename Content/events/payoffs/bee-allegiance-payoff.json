@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "bee-allegiance-payoff",
+  "title": "Bee allegiance payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "bee-allegiance"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "CARGO BAY",
+    "text": "The Armada of Queens has made good: a jar of honey has improbably appeared in our supply calculations. The bee alliance pays dividends, Captain. Buzz eternal.",
+    "sfx": "chime_good"
+  }
+}

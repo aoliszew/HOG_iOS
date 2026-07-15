@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-oldest-tree",
+  "title": "Trivia oldest tree",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "About 4,850 years \u2014 bristlecone pines. Correct! They predate most alphabets. Respect your elders.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Almost five millennia: bristlecone pines, quietly outlasting empires on windy mountainsides.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Almost five millennia: bristlecone pines, quietly outlasting empires on windy mountainsides.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Earth's oldest known individual trees are approximately how old?",
+        "choices": [
+          {
+            "label": "Nearly 5,000 years",
+            "phrases": [
+              "5,000",
+              "five thousand"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "500 years",
+            "phrases": [
+              "500"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "50,000 years",
+            "phrases": [
+              "50,000"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

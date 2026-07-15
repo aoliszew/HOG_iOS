@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "scan-mirror-tint",
+  "title": "Scan mirror tint",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan anomaly: a vehicle with fully mirrored windows. Our own scan is reflecting back at us. We are, in effect, scanning ourselves. Push through the reflection, or accept the mirror?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Push through",
+            "phrases": [
+              "push"
+            ],
+            "next": "push"
+          },
+          {
+            "label": "Accept the mirror",
+            "phrases": [
+              "accept"
+            ],
+            "next": "accept"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "push": {
+        "source": "SENSORS",
+        "text": "Adjusting frequencies... we're through! Interior reading shows {pick:a mobile aquarium|forty houseplants|a very small recording studio}. Also, they know we're scanning. They've written 'HI' in the condensation. Respond?",
+        "choices": [
+          {
+            "label": "Write HI back",
+            "phrases": [
+              "hi"
+            ],
+            "next": "hi"
+          },
+          {
+            "label": "Go dark",
+            "phrases": [
+              "dark"
+            ],
+            "next": "dark"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "hi"
+      },
+      "hi": {
+        "source": "SENSORS",
+        "text": "'HI' transmitted via headlight flicker. They responded with a windshield-wiper wave. First contact protocols: complete. Humanity: confirmed on both sides.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "mirror-friend"
+        ]
+      },
+      "dark": {
+        "source": "SENSORS",
+        "text": "Going dark. But they saw us, Captain. Somewhere out there is a vehicle that knows. The mirror remembers.",
+        "next": "end",
+        "sfx": "static"
+      },
+      "accept": {
+        "source": "SENSORS",
+        "text": "The mirror accepted. Our scan returns only ourselves: one improbable ship, doing its best. Sensors report this is called 'self-reflection' and log it as healthy.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "self-reflected"
+        ]
+      }
+    }
+  }
+}

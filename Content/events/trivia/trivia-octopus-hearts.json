@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "trivia-octopus-hearts",
+  "title": "Trivia octopus hearts",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Three hearts, blue blood, nine brains-ish. Correct \u2014 octopuses are basically aliens we already found.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Three. Two for the gills, one for the body \u2014 which stops when it swims. Even its cardio is weird.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Three. Two for the gills, one for the body \u2014 which stops when it swims. Even its cardio is weird.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "An octopus has how many hearts?",
+        "choices": [
+          {
+            "label": "Three",
+            "phrases": [
+              "three",
+              "3"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "One",
+            "phrases": [
+              "one"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Eight",
+            "phrases": [
+              "eight",
+              "8"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

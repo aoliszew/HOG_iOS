@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-titan-lakes",
+  "title": "Trivia titan lakes",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Liquid methane and ethane \u2014 correct! Beachfront property for very cold, very flammable tastes.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Methane \u2014 it rains it, pools it, and fogs it at minus 180 Celsius. Bring a very good coat.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Methane \u2014 it rains it, pools it, and fogs it at minus 180 Celsius. Bring a very good coat.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Saturn's moon Titan has lakes made of...?",
+        "choices": [
+          {
+            "label": "Liquid methane",
+            "phrases": [
+              "methane"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Water",
+            "phrases": [
+              "water"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Lava",
+            "phrases": [
+              "lava"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

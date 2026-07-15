@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "trivia-final-message",
+  "title": "Trivia final message",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "'We apologise for the inconvenience.' Correct \u2014 written in letters of fire on the Quentulus Quazgar Mountains. Marvin found it... settling.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "It reads: 'We apologise for the inconvenience.' Marvin read it at the end. It helped, a little.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "It reads: 'We apologise for the inconvenience.' Marvin read it at the end. It helped, a little.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: God's Final Message to His Creation reads...?",
+        "choices": [
+          {
+            "label": "We apologise for the inconvenience",
+            "phrases": [
+              "apologise",
+              "inconvenience",
+              "apologize"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "So long and thanks",
+            "phrases": [
+              "so long"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Don't panic",
+            "phrases": [
+              "panic"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

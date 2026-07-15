@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "trivia-speed-light",
+  "title": "Trivia speed light",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "About 300,000 kilometers per second \u2014 correct! The universe's absolute speed limit, rigorously enforced.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "300,000 kilometers per SECOND. The strictest speed limit in existence, no exceptions, not even for bad news \u2014 officially.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "300,000 kilometers per SECOND. The strictest speed limit in existence, no exceptions, not even for bad news \u2014 officially.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The speed of light is roughly...?",
+        "choices": [
+          {
+            "label": "300,000 km per second",
+            "phrases": [
+              "300",
+              "three hundred thousand"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "300,000 km per hour",
+            "phrases": [
+              "hour"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "3,000 km per second",
+            "phrases": [
+              "3,000",
+              "three thousand"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "scan-empty-boat",
+  "title": "Scan empty boat",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a truck towing a boat named {pick:'Knot Working'|'Ship Happens'|'Vitamin Sea'|'Unsinkable II'}. The boat is, note, nowhere near water. Analyze the pun, or chart their water probability?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Analyze the pun",
+            "phrases": [
+              "pun"
+            ],
+            "next": "pun"
+          },
+          {
+            "label": "Chart water probability",
+            "phrases": [
+              "water"
+            ],
+            "next": "water"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "pun": {
+        "source": "SENSORS",
+        "text": "Pun analysis: groan factor {n:6-10} out of 10, commitment factor maximum. The name 'Unsinkable II' implies an Unsinkable I. Investigate the implication?",
+        "choices": [
+          {
+            "label": "Investigate",
+            "phrases": [
+              "investigate"
+            ],
+            "next": "invest"
+          },
+          {
+            "label": "Let it float",
+            "phrases": [
+              "float"
+            ],
+            "next": "float"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "float"
+      },
+      "invest": {
+        "source": "SENSORS",
+        "text": "Records suggest Unsinkable I is... unavailable for comment. The sequel carries the family hopes. We wish it calmer waters and better luck.",
+        "next": "end",
+        "sfx": "chime_bad",
+        "setFlags": [
+          "boat-lore"
+        ]
+      },
+      "float": {
+        "source": "SENSORS",
+        "text": "Agreed \u2014 some names are gravestones and prayers at once. The pun endures. The boat rides on, dry and optimistic.",
+        "next": "end",
+        "sfx": "chime_good"
+      },
+      "water": {
+        "source": "SENSORS",
+        "text": "Probability of water contact today: {n:40-95} percent. There is a lake {n:8-40} miles ahead. The boat can smell it. Boats can smell lakes, Captain. Trust sensors.",
+        "next": "end"
+      }
+    }
+  }
+}

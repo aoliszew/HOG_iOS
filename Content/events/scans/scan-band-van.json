@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "id": "scan-band-van",
+  "title": "Scan band van",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "scans"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "result",
+    "nodes": {
+      "result": {
+        "source": "SENSORS",
+        "text": "Scan: a touring band's van. Instruments: {n:5-9}. Merch boxes: {n:2-8}. Morale: running on gas-station coffee and belief. Request a song dedication, or scan their setlist?",
+        "sfx": "scan",
+        "choices": [
+          {
+            "label": "Request dedication",
+            "phrases": [
+              "dedication"
+            ],
+            "next": "ded"
+          },
+          {
+            "label": "Scan the setlist",
+            "phrases": [
+              "setlist"
+            ],
+            "next": "setlist"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "moveon"
+      },
+      "moveon": {
+        "source": "SENSORS",
+        "text": "The vessel drifts out of optimal range. Its secrets remain its own. For now.",
+        "next": "end"
+      },
+      "ded": {
+        "source": "SENSORS",
+        "text": "Transmitting request... they've responded! They want a band name to dedicate it to. Quick, Captain \u2014 what are we?",
+        "choices": [
+          {
+            "label": "The Improbables",
+            "phrases": [
+              "improbables"
+            ],
+            "next": "name1"
+          },
+          {
+            "label": "Heart of Gold",
+            "phrases": [
+              "heart of gold"
+            ],
+            "next": "name2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "name1"
+      },
+      "name1": {
+        "source": "SENSORS",
+        "text": "Dedication logged: 'This one goes out to The Improbables.' Somewhere on tonight's stage, we will be legends for four minutes.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "band-dedication"
+        ]
+      },
+      "name2": {
+        "source": "SENSORS",
+        "text": "'To the Heart of Gold, wherever she flies.' The band saluted. The van's blinker winked. Music and motoring, united.",
+        "next": "end",
+        "sfx": "chime_good",
+        "setFlags": [
+          "band-dedication"
+        ]
+      },
+      "setlist": {
+        "source": "SENSORS",
+        "text": "Setlist acquired: {n:8-14} songs, one questionable cover, an encore they pretend is spontaneous. We know their secrets now. We will hum them.",
+        "next": "end",
+        "sfx": "chime_good"
+      }
+    }
+  }
+}

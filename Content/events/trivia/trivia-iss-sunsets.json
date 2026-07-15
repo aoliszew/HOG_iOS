@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "id": "trivia-iss-sunsets",
+  "title": "Trivia iss sunsets",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Sixteen \u2014 correct! A golden hour every 45 minutes. Photographers weep.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Sixteen sunrises and sixteen sunsets per day. Romance, industrialized.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Sixteen sunrises and sixteen sunsets per day. Romance, industrialized.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Astronauts on the ISS see how many sunsets daily?",
+        "choices": [
+          {
+            "label": "16",
+            "phrases": [
+              "16",
+              "sixteen"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "2",
+            "phrases": [
+              "2",
+              "two"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "60",
+            "phrases": [
+              "60",
+              "sixty"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-mattresses",
+  "title": "Trivia mattresses",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Sqornshellous Zeta \u2014 correct! They're all called Zem, and they flollop. Marvin once had a lovely chat with one.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Sqornshellous Zeta. The mattresses flollop there, globbering in the marshes. All named Zem.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Sqornshellous Zeta. The mattresses flollop there, globbering in the marshes. All named Zem.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: live mattresses are harvested from the swamps of...?",
+        "choices": [
+          {
+            "label": "Sqornshellous Zeta",
+            "phrases": [
+              "sqornshellous"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Vogsphere",
+            "phrases": [
+              "vogsphere"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Kakrafoon",
+            "phrases": [
+              "kakrafoon"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "dog-alliance-payoff",
+  "title": "Dog alliance payoff",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "payoffs"
+  ],
+  "trigger": {
+    "contexts": {
+      "requiresFlags": [
+        "dog-alliance"
+      ]
+    },
+    "weight": 5
+  },
+  "content": {
+    "source": "SENSORS",
+    "text": "Update from the dog alliance: the RV's co-pilot has reported us to its network. {n:2-9} dogs at upcoming rest stops are now predisposed to like us. This is real power, Captain.",
+    "sfx": "chime_good"
+  }
+}

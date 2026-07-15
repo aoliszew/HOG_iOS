@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-jupiter-spot",
+  "title": "Trivia jupiter spot",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A storm raging for centuries, bigger than Earth. Correct! Jupiter holds grudges meteorologically.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "A storm \u2014 one that's been spinning since before telescopes were good enough to judge it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "A storm \u2014 one that's been spinning since before telescopes were good enough to judge it.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Jupiter's Great Red Spot is...?",
+        "choices": [
+          {
+            "label": "A centuries-old storm",
+            "phrases": [
+              "storm"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A crater",
+            "phrases": [
+              "crater"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A shadow",
+            "phrases": [
+              "shadow"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-gargle-blaster",
+  "title": "Trivia gargle blaster",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "A slice of lemon wrapped round a large gold brick \u2014 correct, and medically inadvisable. Point!",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Canonically: a slice of lemon wrapped round a large gold brick. The towel would never.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Canonically: a slice of lemon wrapped round a large gold brick. The towel would never.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Drinking a Pan Galactic Gargle Blaster is like having your brain smashed out by...?",
+        "choices": [
+          {
+            "label": "A lemon wrapped round a gold brick",
+            "phrases": [
+              "lemon",
+              "gold brick"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "A neutron star",
+            "phrases": [
+              "neutron"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "A wet towel",
+            "phrases": [
+              "towel"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

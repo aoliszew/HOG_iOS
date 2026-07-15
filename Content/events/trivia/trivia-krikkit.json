@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-krikkit",
+  "title": "Trivia krikkit",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Correct \u2014 nice people, lovely songs, and a firm plan to annihilate all existence. It happens.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Destroy it, alas. They simply couldn't accept a sky full of other people.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Destroy it, alas. They simply couldn't accept a sky full of other people.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The people of Krikkit wanted to do what to the rest of the universe?",
+        "choices": [
+          {
+            "label": "Destroy it entirely",
+            "phrases": [
+              "destroy"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Sell it insurance",
+            "phrases": [
+              "insurance"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Teach it songs",
+            "phrases": [
+              "songs"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-jwst-orbit",
+  "title": "Trivia jwst orbit",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "L2 \u2014 correct! A gravitational parking spot a million miles out, where it hides from the Sun behind Earth's shadow-ish. Elegant.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "The second Lagrange point, L2 \u2014 gravity's quiet corner, four times farther than the Moon.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "The second Lagrange point, L2 \u2014 gravity's quiet corner, four times farther than the Moon.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Hard mode: the James Webb Space Telescope orbits at which special point?",
+        "choices": [
+          {
+            "label": "L2 Lagrange point",
+            "phrases": [
+              "l2",
+              "lagrange"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Low Earth orbit",
+            "phrases": [
+              "low earth"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "The Moon",
+            "phrases": [
+              "moon"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

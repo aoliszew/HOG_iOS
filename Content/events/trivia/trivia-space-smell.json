@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "id": "trivia-space-smell",
+  "title": "Trivia space smell",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Seared steak and hot metal \u2014 correct, per returning spacewalkers' suits. The void grills.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Oddly: burnt metal and seared steak, says every spacewalker's helmet. The universe barbecues.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Oddly: burnt metal and seared steak, says every spacewalker's helmet. The universe barbecues.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "Astronauts report that space smells like...?",
+        "choices": [
+          {
+            "label": "Burnt metal and steak",
+            "phrases": [
+              "burnt",
+              "metal",
+              "steak"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Nothing",
+            "phrases": [
+              "nothing"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Lavender",
+            "phrases": [
+              "lavender"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

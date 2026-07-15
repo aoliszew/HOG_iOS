@@ -10,6 +10,9 @@ struct ShipEvent {
     var responses: [EventDefinition.QuickResponse] = []
     /// Optional sound effect (file name) played as this message arrives.
     var sfx: String?
+    /// Marker: playing this message starts the held branching encounter
+    /// (ON REQUEST mode holds questions behind the PLAY button).
+    var startsBranching: Bool = false
 }
 
 /// What an encounter slot produced: a one-shot message, or a multi-step

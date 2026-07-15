@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "trivia-longest-interstate",
+  "title": "Trivia longest interstate",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "I-90 \u2014 correct! Boston to Seattle, about 3,020 miles of continent.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "I-90, Boston to Seattle. Route 66 is the legend; I-90 is the marathon.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "I-90, Boston to Seattle. Route 66 is the legend; I-90 is the marathon.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "The longest interstate highway in the US is...?",
+        "choices": [
+          {
+            "label": "I-90",
+            "phrases": [
+              "90",
+              "i-90"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "I-95",
+            "phrases": [
+              "95"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Route 66",
+            "phrases": [
+              "66"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}

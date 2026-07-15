@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "trivia-eiffel-growth",
+  "title": "Trivia eiffel growth",
+  "author": "claude",
+  "type": "branching",
+  "class": "plot",
+  "tags": [
+    "trivia"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "entry": "quiz",
+    "nodes": {
+      "a0": {
+        "source": "AI CORE",
+        "text": "Taller \u2014 thermal expansion adds around 15 centimeters. Correct! Even towers stretch in nice weather.",
+        "sfx": "chime_good",
+        "setFlags": [
+          "trivia-point"
+        ],
+        "next": "end"
+      },
+      "a1": {
+        "source": "AI CORE",
+        "text": "Taller, by about 15 cm. Iron enjoys summer like the rest of us.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "a2": {
+        "source": "AI CORE",
+        "text": "Taller, by about 15 cm. Iron enjoys summer like the rest of us.",
+        "sfx": "chime_bad",
+        "next": "end"
+      },
+      "quiz": {
+        "source": "AI CORE",
+        "text": "In summer heat, the Eiffel Tower gets...?",
+        "choices": [
+          {
+            "label": "Taller",
+            "phrases": [
+              "taller"
+            ],
+            "next": "a0"
+          },
+          {
+            "label": "Shorter",
+            "phrases": [
+              "shorter"
+            ],
+            "next": "a1"
+          },
+          {
+            "label": "Wider only",
+            "phrases": [
+              "wider"
+            ],
+            "next": "a2"
+          }
+        ],
+        "timeoutSeconds": 60,
+        "timeoutNext": "timeout"
+      },
+      "timeout": {
+        "source": "AI CORE",
+        "text": "Time expired, Captain. The answer escapes into the void, cackling. We'll get the next one.",
+        "next": "end"
+      }
+    }
+  }
+}
