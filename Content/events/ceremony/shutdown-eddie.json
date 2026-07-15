@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "shutdown-eddie",
+  "title": "Shutdown eddie",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "shutdown"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "What a SUPER drive, Captain! Just great stuff! Powering down now \u2014 can't WAIT for the next one! Sleep tight!"
+  }
+}

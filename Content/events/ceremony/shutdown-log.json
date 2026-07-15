@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "shutdown-log",
+  "title": "Shutdown log",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "shutdown"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Final log entry: mission complete, crew intact, {pick:zero|minimal|acceptable} anomalies unexplained. The ship sleeps. Well flown, Captain."
+  }
+}

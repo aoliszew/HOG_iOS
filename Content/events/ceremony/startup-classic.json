@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "startup-classic",
+  "title": "Startup classic",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "startup"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Systems online. Shields at {n:91-99} percent. Infinite Improbability Drive on standby."
+  }
+}

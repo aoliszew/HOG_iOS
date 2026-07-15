@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "shutdown-nautical",
+  "title": "Shutdown nautical",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "shutdown"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Vessel secured, watch dismissed, harbor found. The Heart of Gold rests at anchor. Until the next tide, Captain."
+  }
+}

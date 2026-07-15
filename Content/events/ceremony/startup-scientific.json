@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "startup-scientific",
+  "title": "Startup scientific",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "startup"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Startup telemetry: {n:1200-9999} systems green, {n:0-3} systems beige, shields {n:90-99} percent. Statistical probability of adventure: rising sharply. Engines online."
+  }
+}

@@ -12,6 +12,7 @@
 		215E1A034D5A5F7BE823F21B /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80327A0E3CC7D5BB2FE49893 /* AudioEngine.swift */; };
 		238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */; };
 		25F4A32EFD9EB0EB45C90C39 /* power_up.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FC72571DB2B9D3532E3BDE8 /* power_up.caf */; };
+		2D8E52BDD895FA33E1B7128B /* POIWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42F07F5C529529EE8EB8F66 /* POIWatcher.swift */; };
 		38BD90C95924C75259E9122D /* power_down.caf in Resources */ = {isa = PBXBuildFile; fileRef = 54AE6C3306CF804B3126BE53 /* power_down.caf */; };
 		3B4D9CD57853173DFBBAE363 /* Content in Resources */ = {isa = PBXBuildFile; fileRef = 76CEABEBF60304E62E7000F6 /* Content */; };
 		3F3E3295D0E616CC6E88EA6A /* EventEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DCB1167A3C7DB871965408 /* EventEngine.swift */; };
@@ -78,6 +79,7 @@
 		CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPlan.swift; sourceTree = "<group>"; };
 		D394B43303D809BCC9CB9186 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DEA40CDEA63EDB544B6A7837 /* MessageTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTemplate.swift; sourceTree = "<group>"; };
+		E42F07F5C529529EE8EB8F66 /* POIWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIWatcher.swift; sourceTree = "<group>"; };
 		EB25662BDB36EE1D01F2C217 /* HeartOfGoldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartOfGoldApp.swift; sourceTree = "<group>"; };
 		F7A05356927EFA9FF3A553FB /* CharacterVoices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVoices.swift; sourceTree = "<group>"; };
 		FA68DE29A7AA2B5FB1734D90 /* HeartOfGold.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HeartOfGold.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +193,7 @@
 		FB737DD02ED3A5971895A45A /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				E42F07F5C529529EE8EB8F66 /* POIWatcher.swift */,
 				C45D4602C40695F103C1ED63 /* RegionAwareness.swift */,
 				CD9987A48FF4D86E7B33EF31 /* TripPlan.swift */,
 				5F31B6668D60B5AF7179516A /* TripStore.swift */,
@@ -295,6 +298,7 @@
 				7F623D4017426B50E2DFB844 /* EventModels.swift in Sources */,
 				238C8A5EE458485751745A50 /* HeartOfGoldApp.swift in Sources */,
 				0DD5262849E38DF7837A29D0 /* MessageTemplate.swift in Sources */,
+				2D8E52BDD895FA33E1B7128B /* POIWatcher.swift in Sources */,
 				BDA49450C591274BA7F4757D /* RegionAwareness.swift in Sources */,
 				EAA276B60630FE8BDEDCA8B4 /* SequencePlayer.swift in Sources */,
 				8A7D79DFD37D4E3817DBA297 /* ShipController.swift in Sources */,

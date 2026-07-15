@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "shutdown-classic",
+  "title": "Shutdown classic",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "shutdown"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "It has been a pleasure, Captain. So long, and thanks for all the fish."
+  }
+}

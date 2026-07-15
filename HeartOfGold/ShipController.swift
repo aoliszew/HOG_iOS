@@ -53,6 +53,7 @@ final class ShipController: ObservableObject {
     let trip = TripTracker()
     let commands = CommandListener()
     private let region = RegionAwareness()
+    private let poiWatcher = POIWatcher()
 
     private let audio = AudioEngine()
     private let shipVoice = ShipVoice()
@@ -112,6 +113,7 @@ final class ShipController: ObservableObject {
                 self?.updateStopDetection()
                 self?.updateRegion()
                 self?.updateVoyageProgress()
+                self?.updatePOIs()
                 self?.persistIfFlying()
             }
             .store(in: &cancellables)
@@ -291,16 +293,20 @@ final class ShipController: ObservableObject {
         hasMovedThisTrip = false
         stoppedSince = nil
         docked = false
-        let shields = Int.random(in: 94...99)
-        let startup = "Systems online. Shields at \(shields) percent. Infinite Improbability Drive on standby. \(mode.startupGreeting)"
-        say(source: "SHIP", startup, delay: 1.2) { [weak self] in
+        poiWatcher.resetTrip()
+        events.start(mode: mode)
+
+        // Every power-up sounds different: pull a startup line from the pool.
+        var startup = "Systems online. Shields at \(Int.random(in: 91...99)) percent. Infinite Improbability Drive on standby."
+        if case .message(let ceremony)? = requestOnDemand(tag: "startup") {
+            startup = ceremony.text
+        }
+        say(source: "SHIP", "\(startup) \(mode.startupGreeting)", delay: 1.2) { [weak self] in
             Task { @MainActor in
                 guard Self.voiceInputEnabled, let self, self.poweredUp else { return }
                 if !self.plan.isComplete { self.askBriefing() }
             }
         }
-
-        events.start(mode: mode)
         resumableTrip = nil
         persistIfFlying()
     }
@@ -319,6 +325,14 @@ final class ShipController: ObservableObject {
         docked = false
         voyageLegInitialMiles = nil
         announcedMilestones = []
+        // Restore the unplayed message queue (and any held branching encounter).
+        pendingMessages = (saved.queuedMessages ?? []).map {
+            ShipEvent(source: $0.source, text: $0.text, ambient: $0.ambient,
+                      sfx: $0.sfx, startsBranching: $0.startsBranching)
+        }
+        if let heldID = saved.pendingBranchingID {
+            pendingBranchingDef = eventSource.event(withID: heldID)
+        }
         poweredUp = true
         trip.resetTrip()
         trip.restoreDistance(saved.distanceMiles)
@@ -483,6 +497,15 @@ final class ShipController: ObservableObject {
         }
     }
 
+    /// Landmark alerts: curated points of interest along the route.
+    private func updatePOIs() {
+        guard poweredUp, !isPaused, let location = trip.currentLocation else { return }
+        if let poi = poiWatcher.check(location: location) {
+            audio.play(.scan)
+            say(source: poi.source, MessageTemplate.render(poi.text), delay: 0.6)
+        }
+    }
+
     private func updateRegion() {
         guard poweredUp, !isPaused, let location = trip.currentLocation else { return }
         region.check(location: location)
@@ -590,7 +613,13 @@ final class ShipController: ObservableObject {
                                     lastFired: state.lastFired,
                                     planLength: plan.length?.rawValue,
                                     plannedStops: plan.plannedStops,
-                                    stopsCompleted: plan.stopsCompleted))
+                                    stopsCompleted: plan.stopsCompleted,
+                                    queuedMessages: pendingMessages.map {
+                                        TripSnapshot.QueuedMessage(source: $0.source, text: $0.text,
+                                                                   ambient: $0.ambient, sfx: $0.sfx,
+                                                                   startsBranching: $0.startsBranching)
+                                    },
+                                    pendingBranchingID: pendingBranchingDef?.id))
     }
 
     func powerDown() {
@@ -608,7 +637,11 @@ final class ShipController: ObservableObject {
         trip.stop()
         voice.stopSpeaking()
         pendingMessages.removeAll()
-        say(source: "SHIP", "Powering down. Mission distance: \(String(format: "%.1f", trip.distanceMiles)) miles. It has been a pleasure, Captain. So long, and thanks for all the fish.")
+        var farewell = "It has been a pleasure, Captain. So long, and thanks for all the fish."
+        if case .message(let ceremony)? = requestOnDemand(tag: "shutdown") {
+            farewell = ceremony.text
+        }
+        say(source: "SHIP", "Powering down. Mission distance: \(String(format: "%.1f", trip.distanceMiles)) miles. \(farewell)")
         DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [audio] in
             audio.play(.powerDown)
         }

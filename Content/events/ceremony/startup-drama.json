@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "startup-drama",
+  "title": "Startup drama",
+  "author": "claude",
+  "type": "single",
+  "class": "ambient",
+  "tags": [
+    "startup"
+  ],
+  "onDemand": true,
+  "trigger": {
+    "contexts": {},
+    "maxPerTrip": 1
+  },
+  "content": {
+    "source": "SHIP",
+    "text": "Igniting the improbability core... it flickered, it caught, it purred. Shields to {n:90-99} percent. Somewhere, physics files a mild objection. Overruled. Systems online."
+  }
+}
